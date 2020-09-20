@@ -1,0 +1,55 @@
+form{
+    background-color: #b5b5b5;
+    padding:0.001em;
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+section{
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    width: 60%;
+
+}
+
+aside.player_profile{
+    margin-top: 20px ;
+    background-color :#f4a235;
+    padding: 10px;
+    display:flex;
+    justify-content: space-between;
+}
+/*Size for the profile picture : 64px*/
+aside.player_profile img{
+    width: 64px;
+    height: 64px;
+
+}
+aside.player_profile .Picture_and_nickname{
+    display: flex;
+    flex-direction: row;
+
+}
+
+aside.player_profile .Picture_and_nickname .nickname{
+    padding-left: 5px;
+}
+
+
+aside.player_profile .more_profile_information{
+    display: flex;
+    flex-direction: row;
+}
+
+aside.player_profile .button .follow{
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    background-color: #b5b5b5;
+
+}

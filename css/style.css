@@ -1,0 +1,77 @@
+.bandeau
+{
+  background-color: orange;
+}
+
+.bandeau_haut
+{
+  background-color: orange;
+  display: flex;
+  align-content: center;
+}
+
+#recherche
+{
+  text-align: center;
+  width: 50%;
+  align-self: center;
+}
+
+#div_logo
+{
+  /* background-color: blue; */
+  width: 25%;
+}
+#logo
+{
+  width: 28.5%;
+  height: 100%;
+  border-right: 2px solid black;
+}
+
+#div_account
+{
+  /* background-color: blue; */
+  width: 25%;
+  text-align: right;
+}
+
+.nav
+{
+  background-color: grey;
+  border-right: 2px solid black;
+  border-top: 2px solid black;
+  width: 15%;
+}
+
+.tag
+{
+  /* text-align: left; */
+  overflow: hidden;
+  word-wrap: break-word;
+  color: pink;
+}
+
+.page
+{
+  background-color: lightgrey;
+  display: flex;
+}
+
+.game_div
+{
+  background-color: lightblue;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.game
+{
+  background-color: grey;
+  border: 2px solid black;
+  width: 150px;
+  height: 220px;
+  margin: 20px;
+  text-align: justify;
+}
