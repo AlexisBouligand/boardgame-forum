@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../css/header_footer.css" />
+
+    <title>Account creation</title>
+</head>
+
+<body>
+
+  <header>
+
+    <div id="div_logo">
+    <img src="../images/logo.png" alt="logo" id="logo" />
+    </div>
+
+    <form method="post" action="traitement.php" id="recherche">
+      <p>
+        <label for="pseudo">Recherche </label>
+        <input type="text" name="pseudo" id="pseudo" placeholder="ex : solo" size="30" maxlength="10" />
+      </p>
+    </form>
+
+    <div id="div_account">
+      <p><a href="user_connexion.html">Login</a>  /  Sign in</p>
+    </div>
+
+  </header>
+
+  <form method="post" action="fictif.php">
+
+     <p>
+        <label for="pseudo">Pseudo :</label>
+        <input type="text" name="pseudo" id="pseudo" required/>
+
+     <br/>
+
+        <label for="email">Email : </label>
+        <input type="text" name="email" id="email" required/>
+
+      <br/>
+
+        <label for="password">Password : </label>
+        <input type="password" name="password" id="password" required/>
+
+      <br/>
+
+        <input type="submit" name="send_button" value="Send">
+     </p>
+  </form>
+
+
+
+  <footer>
+    <p>Ça c'est le bas de page<p>
+  </footer>
+
+
+</body>
+</html>

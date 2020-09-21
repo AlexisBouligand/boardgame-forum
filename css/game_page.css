@@ -3,14 +3,6 @@ body{
     flex-direction: column;
 }
 
-header{
-    background-color: #b5b5b5;
-}
-
-footer{
-    background-color: #b5b5b5;
-}
-
 img{
     white-space: pre-wrap;
 }

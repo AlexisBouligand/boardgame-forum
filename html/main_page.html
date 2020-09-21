@@ -2,12 +2,15 @@
 <html>
 <head>
     <meta charset="utf-8" />
+    <!-- The lastest stylesheet loaded overrides the others -->
+    <link rel="stylesheet" href="../css/header_footer.css" />
     <link rel="stylesheet" href="../css/main_page.css" />
     <title>Accueil</title>
 </head>
 
 <body>
-  <div class="bandeau_haut">
+
+  <header>
 
     <div id="div_logo">
     <img src="../images/logo.png" alt="logo" id="logo" />
@@ -21,14 +24,14 @@
     </form>
 
     <div id="div_account">
-      <p>Log in  /  Sign in</p>
+      <p><a href="user_connexion.html">Login</a>  /  <a href="account_creation.html">Sign in</a></p>
     </div>
 
-  </div>
+  </header>
 
-  <div class="page">
+  <section>
 
-    <nav class="nav">
+    <nav>
         <ul>
             <p class="tag">test nav</p>
             <p class="tag">test nav deux</p>
@@ -64,11 +67,11 @@
       <h2 class="game">un jeu</h2>
     </div>
 
-  </div>
+  </section>
 
 
 
-  <footer class="bandeau">
+  <footer>
     <p>Ça c'est le bas de page<p>
   </footer>
 

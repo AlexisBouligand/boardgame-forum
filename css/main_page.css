@@ -1,47 +1,9 @@
-.bandeau
-{
-  background-color: orange;
-}
-
-.bandeau_haut
-{
-  background-color: orange;
-  display: flex;
-  align-content: center;
-}
-
-#recherche
-{
-  text-align: center;
-  width: 50%;
-  align-self: center;
-}
-
-#div_logo
-{
-  /* background-color: blue; */
-  width: 25%;
-}
-#logo
-{
-  width: 28.5%;
-  height: 100%;
-  border-right: 2px solid black;
-}
-
-#div_account
-{
-  /* background-color: blue; */
-  width: 25%;
-  text-align: right;
-}
-
-.nav
+nav
 {
   background-color: grey;
   border-right: 2px solid black;
   border-top: 2px solid black;
-  width: 15%;
+  width: 45%;
 }
 
 .tag
@@ -52,7 +14,7 @@
   color: pink;
 }
 
-.page
+section
 {
   background-color: lightgrey;
   display: flex;
