@@ -1,3 +1,10 @@
+/* Reset css */
+*{
+    margin: 0px;
+    padding: 0px;
+    font-family: Avenir, sans-serif;
+}
+
 header
 {
   background-color: orange;

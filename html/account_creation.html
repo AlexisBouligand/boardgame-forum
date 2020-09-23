@@ -3,6 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="../css/header_footer.css" />
+    <link rel="stylesheet" href="../css/account_creation.css" />
 
     <title>Account creation</title>
 </head>
@@ -31,22 +32,53 @@
   <form method="post" action="fictif.php">
 
      <p>
+     <br/>
+
         <label for="pseudo">Pseudo :</label>
         <input type="text" name="pseudo" id="pseudo" required/>
 
+     <br/>
      <br/>
 
         <label for="email">Email : </label>
         <input type="text" name="email" id="email" required/>
 
       <br/>
+      <br/>
 
         <label for="password">Password : </label>
         <input type="password" name="password" id="password" required/>
 
       <br/>
+      <br/>
+
+        <label for="password">Birthdate : </label>
+        <input type="text" name="Birthdate" id="Birthdate" required/>
+
+      <br/>
+      <br/>
+
+      <nav>
+      <ul>
+        <li class="deroulant"><a href="#">Country &ensp;</a>
+          <ul class="sous">
+            <li><a href="#">Albanie</a></li>
+            <li><a href="#">France</a></li>
+            <li><a href="#">Wakanda</a></li>
+          </ul>
+        </li>
+      </ul>
+      </nav>
+
+      <br/>
+
+        <input type="submit" name="send_button" value="chose profile picture">
+
+      <br/>
+      <br/>
 
         <input type="submit" name="send_button" value="Send">
+
      </p>
   </form>
 
