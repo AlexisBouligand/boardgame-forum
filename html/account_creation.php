@@ -1,93 +1,46 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="../css/header_footer.css" />
-    <link rel="stylesheet" href="../css/account_creation.css" />
+<?php
+  $PAGE_NAME = "Create Account";
+  include_once("../lib/head.php");
+?>
 
-    <title>Account creation</title>
-</head>
+<h2>Account creation</h2>
 
-<body>
+<form class="main-form" method="post" action="fictif.php">
+  <div class="text-input">
+    <label for="pseudo">Pseudo :</label>
+    <input type="text" name="pseudo" id="pseudo" required />
+  </div>
 
-  <header>
+  <div class="text-input">
+    <label for="email">Email : </label>
+    <input type="text" name="email" id="email" required />
+  </div>
 
-    <div id="div_logo">
-    <a href="main_page.html"><img src="../images/logo.png" alt="logo" id="logo" /></a>
-    </div>
+  <div class="text-input">
+    <label for="password">Password : </label>
+    <input type="password" name="password" id="password" required />
+  </div>
 
-    <form method="post" action="traitement.php" id="recherche">
-      <p>
-        <label for="pseudo">Recherche </label>
-        <input type="text" name="pseudo" id="pseudo" placeholder="ex : solo" size="30" maxlength="10" />
-      </p>
-    </form>
+  <div class="text-input">
+    <label for="Birthdate">Birthdate : </label>
+    <input type="text" name="Birthdate" id="Birthdate" required />
+  </div>
 
-    <div id="div_account">
-      <p><a href="user_connexion.html">Login</a>  /  Sign in</p>
-    </div>
+  <div class="dropdown-menu">
+    Country:
+    <select name="country" id="country-select">
+      <option name="AL">Albanie</option>
+      <option name="FR" selected>France</option>
+      <option name="WK">Wakanda</option>
+    </select>
+  </div>
 
-  </header>
+  <!-- TODO: this -->
+  <!-- <input type="submit" name="pp_button" value="chose profile picture"> -->
 
-  <form method="post" action="fictif.php">
+  <input type="submit" name="send_button" value="Send">
+</form>
 
-     <p>
-     <br/>
-
-        <label for="pseudo">Pseudo :</label>
-        <input type="text" name="pseudo" id="pseudo" required/>
-
-     <br/>
-     <br/>
-
-        <label for="email">Email : </label>
-        <input type="text" name="email" id="email" required/>
-
-      <br/>
-      <br/>
-
-        <label for="password">Password : </label>
-        <input type="password" name="password" id="password" required/>
-
-      <br/>
-      <br/>
-
-        <label for="Birthdate">Birthdate : </label>
-        <input type="text" name="Birthdate" id="Birthdate" required/>
-
-      <br/>
-      <br/>
-
-      <nav>
-      <ul>
-        <li class="deroulant"><a href="#">Country &ensp;</a>
-          <ul class="sous">
-            <li><a href="#">Albanie</a></li>
-            <li><a href="#">France</a></li>
-            <li><a href="#">Wakanda</a></li>
-          </ul>
-        </li>
-      </ul>
-      </nav>
-
-      <br/>
-
-        <input type="submit" name="pp_button" value="chose profile picture">
-
-      <br/>
-      <br/>
-
-        <input type="submit" name="send_button" value="Send">
-
-     </p>
-  </form>
-
-
-
-  <footer>
-    <p>Ça c'est le bas de page<p>
-  </footer>
-
-
-</body>
-</html>
+<?php
+  include_once("../lib/tail.php");
+?>

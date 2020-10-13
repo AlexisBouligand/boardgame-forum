@@ -5,6 +5,7 @@
     <!-- The lastest stylesheet loaded overrides the others -->
     <link rel="stylesheet" href="../css/header_footer.css" />
     <link rel="stylesheet" href="../css/main_page.css" />
+    <link rel="stylesheet" href="../css/style.css" />
     <title>Accueil</title>
 </head>
 
@@ -31,12 +32,7 @@
 
   <section>
 
-    <nav>
-        <ul>
-            <p class="tag">test nav</p>
-            <p class="tag">test nav deux</p>
-        </ul>
-    </nav>
+
 
 
     <div class="game_div">

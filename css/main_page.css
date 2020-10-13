@@ -1,35 +1,23 @@
-nav
-{
-  background-color: grey;
-  border-right: 2px solid black;
-  border-top: 2px solid black;
-  width: 45%;
-}
-
-.tag
-{
+.tag {
   /* text-align: left; */
   overflow: hidden;
   word-wrap: break-word;
   color: pink;
 }
 
-section
-{
+section {
   background-color: lightgrey;
   display: flex;
 }
 
-.game_div
-{
+.game_div {
   background-color: lightblue;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.game
-{
+.game {
   background-color: grey;
   border: 2px solid black;
   width: 150px;
