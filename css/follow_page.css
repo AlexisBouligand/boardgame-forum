@@ -5,14 +5,6 @@
   justify-content: center;
 }
 
-section.profiles {
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  width: 60%;
-  max-width: 50em;
-}
-
 aside.player-profile {
   margin-top: 20px;
   background-color :#f4a235;

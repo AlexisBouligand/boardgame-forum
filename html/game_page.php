@@ -1,108 +1,77 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <link rel="stylesheet" href="../css/header_footer.css"/>
-        <link rel="stylesheet" href="../css/game_page.css"/>
-        <title>Game Page</title>
-    </head>
+<?php
+$PAGE_NAME = "Game Page";
+$PAGE_HEAD = "<link rel=\"stylesheet\" href=\"../css/game_page.css\" />";
+include_once("../lib/head.php");
 
-    <body>
+$game_res = new Game("7 Wonders", 0.75, 18.76, "Repos Productions");
+$search_res = [
+  new Critic(
+    new Player(0, "Jean-Paul", time(), "WK", "password"),
+    "Muni d’un seul mot – The Game – et décidé à se battre pour sauver le monde, notre protagoniste sillonne l’univers crépusculaire du game. Sa mission le projettera dans une dimension qui dépasse le temps. Pourtant, il ne s’agit pas d’un voyage dans le temps, mais bel et bien d'un voyage à travers les époques…",
+    time(),
+    12
+  ),
+  new Critic(
+    new Player(1, "UwU", time(), "FR", "password"),
+    "C T kool",
+    time(),
+    -63
+  )
+];
+?>
+<section class="game-page card-list">
+  <h2><?php echo $game_res->title; ?></h2>
+   <!---article is only dedicated to the game--->
+  <article class="game">
 
+    <div class="global_informations">
+      <!---Size for the image : 64px--->
+      <img src="../Test_Image/7_wonders_board_game_cover.png" alt="Seven wonders board game" />
+      <div class="game-title"><?php echo $game_res->title; ?></div>
+      <h4 class="mark">Note: <?php echo round($game_res->note * 10);?>/10</h4>
+    </div>
 
-      <header>
+    <aside>
+      <div class="price">Price: <b><?php echo $game_res->price; ?>€</b></div>
+      <?php
+      if ($game_res->publisher != null) {
+         ?>
+         <div class="publisher">Publisher: <b><?php echo $game_res->publisher; ?></b></div>
+         <?php
+      }
+      ?>
+    </aside>
+  </article>
 
-        <div id="div_logo">
-        <a href="main_page.html"><img src="../images/logo.png" alt="logo" id="logo" /></a>
-        </div>
+  <?php
+  foreach ($search_res as $critic) {
+    ?>
+    <aside class="player-critic">
+      <div class="post-infos">
+        <img src="../Test_Image/Profile_Picture.png" alt="PP">
+        <div class="username"><?php echo $critic->author->username; ?></div>
+        <div class="publication-date">Published the <?php echo date("Y-m-d", $critic->date); ?></div>
+      </div>
 
-        <form method="post" action="traitement.php" id="recherche">
-          <p>
-            <label for="pseudo">Recherche </label>
-            <input type="text" name="pseudo" id="pseudo" placeholder="ex : solo" size="30" maxlength="10" />
-          </p>
-        </form>
+      <p><?php echo $critic->contents; ?></p>
 
-        <div id="div_account">
-          <p><a href="user_connexion.html">Login</a>  /  <a href="account_creation.html">Sign in</a></p>
-        </div>
+      <div class="karma-box">
+        <a class="like" name="like" href="#">
+          <span>&#x25b2;</span>
+        </a>
+        <span class="karma"><?php echo $critic->karma; ?></span>
+        <a class="dislike" name="dislike" href="#">
+          <span>&#x25bc;</span>
+        </a>
+      </div >
 
-      </header>
+    </aside>
+    <?php
+  }
+  ?>
 
+</section>
 
-
-         <section>
-
-            <h1>Game Title</h1>
-               <!---article is only dedicated to the game--->
-            <article id="game">
-
-               <div id="global_informations">
-                  <!---Size for the image : 64px--->
-                  <img src="../Test_Image/7_wonders_board_game_cover.png" alt="Seven wonders board game">
-                  <h2>The game</h2>
-                  <h4 id="mark">Note : ok/10</h4>
-               </div>
-
-               <aside>
-                  <h4>Price : not too much  </h4> <h4>Publisher : yes</h4>
-               </aside>
-
-            </article>
-
-
-
-
-            <aside class="player_critic">
-               <div class="informations_of_the_post">
-                  <img src="../Test_Image/Profile_Picture.png" alt="PP">
-                  <h2 class="nickname">Ami des enfants</h2>
-                  <h4v class="publication_date">Published the 00/00/01</h4>
-               </div>
-
-               <p>Muni d’un seul mot – The Game – et décidé à se battre pour sauver le monde, notre protagoniste sillonne l’univers crépusculaire du game. Sa mission le projettera dans une dimension qui dépasse le temps. Pourtant, il ne s’agit pas d’un voyage dans le temps, mais bel et bien d'un voyage à travers les époques…</p>
-
-
-               <div class = "button">
-                  <div  class="like">
-                     <p>Like</p>
-                  </div>
-                  <div class="dislike">
-                     <p>Dislike</p>
-                  </div>
-               </div >
-
-            </aside>
-
-            <aside class="player_critic">
-               <div class="informations_of_the_post">
-                  <img src="../Test_Image/Profile_Picture.png" alt="pp">
-                  <h2 class="nickname">Ami des enfants n2</h2>
-                  <h4v class="publication_date">Published the 00/00/02</h4>
-               </div>
-
-               <p>C T cool</p>
-
-               <div class = "button">
-                  <div  class="like">
-                     <p>Like</p>
-                  </div>
-                  <div class="dislike">
-                     <p>Dislike</p>
-                  </div>
-               </div >
-
-            </aside>
-
-
-         </section>
-
-
-
-
-      <footer>
-         <p>Footer</p>
-      </footer>
-
-    </body>
-</html>
+<?php
+include_once("../lib/tail.php");
+?>

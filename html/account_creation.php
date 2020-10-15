@@ -1,6 +1,6 @@
 <?php
-  $PAGE_NAME = "Create Account";
-  include_once("../lib/head.php");
+$PAGE_NAME = "Create Account";
+include_once("../lib/head.php");
 ?>
 
 <h2>Account creation</h2>
@@ -42,5 +42,5 @@
 </form>
 
 <?php
-  include_once("../lib/tail.php");
+include_once("../lib/tail.php");
 ?>

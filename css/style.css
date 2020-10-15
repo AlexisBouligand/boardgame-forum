@@ -21,6 +21,7 @@ main {
   padding-top: 1em;
   padding-left: 2em;
   padding-right: 2em;
+  padding-bottom: 6em;
   flex-grow: 1;
 }
 
@@ -29,6 +30,7 @@ nav.sidebar {
   border-right: 2px solid black;
   border-top: 2px solid black;
   width: 14em;
+  flex-shrink: 0;
 }
 
 nav.sidebar > ul {
@@ -65,4 +67,13 @@ nav.sidebar > ul > li {
 
 .main-form .text-input > label {
   margin-right: 0.75em;
+}
+
+section.card-list {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 60%;
+  max-width: 50em;
+  min-width: 30em;
 }

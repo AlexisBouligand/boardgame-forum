@@ -2,6 +2,9 @@
 $PAGE_NAME = "Accueil";
 $PAGE_HEAD = "<link rel=\"stylesheet\" href=\"../css/follow_page.css\" />";
 include_once("../lib/head.php");
+
+// TODO: the actual search
+$search_res = [new Player(0, "Jean-Paul", time(), "WK", "password")];
 ?>
 
 <form class="main-form search-player" method="get" action="" id="pseudo_search">
@@ -13,11 +16,9 @@ include_once("../lib/head.php");
   ?> />
 </form>
 
-<section class="profiles">
+<section class="profiles card-list">
 
   <?php
-  // TODO: the actual search
-  $search_res = [new Player("Jean-Paul", time(), "WK", "nope")];
   foreach ($search_res as $player) {
     ?>
     <aside class="player-profile">
@@ -47,5 +48,5 @@ include_once("../lib/head.php");
 </section>
 
 <?php
-  include_once("../lib/tail.php");
+include_once("../lib/tail.php");
 ?>

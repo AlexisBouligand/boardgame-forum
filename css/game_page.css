@@ -1,109 +1,94 @@
-body{
-    display: flex;
-    flex-direction: column;
+body {
+  display: flex;
+  flex-direction: column;
 }
 
-img{
-    white-space: pre-wrap;
+img {
+  white-space: pre-wrap;
 }
 
-h2{
-    padding: 5px;
+.game-title {
+  padding: 5px 15px;
+  display: inline-block;
+  font-weight: 700;
+  font-size: 16pt;
+  max-width: 50%;
 }
 
-h4{
-    margin-left: 10px;
-    margin-right: 10px;
+.price, .publisher {
+  margin: 10px;
 }
 
-
-
-
-section{
-    display: flex;
-    flex-direction: column;
-    margin: auto;
-    width: 60%;
+article {
+  background-color :#f4a235;
+  padding: 10px;
 }
 
-
-h1{
-    text-align: center;
-}
-article{
-    background-color :#f4a235;
-    padding:10px;
+.global_informations {
+  display: flex;
 }
 
-#global_informations{
-    display: flex;
-    margin:0;
-    padding: 0;
-
+.mark {
+  padding: 10px;
+  margin-left: auto;
 }
 
-#mark{
-    padding: 10px;
-    margin-left: auto;
-
-
-}
-
-article aside{
-    display: flex;
-
+article aside {
+  display: flex;
 }
 
 
-
-
-
-aside.player_critic{
-    margin-top: 20px ;
-    background-color :#f4a235;
-    padding: 10px;
+aside.player-critic {
+  margin-top: 20px ;
+  background-color :#f4a235;
+  padding: 10px;
 }
+
 /*Size for the profile picture : 64px*/
-aside.player_critic img{
-    width: 64px;
-    height: 64px;
-
-}
-aside.player_critic .informations_of_the_post{
-    display: flex;
-    flex-direction: row;
+aside.player-critic img {
+  width: 64px;
+  height: 64px;
 }
 
-aside.p{
-
-}
-.publication_date{
-    padding: 10px;
-    margin-left: auto;
-
-
+aside.player-critic .post-infos {
+  display: flex;
+  flex-direction: row;
 }
 
-
-aside.player_critic .button{
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    align-items: flex-end;
+aside.player-critic .post-infos .username {
+  font-weight: 700;
+  font-size: 14pt;
+  padding: 5px 15px;
 }
 
-
-aside.player_critic .like{
-    border-radius: 100%;
-    background-color: #b5b5b5;
-    text-align: center;
-    height : 50px;
-    width : 50px;
+.publication-date {
+  padding: 10px;
+  margin-left: auto;
 }
-aside.player_critic .dislike{
-    border-radius: 100%;
-    background-color: #b5b5b5;
-    text-align: center;
-    height : 50px;
-    width : 50px;
+
+aside.player-critic .karma-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+aside.player-critic .karma {
+  margin: 1em 0.25em;
+}
+
+aside.player-critic .like, aside.player-critic .dislike {
+  border-radius: 100%;
+  text-align: center;
+  height: 3em;
+  width: 3em;
+  color: gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+aside.player-critic .like:hover, aside.player-critic .dislike:hover {
+  color: black;
 }

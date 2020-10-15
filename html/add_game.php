@@ -28,5 +28,5 @@ include_once("../lib/head.php");
 </form>
 
 <?php
-  include_once("../lib/tail.php");
+include_once("../lib/tail.php");
 ?>
