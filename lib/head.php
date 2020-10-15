@@ -1,3 +1,6 @@
+<?php
+  include_once("prelude.php");
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -5,6 +8,12 @@
     <link rel="stylesheet" href="../css/header_footer.css" />
     <link rel="stylesheet" href="../css/style.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+
+    <?php
+      if (isset($PAGE_HEAD)) {
+        echo $PAGE_HEAD;
+      }
+    ?>
 
     <title><?php echo $PAGE_NAME; ?></title>
   </head>
