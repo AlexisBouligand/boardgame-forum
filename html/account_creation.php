@@ -7,22 +7,22 @@ include_once("../lib/head.php");
 
 <form class="main-form" method="post" action="fictif.php">
   <div class="text-input">
-    <label for="pseudo">Pseudo :</label>
+    <label for="pseudo">Pseudo:</label>
     <input type="text" name="pseudo" id="pseudo" required />
   </div>
 
   <div class="text-input">
-    <label for="email">Email : </label>
+    <label for="email">Email:</label>
     <input type="text" name="email" id="email" required />
   </div>
 
   <div class="text-input">
-    <label for="password">Password : </label>
+    <label for="password">Password:</label>
     <input type="password" name="password" id="password" required />
   </div>
 
   <div class="text-input">
-    <label for="Birthdate">Birthdate : </label>
+    <label for="Birthdate">Birthdate:</label>
     <input type="text" name="Birthdate" id="Birthdate" required />
   </div>
 

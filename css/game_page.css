@@ -1,8 +1,3 @@
-body {
-  display: flex;
-  flex-direction: column;
-}
-
 img {
   white-space: pre-wrap;
 }
@@ -19,12 +14,12 @@ img {
   margin: 10px;
 }
 
-article {
-  background-color :#f4a235;
+article.game {
+  background-color: #f4a235;
   padding: 10px;
 }
 
-.global_informations {
+.global-informations {
   display: flex;
 }
 
@@ -40,11 +35,11 @@ article aside {
 
 aside.player-critic {
   margin-top: 20px ;
-  background-color :#f4a235;
+  background-color:#f4a235;
   padding: 10px;
 }
 
-/*Size for the profile picture : 64px*/
+/*Size for the profile picture: 64px*/
 aside.player-critic img {
   width: 64px;
   height: 64px;

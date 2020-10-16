@@ -1,0 +1,21 @@
+.user {
+  background-color: #f4a235;
+  padding: 10px;
+}
+
+.profile-picture {
+  width: 64px;
+  height: 64px;
+}
+
+.global-informations {
+  display: flex;
+}
+
+.username {
+  padding: 5px 15px;
+  display: inline-block;
+  font-weight: 700;
+  font-size: 16pt;
+  max-width: 50%;
+}

@@ -24,7 +24,7 @@ $search_res = [
    <!---article is only dedicated to the game--->
   <article class="game">
 
-    <div class="global_informations">
+    <div class="global-informations">
       <!---Size for the image : 64px--->
       <img src="../Test_Image/7_wonders_board_game_cover.png" alt="Seven wonders board game" />
       <div class="game-title"><?php echo $game_res->title; ?></div>

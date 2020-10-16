@@ -26,7 +26,7 @@
 
       <form method="post" action="traitement.php" id="recherche">
         <label for="pseudo">Recherche:</label>
-        <input type="text" name="pseudo" id="pseudo" placeholder="ex : solo" size="30" maxlength="10" />
+        <input type="text" name="pseudo" id="pseudo" placeholder="ex: solo" size="30" maxlength="10" />
       </form>
 
       <div id="account-login">
