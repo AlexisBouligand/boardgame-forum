@@ -3,7 +3,7 @@ $PAGE_NAME = "Game Page";
 $PAGE_HEAD = "<link rel=\"stylesheet\" href=\"../css/game_page.css\" />";
 include_once("../lib/head.php");
 
-$game_res = new Game("7 Wonders", 0.75, 18.76, "Repos Productions");
+$game_res = new Game(1, "7 Wonders", 0.75, 18.76, "Repos Productions");
 $search_res = [
   new Critic(
     new Player(0, "Jean-Paul", time(), "WK", "password"),
