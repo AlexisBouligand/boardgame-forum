@@ -1,47 +1,73 @@
-/* Reset css */
-*{
-    margin: 0px;
-    padding: 0px;
-    font-family: Avenir, sans-serif;
-}
-
-header
-{
+header {
   background-color: orange;
   display: flex;
   align-content: center;
+  --header-height: 64px;
+  height: var(--header-height);
 }
 
-#recherche
-{
+#recherche {
   text-align: center;
-  width: 50%;
   align-self: center;
-  background-color: orange;
+  flex-grow: 1;
+  height: var(--header-height);
+  padding-left: 2em;
+  padding-right: 2em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 
-#div_logo
-{
-  /* background-color: blue; */
-  width: 25%;
+#recherche :nth-child(1) {
+  margin-right: 0.5em;
 }
-#logo
-{
-  width: 28.5%;
-  height: 100%;
+
+#recherche input {
+  background: orange;
+  border: 1px solid darkslategray;
+  border-radius: 2px;
+  padding: 0.2em 0.3em;
+  transition: 0.2s background, 0.2s border;
+}
+
+#recherche input:hover {
+  border: 1px solid black;
+}
+
+#recherche input:focus {
+  background: darkorange;
+}
+
+#div_logo {
+  width: var(--header-height);
   border-right: 2px solid black;
 }
 
-#div_account
-{
-  /* background-color: blue; */
-  width: 25%;
-  text-align: right;
+#logo {
+  height: var(--header-height);
 }
 
+#account-login a {
+  /* background-color: blue; */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 1em;
+  padding-right: 1em;
+  background-color: inherit;
+  transition: 0.2s background-color;
+  color: white;
+  height: var(--header-height);
+}
 
+#account-login a:hover {
+  background-color: darkorange;
+}
 
-footer
-{
+footer {
+  padding-top: 1em;
+  padding-bottom: 1em;
+  text-align: center;
   background-color: orange;
 }

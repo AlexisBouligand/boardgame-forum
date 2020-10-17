@@ -1,88 +1,52 @@
+<?php
+$PAGE_NAME = "Accueil";
+$PAGE_HEAD = "<link rel=\"stylesheet\" href=\"../css/follow_page.css\" />";
+include_once("../lib/head.php");
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <link rel="stylesheet" href="../css/header_footer.css" />
-    <link rel="stylesheet" href="../css/follow_page.css" />
-    <title>Accueil</title>
-</head>
+// TODO: the actual search
+$search_res = [new Player(0, "Jean-Paul", time(), "WK", "password")];
+?>
 
-<body>
+<form class="main-form search-player" method="get" action="" id="pseudo_search">
+  <label for="pseudo">Search for a Friend: </label>
+  <input type="text" name="pseudo" id="pseudo" size="40" maxlength="30" <?php
+    if (isset($_GET["pseudo"])) {
+      echo $_GET["pseudo"];
+    }
+  ?> />
+</form>
 
+<section class="profiles card-list">
 
-  <header>
-
-    <div id="div_logo">
-    <a href="main_page.html"><img src="../images/logo.png" alt="logo" id="logo" /></a>
-    </div>
-
-    <form method="post" action="traitement.php" id="recherche">
-      <p>
-        <label for="pseudo">Recherche </label>
-        <input type="text" name="pseudo" id="pseudo" placeholder="ex : solo" size="30" maxlength="10" />
-      </p>
-    </form>
-
-    <div id="div_account">
-      <p><a href="user_connexion.html">Login</a>  /  <a href="account_creation.html">Sign in</a></p>
-    </div>
-
-  </header>
-
-
-
-    <form method="post" action="traitement.php" id="pseudo_search">
-      <p>
-        <label for="pseudo">Search for a Friend : </label>
-        <input type="text" name="pseudo" id="pseudo" size="40" maxlength="30" />
-      </p>
-    </form>
-
-
-    <section>
-
-
-
-    <aside class="player_profile">
-      <div class="Picture_and_nickname">
+  <?php
+  foreach ($search_res as $player) {
+    ?>
+    <aside class="player-profile">
+      <div class="picture-and-nickname">
           <img src="../Test_Image/Profile_Picture.png" alt="PP">
-          <h2 class="nickname">Le seul OU l'unique</h2>
+          <h2 class="nickname"><?php echo $player->username; ?></h2>
       </div>
 
-      <div class="more_profile_information">
-         <p>Sexe, </p><p>Age, </p><p>Pays</p>
+      <div class="profile-info">
+        <span>
+          Né(e) le <?php echo date("Y-m-d", $player->birth_date); ?>
+        </span>
+        <span>
+          Pays: <?php echo $player->country; ?>
+        </span>
       </div>
 
-      <div class = "button">
-          <div  class="follow">
-             <p>Follow</p>
-          </div>
-      </div >
+      <a class="follow" href="#">
+        <span>Follow</span>
+      </a>
 
     </aside>
+    <?php
+  }
+  ?>
 
+</section>
 
-    <aside class="player_profile">
-     <div class="Picture_and_nickname">
-         <img src="../Test_Image/Profile_Picture.png" alt="PP">
-         <h2 class="nickname">It's me Mariiiiiiiii</h2>
-     </div>
-
-     <div class="more_profile_information">
-        <p>Sexe, </p><p>Age, </p><p>Pays</p>
-     </div>
-
-     <div class = "button">
-         <div  class="follow">
-           <p>Follow</p>
-         </div>
-     </div >
-
-  </aside>
-
-     </section>
-
-
-</body>
-</html>
+<?php
+include_once("../lib/tail.php");
+?>

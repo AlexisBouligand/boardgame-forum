@@ -1,39 +1,39 @@
-nav
-{
-  background-color: grey;
-  border-right: 2px solid black;
-  border-top: 2px solid black;
-  width: 45%;
-}
-
-.tag
-{
+.tag {
   /* text-align: left; */
   overflow: hidden;
   word-wrap: break-word;
   color: pink;
 }
 
-section
-{
-  background-color: lightgrey;
-  display: flex;
-}
-
-.game_div
-{
-  background-color: lightblue;
+.game-list {
+  /* background-color: lightblue; */
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.game
-{
+.game {
   background-color: grey;
+  color: black;
+  text-decoration: none;
   border: 2px solid black;
   width: 150px;
   height: 220px;
   margin: 20px;
-  text-align: justify;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 20px;
+  transition: 0.2s background-color;
+}
+
+.game:hover {
+  background-color: darkgray;
+}
+
+.game-picture {
+  width: 64px;
+  height: 64px;
 }
