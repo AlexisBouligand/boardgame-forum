@@ -10,15 +10,15 @@ if (isset($_POST["submit"])) {
 
 <form class="main-form" method="post" action="user_login.php">
 
-  <div class="text-input">
-    <label for="pseudo">Pseudo:</label>
-    <input type="text" name="pseudo" id="pseudo" required/>
-  </div>
 
-  <div class="text-input">
-    <label for="password">Password:</label>
-    <input type="password" name="password" id="password" required/>
-  </div>
+    <label >Pseudo:
+    <input type="text" name="pseudo" required/>
+    </label>
+
+
+    <label>Password:
+    <input type="password" name="password" required/>
+    </label>
 
   <input type="submit" name="submit" value="Send">
 </form>
