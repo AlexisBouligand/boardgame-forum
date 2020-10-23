@@ -77,3 +77,20 @@ section.card-list {
   max-width: 50em;
   min-width: 30em;
 }
+
+a {
+  text-decoration: none;
+}
+
+a:hover, a:active {
+  text-decoration: underline;
+}
+
+a.center {
+  display: block;
+  text-align: center;
+}
+
+.gray {
+  color: gray;
+}

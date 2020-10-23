@@ -21,17 +21,17 @@
   <body>
     <header>
       <div id="div_logo">
-        <a href="main_page.php"><img src="../images/logo.png" alt="logo" id="logo" /></a>
+        <a href="/"><img src="../images/logo.png" alt="logo" id="logo" /></a>
       </div>
 
-      <form method="post" action="traitement.php" id="recherche">
+      <form method="get" action="/follow_page.php" id="recherche">
         <label for="pseudo">Recherche:</label>
         <input type="text" name="pseudo" id="pseudo" placeholder="ex: solo" size="30" maxlength="10" />
       </form>
 
       <div id="account-login">
         <!-- TODO: clean that up? -->
-        <a href="user_connexion.php" class="login">Sign In</a>
+        <a href="/user_login.php" class="login">Sign In</a>
       </div>
 
     </header>

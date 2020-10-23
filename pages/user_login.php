@@ -9,19 +9,19 @@ if (isset($_POST["submit"])) {
 ?>
 
 <form class="main-form" method="post" action="user_login.php">
-
-
-    <label >Pseudo:
+  <label >Pseudo:
     <input type="text" name="pseudo" required/>
-    </label>
+  </label>
 
 
-    <label>Password:
+  <label>Password:
     <input type="password" name="password" required/>
-    </label>
+  </label>
 
   <input type="submit" name="submit" value="Send">
 </form>
+
+<a href="/account_creation.php" class="center gray">Sign up</a>
 
 <?php
 include_once("../lib/tail.php");

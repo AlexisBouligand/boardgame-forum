@@ -1,6 +1,26 @@
 <?php
 $PAGE_NAME = "Add Game";
 include_once("../lib/head.php");
+include_once("../lib/add_game.php");
+
+if (isset($_POST["submit"])) {
+  // TODO: validate and sanitize
+  $name = $_POST["name"];
+  $creator = $_POST["creator"];
+  $price = $_POST["price"];
+  $publisher = $_POST["publisher"];
+  $res = add_game(
+    $name,
+    $creator,
+    $price,
+    $publisher
+  );
+  if ($res == NULL) {
+    header("Location: /");
+  } else {
+    echo "There was an error while trying to add your game: " . $res;
+  }
+}
 ?>
 
 <h2>Add a Game</h2>

@@ -11,7 +11,7 @@ $search_res = [new Player(0, "Jean-Paul", time(), "WK", "password")];
   <label for="pseudo">Search for a Friend: </label>
   <input type="text" name="pseudo" id="pseudo" size="40" maxlength="30" <?php
     if (isset($_GET["pseudo"])) {
-      echo $_GET["pseudo"];
+      echo "value=\"" . $_GET["pseudo"] . "\"";
     }
   ?> />
 </form>
