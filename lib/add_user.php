@@ -9,9 +9,9 @@ $profile_picture = $_POST["profile_picture"];
 try {
     // Se connecter à la base de données
     $bdd = new PDO("mysql:host=localhost;dbname=boardgameforum;charset=utf8", "root", "");
-// Créer une requête INSERT INTO pour insérer un étudiant
+    // Créer une requête INSERT INTO pour insérer un étudiant
     $req = $bdd->prepare("INSERT INTO user (pseudonym, email, password, profile_picture, country, birthdate) VALUES (?,?,?,?,?,?);");
-// Exécuter la requête
+    // Exécuter la requête
     $req->execute([$pseudo, $email, password_hash($password,PASSWORD_BCRYPT), $profile_picture, $country, $birthdate]);
 } catch (Exception $exception) {
     echo $exception;
@@ -19,4 +19,3 @@ try {
 
 header("Location: ../html/index.php");
 ?>
-
