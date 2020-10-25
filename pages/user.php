@@ -1,6 +1,6 @@
 <?php
 $PAGE_NAME = "Utilisateur";
-$PAGE_HEAD = "<link rel=\"stylesheet\" href=\"../css/user_page.css\" />";
+$PAGE_HEAD = "<link rel=\"stylesheet\" href=\"/css/user_page.css\" />";
 include_once("../lib/head.php");
 
 
@@ -16,7 +16,7 @@ if (isset($_GET["user"])) {
   <h2><?php echo $user->username; ?></h2>
   <article class="user">
     <div class="global-informations">
-      <img src="../Test_Image/Profile_Picture.png" alt="PP" class="profile-picture" />
+      <img src="/Test_Image/Profile_Picture.png" alt="PP" class="profile-picture" />
       <div class="username"><?php echo $user->username; ?></div>
     </div>
   </article>

@@ -1,6 +1,6 @@
 <?php
 $PAGE_NAME = "Connexion";
-// $PAGE_HEAD = "<link rel=\"stylesheet\" href=\"../css/user_login.css\" />";
+// $PAGE_HEAD = "<link rel=\"stylesheet\" href=\"/css/user_login.css\" />";
 include_once("../lib/head.php");
 
 if (isset($_POST["submit"])) {

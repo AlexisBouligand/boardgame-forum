@@ -1,6 +1,6 @@
 <?php
 $PAGE_NAME = "Accueil";
-$PAGE_HEAD = "<link rel=\"stylesheet\" href=\"../css/follow_page.css\" />";
+$PAGE_HEAD = "<link rel=\"stylesheet\" href=\"/css/follow_page.css\" />";
 include_once("../lib/head.php");
 
 // TODO: the actual search
@@ -23,7 +23,7 @@ $search_res = [new Player(0, "Jean-Paul", time(), "WK", "password")];
     ?>
     <aside class="player-profile">
       <div class="picture-and-nickname">
-          <img src="../Test_Image/Profile_Picture.png" alt="PP">
+          <img src="/Test_Image/Profile_Picture.png" alt="PP">
           <h2 class="nickname"><?php echo $player->username; ?></h2>
       </div>
 

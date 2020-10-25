@@ -1,6 +1,6 @@
 <?php
 $PAGE_NAME = "Game Page";
-$PAGE_HEAD = "<link rel=\"stylesheet\" href=\"../css/game_page.css\" />";
+$PAGE_HEAD = "<link rel=\"stylesheet\" href=\"/css/game_page.css\" />";
 include_once("../lib/head.php");
 
 $game_res = new Game(1, "7 Wonders", 0.75, 18.76, "Repos Productions");
@@ -26,7 +26,7 @@ $search_res = [
 
     <div class="global-informations">
       <!---Size for the image : 64px--->
-      <img src="../Test_Image/7_wonders_board_game_cover.png" alt="Seven wonders board game" />
+      <img src="/Test_Image/7_wonders_board_game_cover.png" alt="Seven wonders board game" />
       <div class="game-title"><?php echo $game_res->title; ?></div>
       <h4 class="mark">Note: <?php echo round($game_res->note * 10);?>/10</h4>
     </div>
@@ -48,7 +48,7 @@ $search_res = [
     ?>
     <aside class="player-critic">
       <div class="post-infos">
-        <img src="../Test_Image/Profile_Picture.png" alt="PP">
+        <img src="/Test_Image/Profile_Picture.png" alt="PP">
         <div class="username"><?php echo $critic->author->username; ?></div>
         <div class="publication-date">Published the <?php echo date("Y-m-d", $critic->date); ?></div>
       </div>
