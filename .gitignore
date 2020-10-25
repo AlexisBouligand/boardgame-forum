@@ -1,2 +1,5 @@
 config.php
 .DS_Store
+# JetBrains
+.idea/
+*.iml
