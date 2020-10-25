@@ -48,7 +48,7 @@ header {
   height: var(--header-height);
 }
 
-#account-login a {
+#account-login > a {
   /* background-color: blue; */
   display: flex;
   align-items: center;
@@ -61,7 +61,7 @@ header {
   height: var(--header-height);
 }
 
-#account-login a:hover {
+#account-login > a:hover {
   background-color: darkorange;
 }
 

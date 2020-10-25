@@ -4,7 +4,17 @@ $PAGE_NAME = "Connexion";
 include_once("../lib/head.php");
 
 if (isset($_POST["submit"])) {
-  // Handle login attempt
+  // TODO: sanitize and verify
+  $pseudonym = $_POST["pseudo"];
+  $password = $_POST["password"];
+
+  if (try_login($pseudonym, $password)) {
+    $_SESSION["pseudonym"] = $pseudonym;
+    $_SESSION["password"] = $password;
+    header("Location: /");
+  } else {
+    echo "Login attempt failed: try again!";
+  }
 }
 ?>
 

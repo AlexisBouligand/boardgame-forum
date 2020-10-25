@@ -12,7 +12,7 @@ function add_user(
         // Créer une requête INSERT INTO pour insérer un étudiant
         $req = $bdd->prepare("INSERT INTO user (pseudonym, email, password, profile_picture, country, birthdate) VALUES (?, ?, ?, ?, ?, ?);");
         // Exécuter la requête
-        $req->execute([$pseudo, $email, password_hash($password,PASSWORD_BCRYPT), $profile_picture, $country, $birthdate]);
+        $req->execute([$pseudo, $email, password_hash($password, PASSWORD_BCRYPT), $profile_picture, $country, $birthdate]);
 
         return NULL;
     } catch (Exception $exception) {

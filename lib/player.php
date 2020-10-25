@@ -22,4 +22,20 @@ class Player {
   }
 }
 
+function try_login($pseudonym, $password) {
+  global $current_user;
+  global $bdd;
+  $req = $bdd->prepare("SELECT id, birthdate, country, password FROM user WHERE user.pseudonym = ?;");
+  if ($req->execute([$pseudonym])) {
+    $res = $req->fetch();
+    if (password_verify($password, $res["password"])) {
+      $current_user = new Player($res["id"], $pseudonym, $res["birthdate"], $res["country"], $password);
+      return true;
+    }
+  }
+  echo $pseudonym . "<br />" . $password . "<br />";
+
+  return false;
+}
+
 ?>

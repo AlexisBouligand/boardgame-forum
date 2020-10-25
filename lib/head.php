@@ -31,7 +31,11 @@
 
       <div id="account-login">
         <!-- TODO: clean that up? -->
-        <a href="/user_login.php" class="login">Sign In</a>
+        <?php if ($current_user == NULL) { ?>
+          <a href="/user_login.php" class="login">Sign In</a>
+        <?php } else { ?>
+          <a href="/user_logout.php" class="logout">Hello, <?php echo $current_user->username; ?>.<br />Log out?</a>
+        <?php } ?>
       </div>
 
     </header>
