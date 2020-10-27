@@ -3,3 +3,5 @@ config.php
 # JetBrains
 .idea/
 *.iml
+pages/images/user/
+pages/images/game/

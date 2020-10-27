@@ -55,7 +55,7 @@ CREATE TABLE `game` (
   `creator` varchar(255) DEFAULT NULL,
   `publisher` char(255) DEFAULT NULL,
   `price` float DEFAULT NULL,
-  `image` blob NOT NULL
+  `image` int(1) DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -106,7 +106,7 @@ CREATE TABLE `user` (
   `pseudonym` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
-  `profile_picture` blob NOT NULL,
+  `profile_picture` int(1) DEFAULT 0,
   `country` int(11) DEFAULT NULL,
   `birthdate` date DEFAULT NULL,
   `date_account_creation` datetime NOT NULL DEFAULT current_timestamp()
