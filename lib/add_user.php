@@ -13,10 +13,11 @@ function add_user(
         $req = $bdd->prepare("INSERT INTO user (pseudonym, email, password, profile_picture, country, birthdate) VALUES (?, ?, ?, ?, ?, ?);");
         // Exécuter la requête
         $req->execute([$pseudo, $email, password_hash($password, PASSWORD_BCRYPT), $profile_picture, $country, $birthdate]);
-
         return NULL;
     } catch (Exception $exception) {
         return $exception;
     }
+
+
 }
 ?>
