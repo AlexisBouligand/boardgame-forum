@@ -1,6 +1,0 @@
-<?php
-$db_host = "localhost";
-$db_name = "boardgameforum";
-$db_username = "root";
-$db_password = "";
-?>
