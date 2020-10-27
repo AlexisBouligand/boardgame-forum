@@ -12,7 +12,6 @@ $current_user = NULL;
 include_once("player.php");
 include_once("game.php");
 include_once("critic.php");
-
 if (isset($_SESSION["pseudonym"]) && isset($_SESSION["password"])) {
   if (!try_login($_SESSION["pseudonym"], $_SESSION["password"])) {
     unset($_SESSION["pseudonym"]);

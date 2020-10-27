@@ -30,14 +30,12 @@ function try_login($pseudonym, $password) {
   global $bdd;
   $req = $bdd->prepare("SELECT id, birthdate, country, password FROM user WHERE user.pseudonym = ?;");
 
-  if ($req->execute([$pseudonym])) {
-    $res = $req->fetch();
+  if ($req->execute([$pseudonym]) && ($res = $req->fetch())) {
 
     //Dans la bdd n'est stocké que l'id du pays pour l'utilisateur mais on veut ici donner le nom du pays donc on vas faire une autre requète
     $country_req=$bdd->prepare("SELECT country_name FROM country WHERE id=?");
-    if($country_req->execute([ $res["country"] ]))
-    {
-      $country_res=$country_req->fetch();
+    if($country_req->execute([$res["country"]])) {
+      $country_res = $country_req->fetch();
     }
 
     if(password_verify($password, $res["password"])) {
