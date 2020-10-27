@@ -94,3 +94,57 @@ a.center {
 .gray {
   color: gray;
 }
+
+.player-profile {
+  margin-top: 20px;
+  background-color :#f4a235;
+  display: flex;
+  justify-content: space-between;
+  --profile-card-margin: 10px;
+  box-shadow: 0px 2px 6px -2px rgba(0, 0, 0, 0.3), 0px 4px 11px -4px rgba(0, 0, 0, 0);
+  overflow: hidden;
+  transition: 0.2s box-shadow;
+}
+
+.player-profile:hover {
+  box-shadow: 0px 2px 6px -2px rgba(0, 0, 0, 0.2), 0px 4px 11px -4px rgba(0, 0, 0, 0.3);
+}
+
+/*Size for the profile picture : 64px*/
+.player-profile img {
+  width: 64px;
+  height: 64px;
+}
+
+.player-profile .picture-and-nickname {
+  margin: var(--profile-card-margin);
+  display: flex;
+  flex-direction: row;
+}
+
+.player-profile .picture-and-nickname .nickname {
+  padding-left: 5px;
+}
+
+
+.player-profile .profile-info {
+  margin: var(--profile-card-margin);
+  display: flex;
+  flex-direction: column;
+}
+
+.player-profile .follow {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: inherit;
+  padding-left: 1em;
+  padding-right: 1em;
+  transition: 0.2s background-color;
+  color: white;
+}
+
+.player-profile .follow:hover {
+  background-color: darkorange;
+}

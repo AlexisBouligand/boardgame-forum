@@ -5,14 +5,14 @@ function add_user(
     String $password,
     String $birthdate,
     String $country,
-    String $profile_picture
+    bool $profile_picture
 ) {
     global $bdd;
     try {
         // Créer une requête INSERT INTO pour insérer un étudiant
         $req = $bdd->prepare("INSERT INTO user (pseudonym, email, password, profile_picture, country, birthdate) VALUES (?, ?, ?, ?, ?, ?);");
         // Exécuter la requête
-        if ($req->execute([$pseudo, $email, password_hash($password, PASSWORD_BCRYPT), 0, $country, $birthdate])) {
+        if ($req->execute([$pseudo, $email, password_hash($password, PASSWORD_BCRYPT), $profile_picture ? 1 : 0, $country, $birthdate])) {
             return NULL;
         } else {
             return "Uh oh!";
