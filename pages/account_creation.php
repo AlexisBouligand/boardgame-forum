@@ -21,7 +21,7 @@ if (isset($_POST["submit"])) {
     );
     if ($res == NULL) {
         // login the user
-        header("Location:user_login.php");
+        header("Location: /user_login.php");
     } else {
         echo "There was an error while creating your account: " . $res;
     }
@@ -30,7 +30,7 @@ if (isset($_POST["submit"])) {
 
 <h2>Account creation</h2>
 
-<form class="main-form" method="post" action="../lib/add_user.php">
+<form class="main-form" method="post" action="account_creation.php">
     <label>
         Pseudo:<input type="text" name="pseudo" required />
     </label>

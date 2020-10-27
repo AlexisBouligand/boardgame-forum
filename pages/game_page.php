@@ -1,6 +1,6 @@
 <?php
 $PAGE_NAME = "Game Page";
-$PAGE_HEAD = "<link rel=\"stylesheet\" href=\"css/game_page.css\" />";
+$PAGE_HEAD = "<link rel=\"stylesheet\" href=\"/css/game_page.css\" />";
 include_once("../lib/head.php");
 
 //On recherche le jeu sur lequel a cliqué le joueur
@@ -49,7 +49,7 @@ for($i=0; $i<$count_res['counter'];$i++){
             -63,
             $review_res['score']
         ),];
-        
+
     }
 }
 

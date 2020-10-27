@@ -1,6 +1,6 @@
 <?php
 $PAGE_NAME = "Accueil";
-$PAGE_HEAD = "<link rel=\"stylesheet\" href=\"css/main_page.css\" />";
+$PAGE_HEAD = "<link rel=\"stylesheet\" href=\"/css/main_page.css\" />";
 include_once("../lib/head.php");
 
 $search_res = [
@@ -28,7 +28,7 @@ while($ligne = $req->fetch()) { // On est pas en lo21 donc on a le droit >.>
   foreach ($search_res as $game) {
     ?>
     <a class="game" href="game_page.php?id=<?php echo $game->id; ?>">
-      <img class="game-picture" src="../lib/get_game_image.php?id=<?php echo $game->id; ?>" />
+      <!-- <img class="game-picture" src="../lib/get_game_image.php?id=<?php echo $game->id; ?>" /> -->
       <h3 class="game-title"><?php echo $game->title;?></h3>
         <h3 class="game-title">Note:<?php echo $game->note;?></h3>
     </a>
