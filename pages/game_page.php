@@ -1,24 +1,79 @@
 <?php
 $PAGE_NAME = "Game Page";
-$PAGE_HEAD = "<link rel=\"stylesheet\" href=\"/css/game_page.css\" />";
+$PAGE_HEAD = "<link rel=\"stylesheet\" href=\"css/game_page.css\" />";
 include_once("../lib/head.php");
 
-$game_res = new Game(1, "7 Wonders", 0.75, 18.76, "Repos Productions");
-$search_res = [
+//On recherche le jeu sur lequel a cliqué le joueur
+$req=$bdd->prepare("SELECT * FROM game WHERE name=?");
+
+    if($req->execute(["Nessos"])){
+        $res=$req->fetch();
+    }
+
+$game_res = new Game($res['id'], $res['name'], 0, $res['price'], $res['publisher']);
+
+    //On cherche la note du jeu
+    $note_req=$bdd->prepare("SELECT AVG(score) AS mean FROM review WHERE id_game=? ");
+
+    if($note_req->execute([ $res['id'] ])){
+        $note_res=$note_req->fetch();
+        $game_res->note=$note_res['mean'];
+        echo $note_res['mean'];
+    }
+
+
+//On va faire une boucle avec toutes les critiques du jeu
+//On a d'abord besoin du nombre de critiques
+$count_req=$bdd->prepare("SELECT COUNT(*) AS counter FROM review WHERE id_game=?");
+if($count_req->execute([$game_res->id])){
+    $count_res=$count_req->fetch();
+}
+
+
+//On vas chercher les critiques
+$review_req=$bdd->prepare("SELECT * FROM review WHERE id_game=?");
+if($review_req->execute([$game_res->id])){
+    $access_to_critic=true;
+    $review_res=$review_req->fetch();
+}
+
+//On met les critiques dans nos objets
+for($i=0; $i<$count_res['counter'];$i++){
+    if($access_to_critic){//Si tout s'est bien passé durant la requête
+        $review_res=$review_req->fetch();
+        echo "ooooooooooooooooooooooook";
+        $search_res[$i]=[new Critic(
+            new Player(1, "UwU", time(), "FR", "password"),
+            $review_res['comment'],
+            $review_res['date_publication'],
+            -63,
+            $review_res['score']
+        ),];
+        
+    }
+}
+
+/*$search_res = [
   new Critic(
     new Player(0, "Jean-Paul", time(), "WK", "password"),
     "Muni d’un seul mot – The Game – et décidé à se battre pour sauver le monde, notre protagoniste sillonne l’univers crépusculaire du game. Sa mission le projettera dans une dimension qui dépasse le temps. Pourtant, il ne s’agit pas d’un voyage dans le temps, mais bel et bien d'un voyage à travers les époques…",
     time(),
-    12
+    12,
+    0
   ),
   new Critic(
     new Player(1, "UwU", time(), "FR", "password"),
     "C T kool",
     time(),
-    -63
+    -63,
+    0
   )
-];
+
+
+];*/
+
 ?>
+
 <section class="game-page card-list">
   <h2><?php echo $game_res->title; ?></h2>
    <!---article is only dedicated to the game--->
@@ -27,8 +82,7 @@ $search_res = [
     <div class="global-informations">
       <!---Size for the image : 64px--->
       <img src="/Test_Image/7_wonders_board_game_cover.png" alt="Seven wonders board game" />
-      <div class="game-title"><?php echo $game_res->title; ?></div>
-      <h4 class="mark">Note: <?php echo round($game_res->note * 10);?>/10</h4>
+      <h4 class="mark">Note: <?php echo round($game_res->note);?>/10</h4>
     </div>
 
     <aside>
@@ -54,6 +108,8 @@ $search_res = [
       </div>
 
       <p><?php echo $critic->contents; ?></p>
+
+    <div><?php  echo $critic->score ?>/10</div>
 
       <div class="karma-box">
         <a class="like" name="like" href="#">
