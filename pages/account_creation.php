@@ -50,7 +50,7 @@ if (isset($_POST["submit"])) {
     <label>Country:</label>
     <select name="country">
         <?php
-        // Créer une requête SELECT pour récupérer
+        // Créer une requête SELECT pour récupérer les pays
         $req = $bdd->prepare("SELECT id, country_name FROM country;");
         // Exécute la requête
         $req->execute();

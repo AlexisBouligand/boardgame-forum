@@ -18,7 +18,7 @@ $game_res = new Game($res['id'], $res['name'], 0, $res['price'], $res['publisher
     if($note_req->execute([ $res['id'] ])){
         $note_res=$note_req->fetch();
         $game_res->note=$note_res['mean'];
-        echo $note_res['mean'];
+
     }
 
 
@@ -37,19 +37,28 @@ if($review_req->execute([$game_res->id])){
     $review_res=$review_req->fetch();
 }
 
+
+
 //On met les critiques dans nos objets
 for($i=0; $i<$count_res['counter'];$i++){
     if($access_to_critic){//Si tout s'est bien passé durant la requête
-        $review_res=$review_req->fetch();
-        echo "ooooooooooooooooooooooook";
-        $search_res[$i]=[new Critic(
-            new Player(1, "UwU", time(), "FR", "password"),
-            $review_res['comment'],
-            $review_res['date_publication'],
-            -63,
-            $review_res['score']
-        ),];
-        
+
+        //On cherche le nom de l'utilisateur qui a posté chaque critique
+        $user_req=$bdd->prepare("SELECT * FROM user WHERE id=?");
+
+        if($user_req->execute([$review_res['id_user']])) {
+            $user_res = $user_req->fetch();//On enregistre m'utilisateur pour le réusitliser just après
+
+
+            $search_res[$i] = new Critic(
+                new Player($user_res['id'], $user_res['pseudonym'], time(), $user_res['country'], $user_res['password']),
+                $review_res['comment'],
+                $review_res['date_publication'],
+                -63,
+                $review_res['score']
+            );
+            $review_res = $review_req->fetch();
+        }
     }
 }
 
@@ -92,10 +101,11 @@ for($i=0; $i<$count_res['counter'];$i++){
          ?>
          <div class="publisher">Publisher: <b><?php echo $game_res->publisher; ?></b></div>
          <?php
-      }//test
+      }
       ?>
     </aside>
   </article>
+
 
   <?php
   foreach ($search_res as $critic) {
@@ -104,7 +114,7 @@ for($i=0; $i<$count_res['counter'];$i++){
       <div class="post-infos">
         <img src="/Test_Image/Profile_Picture.png" alt="PP">
         <div class="username"><?php echo $critic->author->username; ?></div>
-        <div class="publication-date">Published the <?php echo date("Y-m-d", $critic->date); ?></div>
+        <div class="publication-date">Published the <?php echo date("Y-m-d", strtotime($critic->date)); ?></div>
       </div>
 
       <p><?php echo $critic->contents; ?></p>

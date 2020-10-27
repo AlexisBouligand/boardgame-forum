@@ -2,7 +2,7 @@
     </div>
 
     <footer>
-      Ça c'est le bas de page
+      Website made by its creators
     </footer>
   </body>
 </html>
