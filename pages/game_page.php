@@ -38,7 +38,7 @@ $search_res = [
          ?>
          <div class="publisher">Publisher: <b><?php echo $game_res->publisher; ?></b></div>
          <?php
-      }
+      }//test
       ?>
     </aside>
   </article>
