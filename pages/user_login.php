@@ -9,9 +9,10 @@ if (isset($_POST["submit"])) {
   $password = $_POST["password"];
 
   if (try_login($pseudonym, $password)) {
+      print("ok");
     $_SESSION["pseudonym"] = $pseudonym;
     $_SESSION["password"] = $password;
-    header("Location: /");
+    header("Location:user.php?username=$current_user->username");
   } else {
     echo "Login attempt failed: try again!";
   }
