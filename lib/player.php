@@ -24,6 +24,7 @@ class Player {
     $this->has_profile_picture = $has_profile_picture;
   }
 
+  //C'est l'affichage d'un joueur, avec un bouton Follow
   public function draw_card() {
     ?>
     <article class="player-profile">
@@ -49,18 +50,29 @@ class Player {
         </span>
       </div>
 
-      <a class="follow" href="#">
-        <span>Follow</span>
-      </a>
+      <form class="follow" method="post">
+        <label><input type="submit" name="follow" value="Follow"></label>
+      </form>
 
+        <?php
+        // Une fois que le joueur a cliqué sur le bouton follow il est redirigé ici
+        if(isset($_POST["follow"]))
+        {
+            header("Location:../lib/add_friend.php?id=$this->id");
+        }
+        ?>
     </article>
     <?php
   }
+
 
   public function password_verify($password) {
     return $this->hashed_password && password_verify($password, $this->hashed_password);
   }
 }
+
+
+
 
 
 function try_login($username, $password) {

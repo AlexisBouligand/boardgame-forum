@@ -16,7 +16,7 @@ if (isset($_POST["submit"])) {
     $publisher
   );
   if ($res == NULL) {
-    header("Location: /");
+      header("Location:../pages/index.php");
   } else {
     echo "There was an error while trying to add your game: " . $res;
   }
@@ -25,7 +25,7 @@ if (isset($_POST["submit"])) {
 
 <h2>Add a Game</h2>
 
-<form class="main-form" method="post" action="../lib/add_game.php">
+<form class="main-form" method="post" action="game_creation.php">
 
     <label>Game's name :
     <input type="text" name="name" required/>
@@ -46,7 +46,7 @@ if (isset($_POST["submit"])) {
   <!-- TODO: this -->
   <!-- <input type="submit" name="image_button" value="Game's picture"> -->
 
-  <input type="submit" name="send_button" value="Send">
+  <input type="submit" name="submit" value="Send">
 </form>
 
 <?php

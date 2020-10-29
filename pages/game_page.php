@@ -62,24 +62,8 @@ for($i=0; $i<$count_res['counter'];$i++){
   }
 }
 
-/*$search_res = [
-  new Critic(
-    new Player(0, "Jean-Paul", time(), "WK", "password"),
-    "Muni d’un seul mot – The Game – et décidé à se battre pour sauver le monde, notre protagoniste sillonne l’univers crépusculaire du game. Sa mission le projettera dans une dimension qui dépasse le temps. Pourtant, il ne s’agit pas d’un voyage dans le temps, mais bel et bien d'un voyage à travers les époques…",
-    time(),
-    12,
-    0
-  ),
-  new Critic(
-    new Player(1, "UwU", time(), "FR", "password"),
-    "C T kool",
-    time(),
-    -63,
-    0
-  )
 
 
-];*/
 
 ?>
 
