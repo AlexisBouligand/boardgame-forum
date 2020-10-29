@@ -8,7 +8,7 @@ function add_game(
 ) {
   global $bdd;
   try {
-    $req = $bdd->prepare("INSERT INTO game(name, creator, publisher, price) VALUES (?, ?, ?, ?)");
+    $req = $bdd->prepare("INSERT INTO game(name, creator, publisher, price, image) VALUES (?, ?, ?, ?, ?)");
 
     $req->execute([$name, $creator, $publisher,$price]);
 
