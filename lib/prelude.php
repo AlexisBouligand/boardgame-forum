@@ -1,5 +1,7 @@
 <?php
 
+$games_page_length = 10;
+
 session_start();
 include_once("../config.php");
 

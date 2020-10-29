@@ -42,8 +42,11 @@
     <div id="main-horizontal">
       <nav class="sidebar">
         <ul>
-          <li>test nav</li>
-          <li>test nav deux</li>
+          <li><a href="/">Main page</a></li>
+          <li><a href="/list_games.php">All games</a></li>
+          <?php if ($current_user != NULL) { ?>
+            <li><a href="/user.php?id=<?php echo $current_user->id; ?>">Profile page</a></li>
+          <?php } ?>
         </ul>
       </nav>
       <main>

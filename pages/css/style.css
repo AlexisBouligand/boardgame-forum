@@ -46,6 +46,10 @@ nav.sidebar > ul > li {
   color: pink;
 }
 
+nav.sidebar > ul > li > a {
+  color: pink;
+}
+
 .main-form {
   width: 100%;
   display: flex;
@@ -95,23 +99,32 @@ a.center {
   color: gray;
 }
 
+.card {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
 .player-profile {
-  margin-top: 20px;
-  background-color :#f4a235;
   display: flex;
   justify-content: space-between;
   --profile-card-margin: 10px;
+}
+
+.player-profile, .card {
+  margin-top: 20px;
+  background-color :#f4a235;
   box-shadow: 0px 2px 6px -2px rgba(0, 0, 0, 0.3), 0px 4px 11px -4px rgba(0, 0, 0, 0);
   overflow: hidden;
   transition: 0.2s box-shadow;
 }
 
-.player-profile:hover {
+.player-profile:hover, .card:hover {
   box-shadow: 0px 2px 6px -2px rgba(0, 0, 0, 0.2), 0px 4px 11px -4px rgba(0, 0, 0, 0.3);
 }
 
 /*Size for the profile picture : 64px*/
-.player-profile img {
+.player-profile img, .card img {
   width: 64px;
   height: 64px;
 }
