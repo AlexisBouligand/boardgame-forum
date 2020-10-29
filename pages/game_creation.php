@@ -22,7 +22,7 @@ function try_create_game() {
     issert($_FILES["image"])
   );
   if ($res == NULL) {
-      header("Location:../pages/index.php");
+      header("Location: /");
   } else {
     return "There was an error while trying to add your game: " . $res;
   }
