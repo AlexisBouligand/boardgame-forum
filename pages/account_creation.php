@@ -9,7 +9,7 @@ if ($current_user != NULL) {
     die();
 }
 
-if (isset($_POST["submit"])) {
+function try_create_account() {
     // TODO: validate and sanitize these values
     $pseudo = $_POST["pseudo"];
     $email = $_POST["email"];
@@ -17,15 +17,10 @@ if (isset($_POST["submit"])) {
     $birthdate = $_POST["birthdate"];
     $country = $_POST["country"];
     if (isset($_FILES["profile_picture"])) {
-        $profile_picture = getimagesize($_FILES["profile_picture"]["tmp_name"]);
-        $image_file_type = strtolower(pathinfo($_FILES["profile_picture"]["name"], PATHINFO_EXTENSION));
-    } else {
-        echo var_dump($_FILES);
-        $profile_picture = false;
-        die();
+        if (!verify_image_upload("profile_picture", "png", 5000000)) {
+            return "Invalid image!";
+        }
     }
-    // ASSERT($image_file_type == "png")
-    // ASSERT($_FILES["profile_picture]["size"] < 500000)
 
     $res = add_user(
         $pseudo,
@@ -33,22 +28,30 @@ if (isset($_POST["submit"])) {
         $password,
         $birthdate,
         $country,
-        $profile_picture !== false
+        isset($_FILES["profile_picture"])
     );
 
     if ($res == NULL) {
-        try_login($pseudo, $password);
-        if ($current_user == NULL) {
-            echo "Your account couldn't be created for mysterious reasons...";
-        } else {
-            $target_pp_file = "./images/user/" . $current_user->id . ".png";
-            move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $target_pp_file);
-            // login the user
-            header("Location: /user_login.php");
+        $user = find_player_by_name($pseudo);
+        if (!$user || !$user->password_verify($password)) {
+            return "Your account couldn't be created for mysterious reasons...";
         }
+
+        if (isset($_FILES["profile_picture"])) {
+            $target_pp_file = "./images/user/" . $user->id . ".png";
+            move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $target_pp_file);
+        }
+
+        // login the user
+        header("Location: /user_login.php");
+        return "";
     } else {
-        echo "There was an error while creating your account: " . $res;
+        return "There was an error while creating your account: " . $res;
     }
+}
+
+if (isset($_POST["submit"])) {
+    echo try_create_account();
 }
 ?>
 

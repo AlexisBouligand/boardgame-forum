@@ -3,48 +3,40 @@ $PAGE_NAME = "Game Page";
 $PAGE_HEAD = "<link rel=\"stylesheet\" href=\"/css/game_page.css\" />";
 include_once("../lib/head.php");
 
-//On recherche le jeu sur lequel a cliqué le joueur
-$req=$bdd->prepare("SELECT * FROM game WHERE name=?");
-
-if($req->execute(["Nessos"])){
-  $res=$req->fetch();
+if (isset($_GET["name"])) {
+  $game_res = find_game_by_name($_GET["name"]);
+} else if (isset($_GET["id"])) {
+  $game_res = find_game_by_id($_GET["id"]);
+} else {
+  $game_res = false;
 }
 
-$game_res = new Game($res['id'], $res['name'], 0, $res['price'], $res['publisher']);
-
-//On cherche la note du jeu
-$note_req=$bdd->prepare("SELECT AVG(score) AS mean FROM review WHERE id_game=? ");
-
-if($note_req->execute([ $res['id'] ])){
-  $note_res=$note_req->fetch();
-  $game_res->note=$note_res['mean'];
-
+if (!$game_res) {
+  $game_res = new Game(0, "[phantom]", 0.5, 0, false);
 }
-
 
 //On va faire une boucle avec toutes les critiques du jeu
 //On a d'abord besoin du nombre de critiques
-$count_req=$bdd->prepare("SELECT COUNT(*) AS counter FROM review WHERE id_game=?");
-if($count_req->execute([$game_res->id])){
-  $count_res=$count_req->fetch();
+$count_req = $bdd->prepare("SELECT COUNT(*) AS counter FROM review WHERE id_game = ?");
+if ($count_req->execute([$game_res->id])){
+  $count_res = $count_req->fetch();
 }
 
-
 //On vas chercher les critiques
-$review_req=$bdd->prepare("SELECT * FROM review WHERE id_game=?");
+$review_req = $bdd->prepare("SELECT * FROM review WHERE id_game = ?");
 if($review_req->execute([$game_res->id])){
   $access_to_critic=true;
-  $review_res=$review_req->fetch();
+  $review_res = $review_req->fetch();
 }
 
 // NOTE: can't this be done using a while loop?
 
 //On met les critiques dans nos objets
-for($i=0; $i<$count_res['counter'];$i++){
+for($i = 0; $i < $count_res['counter']; $i++){
   if($access_to_critic){//Si tout s'est bien passé durant la requête
 
     //On cherche le nom de l'utilisateur qui a posté chaque critique
-    $user_req=$bdd->prepare("SELECT * FROM user WHERE id=?");
+    $user_req = $bdd->prepare("SELECT * FROM user WHERE id=?");
 
     if($user_req->execute([$review_res['id_user']])) {
       $user_res = $user_req->fetch();//On enregistre m'utilisateur pour le réusitliser just après
@@ -61,25 +53,6 @@ for($i=0; $i<$count_res['counter'];$i++){
     }
   }
 }
-
-/*$search_res = [
-  new Critic(
-    new Player(0, "Jean-Paul", time(), "WK", "password"),
-    "Muni d’un seul mot – The Game – et décidé à se battre pour sauver le monde, notre protagoniste sillonne l’univers crépusculaire du game. Sa mission le projettera dans une dimension qui dépasse le temps. Pourtant, il ne s’agit pas d’un voyage dans le temps, mais bel et bien d'un voyage à travers les époques…",
-    time(),
-    12,
-    0
-  ),
-  new Critic(
-    new Player(1, "UwU", time(), "FR", "password"),
-    "C T kool",
-    time(),
-    -63,
-    0
-  )
-
-
-];*/
 
 ?>
 
@@ -121,7 +94,9 @@ for($i=0; $i<$count_res['counter'];$i++){
             <img src="/images/user-default.png" alt="PP" />
           </a>
         <?php } ?>
-        <div class="username"><?php echo $critic->author->username; ?></div>
+        <a class="username" href="/user.php?id=<?php echo $critic->author->id; ?>">
+          <?php echo $critic->author->username; ?>
+        </a>
         <div class="publication-date">Published the <?php echo date("Y-m-d", strtotime($critic->date)); ?></div>
       </div>
 

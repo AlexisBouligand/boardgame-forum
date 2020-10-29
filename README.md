@@ -40,4 +40,5 @@ This whole section is nonsense, why do people think they ever need an IDE for th
 6. Set the port to 8000, unless your distribution lets you go with 80 without root privileges. Please don't run our code as root.
 7. Hit `OK` (unless PHPStorm warns you about stuff you hadn't set up yet, in which case you should deal with that)
 8. Copy the `config.php.sample` file to `config.php` and enter in your credentials for your MySQL database
-9. You may now run the server using *R**u**n*, *Start*.
+9. You may now run the server using *R**u**n*, *Start*
+10. The website will now be accessible by navigating to `http://localhost:8000/` in your browser

@@ -76,9 +76,9 @@ function try_login($username, $password) {
   return false;
 }
 
-function find_player_by_name($username) {
+function find_player_by($trait, $username) {
   global $bdd;
-  $req = $bdd->prepare("SELECT id, birthdate, country, password, profile_picture FROM user WHERE user.pseudonym = ?;");
+  $req = $bdd->prepare("SELECT pseudonym, id, birthdate, country, password, profile_picture FROM user WHERE $trait = ?;");
 
   if ($req->execute([$username]) && ($res = $req->fetch())) {
     $country_req = $bdd->prepare("SELECT country_name FROM country WHERE id = ?");
@@ -89,10 +89,18 @@ function find_player_by_name($username) {
       $country_res = "Unknown";
     }
 
-    return new Player($res["id"], $username, $res["birthdate"], $country_res, $res["password"], !!$res["profile_picture"]);
+    return new Player($res["id"], $res["pseudonym"], $res["birthdate"], $country_res, $res["password"], !!$res["profile_picture"]);
   } else {
     return false;
   }
+}
+
+function find_player_by_name($name) {
+  return find_player_by("pseudonym", $name);
+}
+
+function find_player_by_id($id) {
+  return find_player_by("id", $id);
 }
 
 ?>

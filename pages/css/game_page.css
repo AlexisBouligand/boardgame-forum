@@ -8,14 +8,13 @@ img {
   font-weight: 700;
   font-size: 16pt;
   max-width: 50%;
-  
 }
 
 .price, .publisher {
   margin: 10px;
 }
 
-article.game {
+.game {
   background-color: #f4a235;
   padding: 10px;
 }
@@ -29,32 +28,29 @@ article.game {
   margin-left: auto;
 }
 
-article aside {
-  display: flex;
-}
 
-
-aside.player-critic {
+.player-critic {
   margin-top: 20px ;
   background-color:#f4a235;
   padding: 10px;
 }
 
 /*Size for the profile picture: 64px*/
-aside.player-critic img {
+.player-critic img {
   width: 64px;
   height: 64px;
 }
 
-aside.player-critic .post-infos {
+.player-critic .post-infos {
   display: flex;
   flex-direction: row;
 }
 
-aside.player-critic .post-infos .username {
+.player-critic .post-infos .username {
   font-weight: 700;
   font-size: 14pt;
   padding: 5px 15px;
+  color: black;
 }
 
 .publication-date {
@@ -62,18 +58,18 @@ aside.player-critic .post-infos .username {
   margin-left: auto;
 }
 
-aside.player-critic .karma-box {
+.player-critic .karma-box {
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
   align-items: center;
 }
 
-aside.player-critic .karma {
+.player-critic .karma {
   margin: 1em 0.25em;
 }
 
-aside.player-critic .like, aside.player-critic .dislike {
+.player-critic .like, .player-critic .dislike {
   border-radius: 100%;
   text-align: center;
   height: 3em;
@@ -85,6 +81,6 @@ aside.player-critic .like, aside.player-critic .dislike {
   text-decoration: none;
 }
 
-aside.player-critic .like:hover, aside.player-critic .dislike:hover {
+.player-critic .like:hover, .player-critic .dislike:hover {
   color: black;
 }
