@@ -22,8 +22,7 @@ function try_create_game() {
     issert($_FILES["image"])
   );
   if ($res == NULL) {
-    header("Location: /");
-    return "Game creation success!";
+      header("Location:../pages/index.php");
   } else {
     return "There was an error while trying to add your game: " . $res;
   }
@@ -36,7 +35,7 @@ if (isset($_POST["submit"])) {
 
 <h2>Add a Game</h2>
 
-<form class="main-form" method="post" action="../lib/add_game.php">
+<form class="main-form" method="post" action="game_creation.php">
 
   <label>Game's name:
     <input type="text" name="name" required />
@@ -59,7 +58,7 @@ if (isset($_POST["submit"])) {
     <input type="file" name="image" />
   </label>
 
-  <input type="submit" name="send_button" value="Send">
+  <input type="submit" name="submit" value="Send">
 </form>
 
 <?php

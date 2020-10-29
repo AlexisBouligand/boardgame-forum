@@ -2,9 +2,14 @@
 $PAGE_NAME = "Accueil";
 $PAGE_HEAD = "<link rel=\"stylesheet\" href=\"/css/follow_page.css\" />";
 include_once("../lib/head.php");
+include_once ("../lib/player.php");
 
 // TODO: the actual search
-$search_res = [new Player(0, "Jean-Paul", time(), "WK", "password")];
+$search_res = [new Player(6, "Jean-Paul", time(), "WK", "password")];
+
+
+
+
 ?>
 
 <form class="main-form search-player" method="get" action="" id="pseudo_search">
@@ -16,34 +21,27 @@ $search_res = [new Player(0, "Jean-Paul", time(), "WK", "password")];
   ?> />
 </form>
 
+
+
+
 <section class="profiles card-list">
 
-  <?php
+
+
+ <?php
   foreach ($search_res as $player) {
-    ?>
-    <aside class="player-profile">
-      <div class="picture-and-nickname">
-          <img src="/Test_Image/Profile_Picture.png" alt="PP">
-          <h2 class="nickname"><?php echo $player->username; ?></h2>
-      </div>
 
-      <div class="profile-info">
-        <span>
-          Né(e) le <?php echo date("Y-m-d", $player->birth_date); ?>
-        </span>
-        <span>
-          Pays: <?php echo $player->country; ?>
-        </span>
-      </div>
+        $player->draw_card();
+      }
 
-      <a class="follow" href="#">
-        <span>Follow</span>
-      </a>
 
-    </aside>
-    <?php
-  }
   ?>
+<?php
+
+
+?>
+
+
 
 </section>
 

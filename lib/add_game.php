@@ -4,17 +4,20 @@ function add_game(
   String $name,
   String $creator,
   String $price,
-  String $publishser,
-  bool $has_image
+  String $publisher
 ) {
   global $bdd;
   try {
     $req = $bdd->prepare("INSERT INTO game(name, creator, publisher, price, image) VALUES (?, ?, ?, ?, ?)");
 
-    $req->execute([$name, $creator, $publisher, $price, $has_image ? 1 : 0]);
+    $req->execute([$name, $creator, $publisher,$price]);
+
+
     return NULL;
   } catch (Exception $err) {
     return $err;
   }
+
 }
+
 ?>
