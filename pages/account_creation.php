@@ -1,5 +1,6 @@
 <?php
 $PAGE_NAME = "Create Account";
+$PAGE_HEAD = "<script src=\"/js/account_creation.js\" defer></script><link rel=\"stylesheet\" href=\"/css/account_creation.css\" />";
 include_once("../lib/head.php");
 include_once("../lib/add_user.php");
 
@@ -10,13 +11,23 @@ if ($current_user != NULL) {
 }
 
 function try_create_account() {
-    // TODO: validate and sanitize these values
     $pseudo = $_POST["pseudo"];
-    $email = $_POST["email"];
+    $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
     $password = $_POST["password"];
     $birthdate = $_POST["birthdate"];
     $country = $_POST["country"];
-    if (isset($_FILES["profile_picture"])) {
+
+    if (!preg_match(PSEUDO_REGEX, $pseudo)) return "Invalid pseudo!";
+    if (!preg_match(PASSWORD_REGEX, $password)) return "Invalid password!";
+    if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) return "Invalid email!";
+    if (!strtotime($birthdate)) return "Invalid birth date!";
+    // TODO: validate `country`
+
+    if ($user = find_player_by_name($pseudo)) {
+        return "Couldn't create account: username already taken!";
+    }
+
+    if (has_uploaded("profile_picture")) {
         if (!verify_image_upload("profile_picture", "png", 5000000)) {
             return "Invalid image!";
         }
@@ -28,7 +39,7 @@ function try_create_account() {
         $password,
         $birthdate,
         $country,
-        isset($_FILES["profile_picture"])
+        has_uploaded("profile_picture")
     );
 
     if ($res == NULL) {
@@ -37,7 +48,7 @@ function try_create_account() {
             return "Your account couldn't be created for mysterious reasons...";
         }
 
-        if (isset($_FILES["profile_picture"])) {
+        if (has_uploaded("profile_picture")) {
             $target_pp_file = "./images/user/" . $user->id . ".png";
             move_uploaded_file($_FILES["profile_picture"]["tmp_name"], $target_pp_file);
         }
@@ -58,16 +69,16 @@ if (isset($_POST["submit"])) {
 <h2>Account creation</h2>
 
 <form enctype="multipart/form-data" class="main-form" method="post" action="account_creation.php">
-    <label>
-        Pseudo:<input type="text" name="pseudo" required />
+    <label id="pseudo-label">
+        Pseudo:<input type="text" name="pseudo" id="pseudo" required />
     </label>
 
     <label>
-        Email:<input type="email" name="email" required />
+        Email:<input type="email" name="email" id="email" required />
     </label>
 
     <label>
-        Password:<input type="password" name="password" required />
+        Password:<input type="password" name="password" id="password" required />
     </label>
 
     <label>
@@ -92,7 +103,7 @@ if (isset($_POST["submit"])) {
         Profile picture:<input type="file" name="profile_picture" id="profile_picture" />
     </label>
 
-    <input type="submit" name="submit" value="Send"/>
+    <input type="submit" name="submit" value="Send" id="submit" />
 </form>
 
 <?php

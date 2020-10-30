@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="/css/header_footer.css" />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
-    <script src="/js/user.js"></script>
+    <script src="/js/main.js"></script>
 
     <?php
       if (isset($PAGE_HEAD)) {
@@ -27,7 +27,7 @@
 
       <form method="get" action="/follow_page.php" id="recherche">
         <label for="pseudo">Recherche:</label>
-        <input type="text" name="pseudo" id="pseudo" placeholder="ex: solo" size="30" maxlength="10" />
+        <input type="text" name="pseudo" placeholder="ex: solo" size="30" maxlength="10" />
       </form>
 
       <div id="account-login">

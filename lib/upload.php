@@ -23,4 +23,8 @@ function verify_image_upload(
   return true;
 }
 
+function has_uploaded(String $field_name) {
+  return isset($_FILES[$field_name]) && file_exists($_FILES[$field_name]["tmp_name"]) && is_uploaded_file($_FILES[$field_name]["tmp_name"]);
+}
+
 ?>
