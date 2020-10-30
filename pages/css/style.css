@@ -156,8 +156,30 @@ a.center {
   padding-right: 1em;
   transition: 0.2s background-color;
   color: white;
+  cursor: pointer;
 }
 
 .player-profile .follow:hover {
   background-color: darkorange;
+}
+
+.player-profile .follow > button {
+  background: transparent;
+  color: white;
+  border: none;
+  font-size: 14pt;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.player-profile .follow:hover > button {
+  text-decoration: underline;
+}
+
+.player-profile .follow > button.thinking {
+  color: #e0e0e0;
+}
+
+.player-profile .follow > button.followed {
+  color: #fed8e0;
 }

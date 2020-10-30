@@ -547,8 +547,8 @@ ALTER TABLE `user`
 -- Contraintes pour la table `follows`
 --
 ALTER TABLE `follows`
-  ADD CONSTRAINT `follows_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `follows_ibfk_2` FOREIGN KEY (`id_friend`) REFERENCES `user` (`id`);
+  ADD CONSTRAINT `follows_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `follows_ibfk_2` FOREIGN KEY (`id_friend`) REFERENCES `user` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `relation_tag`
@@ -561,8 +561,8 @@ ALTER TABLE `relation_tag`
 -- Contraintes pour la table `review`
 --
 ALTER TABLE `review`
-  ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `review_ibfk_2` FOREIGN KEY (`id_game`) REFERENCES `game` (`id`);
+  ADD CONSTRAINT `review_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `review_ibfk_2` FOREIGN KEY (`id_game`) REFERENCES `game` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `user`
@@ -574,8 +574,8 @@ ALTER TABLE `user`
 -- Contraintes pour la table `vote`
 --
 ALTER TABLE `vote`
-  ADD CONSTRAINT `vote_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`),
-  ADD CONSTRAINT `vote_ibfk_2` FOREIGN KEY (`id_review`) REFERENCES `review` (`id`);
+  ADD CONSTRAINT `vote_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `vote_ibfk_2` FOREIGN KEY (`id_review`) REFERENCES `review` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

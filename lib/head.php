@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/css/header_footer.css" />
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
+    <script src="/js/user.js"></script>
 
     <?php
       if (isset($PAGE_HEAD)) {

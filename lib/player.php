@@ -6,6 +6,7 @@ class Player {
   public $birth_date = 0;
   public $country = null;
   public $has_profile_picture = null;
+  public $followed = false;
   private $hashed_password = "";
 
   public function __construct(
@@ -14,7 +15,8 @@ class Player {
     $birth_date = 0,
     $country = null,
     $hashed_password = "",
-    $has_profile_picture = false
+    $has_profile_picture = false,
+    $followed = false
   ) {
     $this->id = $id;
     $this->birth_date = $birth_date;
@@ -22,6 +24,7 @@ class Player {
     $this->country = $country;
     $this->hashed_password = $hashed_password;
     $this->has_profile_picture = $has_profile_picture;
+    $this->followed = $followed;
   }
 
   //C'est l'affichage d'un joueur, avec un bouton Follow
@@ -50,17 +53,20 @@ class Player {
         </span>
       </div>
 
-      <form class="follow" method="post">
-        <label><input type="submit" name="follow" value="Follow"></label>
-      </form>
-
-        <?php
-        // Une fois que le joueur a cliqué sur le bouton follow il est redirigé ici
-        if(isset($_POST["follow"]))
-        {
-            header("Location:../lib/add_friend.php?id=$this->id");
-        }
-        ?>
+      <label class="follow">
+        <button type="button" onclick="follow(<?php echo $this->id; ?>, this);" <?php
+          if ($this->followed) {
+            ?>
+            class="followed">Unfollow
+            <?php
+          } else {
+            ?>
+            >Follow
+            <?php
+          }
+          ?>
+          </button>
+      </label>
     </article>
     <?php
   }
@@ -90,10 +96,12 @@ function try_login($username, $password) {
 
 function find_player_by($trait, $username) {
   global $bdd;
+  global $current_user;
   $req = $bdd->prepare("SELECT pseudonym, id, birthdate, country, password, profile_picture FROM user WHERE $trait = ?;");
 
   if ($req->execute([$username]) && ($res = $req->fetch())) {
     $country_req = $bdd->prepare("SELECT country_name FROM country WHERE id = ?");
+    $followed_req = $bdd->prepare("SELECT * FROM follows WHERE id_user = ? AND id_friend = ?;");
 
     if ($country_req->execute([$res["country"]])) {
       $country_res = $country_req->fetch()["country_name"];
@@ -101,7 +109,13 @@ function find_player_by($trait, $username) {
       $country_res = "Unknown";
     }
 
-    return new Player($res["id"], $res["pseudonym"], $res["birthdate"], $country_res, $res["password"], !!$res["profile_picture"]);
+    if ($current_user != NULL && $followed_req->execute([$current_user->id, $res["id"]])) {
+      $followed = !!$followed_req->fetch();
+    } else {
+      $followed = false;
+    }
+
+    return new Player($res["id"], $res["pseudonym"], $res["birthdate"], $country_res, $res["password"], !!$res["profile_picture"], $followed);
   } else {
     return false;
   }
