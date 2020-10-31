@@ -554,8 +554,8 @@ ALTER TABLE `follows`
 -- Contraintes pour la table `relation_tag`
 --
 ALTER TABLE `relation_tag`
-  ADD CONSTRAINT `relation_tag_ibfk_1` FOREIGN KEY (`id_game`) REFERENCES `game` (`id`),
-  ADD CONSTRAINT `relation_tag_ibfk_2` FOREIGN KEY (`id_tag`) REFERENCES `tag` (`id`);
+  ADD CONSTRAINT `relation_tag_ibfk_1` FOREIGN KEY (`id_game`) REFERENCES `game` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `relation_tag_ibfk_2` FOREIGN KEY (`id_tag`) REFERENCES `tag` (`id`) ON DELETE CASCADE;
 
 --
 -- Contraintes pour la table `review`
