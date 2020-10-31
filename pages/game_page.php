@@ -64,11 +64,11 @@ for($i = 0; $i < $count_res['counter']; $i++){
     <div class="global-informations">
       <!---Size for the image : 64px--->
       <img src="/Test_Image/7_wonders_board_game_cover.png" alt="Seven wonders board game" />
-      <h4 class="mark">Note: <?php echo round($game_res->note);?>/10</h4>
+      <h4 class="mark">Note: <?php echo round($game_res->note, 1); ?>/10</h4>
     </div>
 
     <aside>
-      <div class="price">Price: <b><?php echo $game_res->price; ?>€</b></div>
+      <div class="price">Price: <b><?php if ($game->price === NULL) echo "?"; else echo $game->price; ?>&nbsp;€</b></div>
       <?php
       if ($game_res->publisher != null) {
          ?>

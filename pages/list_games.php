@@ -190,9 +190,9 @@ if ($req->execute($search_terms)) {
         <?php echo $game->title; ?>
       </a>
       <div class="info">
-        <div class="price">Price: <?php echo $game->price; ?><b>€</b></div>
-        <div class="note">Note: <?php echo round($game->note); ?>/10</div>
-        <div class="reviews">Reviews: <?php echo $res["review_count"]; ?></div>
+        <div class="price">Price: <b><?php if ($game->price === NULL) echo "?"; else echo $game->price; ?>&nbsp;€</b></div>
+        <div class="note">Note: <b><?php echo round($game->note, 1); ?>/10</b></div>
+        <div class="reviews">Reviews: <b><?php echo $res["review_count"]; ?></b></div>
       </div>
     </div>
     <?php
