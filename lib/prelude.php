@@ -16,6 +16,7 @@ include_once("player.php");
 include_once("game.php");
 include_once("critic.php");
 include_once("upload.php");
+include_once("page_selector.php");
 
 if (isset($_SESSION["pseudonym"]) && isset($_SESSION["password"])) {
   if (!try_login($_SESSION["pseudonym"], $_SESSION["password"])) {

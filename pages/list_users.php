@@ -4,7 +4,7 @@ $PAGE_HEAD = "<link rel=\"stylesheet\" href=\"/css/list_users.css\" />";
 include_once("../lib/head.php");
 include_once ("../lib/player.php");
 
-
+$last_page = true;
 $search_sql = "";
 $search_terms = [];
 
@@ -104,10 +104,15 @@ Filter by:
 <section class="profiles card-list">
   <?php
   foreach ($search_res as $player) {
+    $last_page = false;
     $player->draw_card();
   }
   ?>
 </section>
+
+<?php
+echo_page_selector("p", $last_page);
+?>
 
 <?php
 include_once("../lib/tail.php");

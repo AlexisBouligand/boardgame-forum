@@ -9,6 +9,7 @@ const ORDER_GAMES_SCORE = 2;
 const ORDER_GAMES_PUBLISHED = 3;
 
 $reversed = false;
+$last_page = true;
 
 if (isset($_GET["s"])) {
   switch (strtolower($_GET["s"])) {
@@ -152,6 +153,7 @@ if ($req->execute($search_terms)) {
   <section class="game-list card-list">
   <?php
   while ($res = $req->fetch()) {
+    $last_page = false;
     $game = new Game($res["id"], $res["name"], $res["mean_score"], $res["price"], $res["publisher"], !!$res["image"]);
     ?>
     <div class="game card">
@@ -184,6 +186,8 @@ if ($req->execute($search_terms)) {
   ?>
   </section>
   <?php
+
+  echo_page_selector("p", $last_page);
 } else {
   ?>
   There was an error querying our database; try again later!

@@ -214,7 +214,10 @@ a.center {
   min-width: 30em;
 }
 
-.options-list > a {
+.options-list > a,
+.page-selector > a,
+.page-selector > .disabled,
+.page-selector .page-go {
   margin: 0.25em 0.5em;
   color: black;
   border: 2px solid black;
@@ -225,8 +228,61 @@ a.center {
   transition: 0.2s background-color, 0.2s box-shadow;
 }
 
-.options-list > a:hover, .options-list > a.active {
+.options-list > a:hover,
+.options-list > a.active,
+.page-selector > a:hover,
+.page-selector .page-go:hover,
+.page-selector .page-go:active {
   background-color: #fafafa;
   box-shadow: 0px 2px 6px -2px rgba(0, 0, 0, 0.6);
   text-decoration: none;
+  cursor: pointer;
+}
+
+.page-selector {
+  margin-top: 1em;
+  margin-bottom: 1em;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.page-selector > .disabled {
+  background-color: #fafafa;
+  box-shadow: none;
+  color: #808080;
+  font-style: italic;
+  border: 2px solid gray;
+  padding-right: 6px;
+}
+
+.page-selector > .disabled:hover {
+  background-color: #fafafa;
+  box-shadow: none;
+  cursor: default;
+}
+
+.page-selector .page-go {
+  margin-left: 2px;
+}
+
+.page-selector .page-number {
+  margin-top: 0.25em;
+  margin-bottom: 0.25em;
+  margin-left: 0.5em;
+  max-width: 4em;
+  border: 2px solid lightgray;
+  padding: 4px;
+  border-radius: 6px;
+  appearance: textfield;
+  transition: 0.2s border-color;
+}
+
+.page-selector .page-number:focus {
+  border: 2px solid gray;
+}
+
+.page-selector .page-number::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
 }
