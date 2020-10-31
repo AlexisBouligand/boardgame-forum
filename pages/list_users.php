@@ -86,17 +86,21 @@ Filter by:
 
 <section class="options-list">
   <?php
-    function echo_link(String $url_appendix, String $contents) {
-      echo "<a href=\"";
+    function echo_link(String $url_appendix, String $contents, bool $active = false) {
+      if ($active) {
+        echo "<a class=\"active\" href=\"";
+      } else {
+        echo "<a href=\"";
+      }
       echo "?name=" . filter_var($_GET["name"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
       echo "&p=" . ($page + 1);
       echo "&$url_appendix";
       echo "\">$contents</a>";
     }
 
-    echo_link("", "All");
-    echo_link("following=", "Following");
-    echo_link("followers=", "Followers");
+    echo_link("", "All", !isset($_GET["following"]) && !isset($_GET["followers"]));
+    echo_link("following=", "Following", isset($_GET["following"]));
+    echo_link("followers=", "Followers", isset($_GET["followers"]));
   ?>
 
 </section>
