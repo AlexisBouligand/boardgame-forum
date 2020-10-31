@@ -11,6 +11,7 @@ if ($current_user != NULL) {
 }
 
 function try_create_account() {
+    global $bdd;
     $pseudo = $_POST["pseudo"];
     $email = filter_var($_POST["email"], FILTER_SANITIZE_EMAIL);
     $password = $_POST["password"];
@@ -21,7 +22,9 @@ function try_create_account() {
     if (!preg_match(PASSWORD_REGEX, $password)) return "Invalid password!";
     if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) return "Invalid email!";
     if (!strtotime($birthdate)) return "Invalid birth date!";
-    // TODO: validate `country`
+
+    $country_req = $bdd->prepare("SELECT * FROM country WHERE id = ?");
+    if (!$country_req->execute([$country]) || !$country_req->fetch()) return "Invalid country!";
 
     if ($user = find_player_by_name($pseudo)) {
         return "Couldn't create account: username already taken!";
