@@ -4,7 +4,6 @@ $PAGE_HEAD = "<script src=\"/js/user_login.js\" defer></script>";
 include_once("../lib/head.php");
 
 if (isset($_POST["submit"])) {
-  // TODO: sanitize and verify
   $pseudonym = $_POST["pseudo"];
   $password = $_POST["password"];
 

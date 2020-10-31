@@ -42,3 +42,5 @@ This whole section is nonsense, why do people think they ever need an IDE for th
 8. Copy the `config.php.sample` file to `config.php` and enter in your credentials for your MySQL database
 9. You may now run the server using *R**u**n*, *Start*
 10. The website will now be accessible by navigating to `http://localhost:8000/` in your browser
+
+Note that the preview buttons that PHPStorm offer you do not work, as they entirely mess up the directory structure of the website.

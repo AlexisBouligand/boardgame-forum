@@ -99,6 +99,56 @@ $req = $bdd->prepare($sql);
 
 if ($req->execute($search_terms)) {
   ?>
+  <h2>Search:</h2>
+  <section class="game-search">
+    <form class="main-form" action="list_games.php" method="get">
+      <input type="string" hidden name="s" value="<?php
+        echo filter_var($_GET["s"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+      ?>" />
+
+      <label>
+        Title (contains):
+        <input type="string" name="name" placeholder="ex: Wonders" <?php
+          if (isset($_GET["name"])) echo "value=\"" . filter_var($_GET["name"], FILTER_SANITIZE_FULL_SPECIAL_CHARS) . "\"";
+        ?> />
+      </label>
+
+      <input type="submit" name="" value="Search" />
+    </form>
+  </section>
+  <h2>Sort by:</h2>
+  <section class="options-list">
+  <?php
+    function search_terms() {
+      $res = "";
+      if (isset($_GET["name"])) $res .= "&name=" . filter_var($_GET["name"], FILTER_SANITIZE_URL);
+      return $res;
+    }
+
+    function echo_sort_method_pair($method_name, $method_id, $name) {
+
+      global $reversed;
+      global $order_method;
+      if (!$reversed && $order_method === $method_id) {
+        echo "<a href=\"?s=$method_name" . search_terms() . "\" class=\"active\">$name</a>";
+      } else {
+        echo "<a href=\"?s=$method_name" . search_terms() . "\">$name</a>";
+      }
+
+      if ($reversed && $order_method === $method_id) {
+        echo "<a href=\"?s=!$method_name" . search_terms() . "\" class=\"active\">$name (rev.)</a>";
+      } else {
+        echo "<a href=\"?s=!$method_name" . search_terms() . "\">$name (rev.)</a>";
+      }
+    }
+
+    echo_sort_method_pair("name", ORDER_GAMES_NAME, "Name");
+    echo_sort_method_pair("price", ORDER_GAMES_PRICE, "Price");
+    echo_sort_method_pair("published", ORDER_GAMES_PUBLISHED, "Date published");
+    echo_sort_method_pair("score", ORDER_GAMES_SCORE, "Note");
+    ?>
+  </section>
+
   <section class="game-list card-list">
   <?php
   while ($res = $req->fetch()) {
@@ -132,56 +182,6 @@ if ($req->execute($search_terms)) {
     <?php
   }
   ?>
-  </section>
-
-  <h2>Sort by:</h2>
-  <section class="sort-methods">
-  <?php
-    function search_terms() {
-      $res = "";
-      if (isset($_GET["name"])) $res .= "&name=" . filter_var($_GET["name"], FILTER_SANITIZE_URL);
-      return $res;
-    }
-
-    function echo_sort_method_pair($method_name, $method_id, $name) {
-
-      global $reversed;
-      global $order_method;
-      if (!$reversed && $order_method === $method_id) {
-        echo "<a href=\"?s=$method_name" . search_terms() . "\" class=\"active\">$name</a>";
-      } else {
-        echo "<a href=\"?s=$method_name" . search_terms() . "\">$name</a>";
-      }
-
-      if ($reversed && $order_method === $method_id) {
-        echo "<a href=\"?s=!$method_name" . search_terms() . "\" class=\"active\">$name (rev.)</a>";
-      } else {
-        echo "<a href=\"?s=!$method_name" . search_terms() . "\">$name (rev.)</a>";
-      }
-    }
-
-    echo_sort_method_pair("name", ORDER_GAMES_NAME, "Name");
-    echo_sort_method_pair("price", ORDER_GAMES_PRICE, "Price");
-    echo_sort_method_pair("published", ORDER_GAMES_PUBLISHED, "Date published");
-    echo_sort_method_pair("score", ORDER_GAMES_SCORE, "Note");
-    ?>
-  </section>
-  <h2>Search:</h2>
-  <section class="game-search">
-    <form class="main-form" action="list_games.php" method="get">
-      <input type="string" hidden name="s" value="<?php
-        echo filter_var($_GET["s"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
-      ?>" />
-
-      <label>
-        Title (contains):
-        <input type="string" name="name" placeholder="ex: Wonders" <?php
-          if (isset($_GET["name"])) echo "value=\"" . filter_var($_GET["name"], FILTER_SANITIZE_FULL_SPECIAL_CHARS) . "\"";
-        ?> />
-      </label>
-
-      <input type="submit"/>
-    </form>
   </section>
   <?php
 } else {

@@ -5,4 +5,5 @@ $db_username = "root";
 $db_password = "";
 
 $games_page_length = 10;
+$users_page_length = 20;
 ?>

@@ -25,9 +25,9 @@
         <a href="/"><img src="../images/logo.png" alt="logo" id="logo" /></a>
       </div>
 
-      <form method="get" action="/follow_page.php" id="recherche">
-        <label for="pseudo">Recherche:</label>
-        <input type="text" name="pseudo" placeholder="ex: solo" size="30" maxlength="10" />
+      <form method="get" action="/list_users.php" id="recherche">
+        <label for="name">Recherche:</label>
+        <input type="text" name="name" placeholder="ex: solo" size="30" maxlength="10" />
       </form>
 
       <div id="account-login">
@@ -45,8 +45,11 @@
         <ul>
           <li><a href="/">Main page</a></li>
           <li><a href="/list_games.php">All games</a></li>
+          <li><a href="/list_users.php">All users</a></li>
           <?php if ($current_user != NULL) { ?>
             <li><a href="/user.php?id=<?php echo $current_user->id; ?>">Profile page</a></li>
+            <li><a href="/list_users.php?following=">Following</a></li>
+            <li><a href="/list_users.php?followers=">Followers</a></li>
           <?php } ?>
         </ul>
       </nav>
