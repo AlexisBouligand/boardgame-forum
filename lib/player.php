@@ -41,7 +41,7 @@ class Player {
             <img src="/images/user-default.png" alt="PP" />
           </a>
         <?php } ?>
-        <h2 class="nickname"><?php echo $this->username; ?></h2>
+        <a href="/user.php?id=<?php echo $this->id; ?>" class="nickname"><?php echo $this->username; ?></a>
       </div>
 
       <div class="profile-info">
