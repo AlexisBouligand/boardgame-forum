@@ -7,6 +7,7 @@ const ORDER_GAMES_NAME = 0;
 const ORDER_GAMES_PRICE = 1;
 const ORDER_GAMES_SCORE = 2;
 const ORDER_GAMES_PUBLISHED = 3;
+const ORDER_GAMES_REVIEWS = 4;
 
 $reversed = false;
 $last_page = true;
@@ -30,6 +31,12 @@ if (isset($_GET["s"])) {
       // fallthrough
     case "price":
       $order_method = ORDER_GAMES_PRICE;
+      break;
+    case "!reviews":
+      $reversed = true;
+      // fallthrough
+    case "reviews":
+      $order_method = ORDER_GAMES_REVIEWS;
       break;
     case "!name":
       $reversed = true;
@@ -91,11 +98,16 @@ switch ($order_method) {
     if ($reversed) $sort_sql .= " ASC";
     else $sort_sql .= " DESC";
     break;
+  case ORDER_GAMES_REVIEWS:
+    $sort_sql = "ORDER BY review_count";
+    if ($reversed) $sort_sql .= " ASC";
+    else $sort_sql .= " DESC";
+    break;
   default:
     $sort_sql = "";
 }
 
-$sql = "SELECT game.*, avg(review.score) AS mean_score FROM game LEFT JOIN review ON review.id_game = game.id $search_sql GROUP BY game.id $sort_sql $offset_sql;";
+$sql = "SELECT game.*, AVG(review.score) AS mean_score, COUNT(review.id) AS review_count FROM game LEFT JOIN review ON review.id_game = game.id $search_sql GROUP BY game.id $sort_sql $offset_sql;";
 $req = $bdd->prepare($sql);
 
 if ($req->execute($search_terms)) {
@@ -147,6 +159,7 @@ if ($req->execute($search_terms)) {
     echo_sort_method_pair("price", ORDER_GAMES_PRICE, "Price");
     echo_sort_method_pair("published", ORDER_GAMES_PUBLISHED, "Date published");
     echo_sort_method_pair("score", ORDER_GAMES_SCORE, "Note");
+    echo_sort_method_pair("reviews", ORDER_GAMES_REVIEWS, "Review count");
     ?>
   </section>
 
@@ -179,6 +192,7 @@ if ($req->execute($search_terms)) {
       <div class="info">
         <div class="price">Price: <?php echo $game->price; ?><b>€</b></div>
         <div class="note">Note: <?php echo round($game->note); ?>/10</div>
+        <div class="reviews">Reviews: <?php echo $res["review_count"]; ?></div>
       </div>
     </div>
     <?php
