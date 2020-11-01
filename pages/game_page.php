@@ -68,7 +68,7 @@ for($i = 0; $i < $count_res['counter']; $i++){
     </div>
 
     <aside>
-      <div class="price">Price: <b><?php if ($game->price === NULL) echo "?"; else echo $game->price; ?>&nbsp;€</b></div>
+      <div class="price">Price: <b><?php if ($game_res->price === NULL) echo "?"; else echo $game_res->price; ?>&nbsp;€</b></div>
       <?php
       if ($game_res->publisher != null) {
          ?>
@@ -79,8 +79,12 @@ for($i = 0; $i < $count_res['counter']; $i++){
     </aside>
   </article>
 
-
   <?php
+  if ($current_user) {
+    echo "<div class=\"vertical-spacer\"></div>";
+    echo "<a href=\"/game_edition.php?id=" . $game_res->id . "\" class=\"center gray\">Edit game</a>";
+  }
+
   foreach ($search_res as $critic) {
     ?>
     <aside class="player-critic">
