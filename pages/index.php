@@ -12,9 +12,8 @@ if (!$req->execute()) {
   echo "Couldn't fetch the list of games!";
 }
 
-// While there is something to read and less than 10 games are read
+// While there is something to read and less than 10 games are read, we display a new game
 $nb_game_displayed = 0;
-
 while(($ligne = $req->fetch()) && $nb_game_displayed++ < 10) { // On est pas en lo21 donc on a le droit >.>
   $search_res[] = new Game($ligne[0], $ligne[1], $ligne[2], $ligne[3], $ligne[4], $ligne[5]);
 }

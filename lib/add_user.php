@@ -1,4 +1,8 @@
 <?php
+
+//Take the informations of a user as parameters
+//Insert this information in the database
+//Return an error or not
 function add_user(
     String $pseudo,
     String $email,
@@ -9,9 +13,9 @@ function add_user(
 ) {
     global $bdd;
     try {
-        // Créer une requête INSERT INTO pour insérer un étudiant
+        // We prepare the Insert request
         $req = $bdd->prepare("INSERT INTO user (pseudonym, email, password, profile_picture, country, birthdate) VALUES (?, ?, ?, ?, ?, ?);");
-        // Exécuter la requête
+        //We send the user informations
         if ($req->execute([$pseudo, $email, password_hash($password, PASSWORD_BCRYPT), $profile_picture ? 1 : 0, $country, $birthdate])) {
             return NULL;
         } else {

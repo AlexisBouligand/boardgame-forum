@@ -409,7 +409,7 @@ INSERT INTO `tag` (`id`, `tag_name`) VALUES
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `pseudonym` varchar(255) NOT NULL,
+  `pseudonym` varchar(255) NOT NULL UNIQUE,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `profile_picture` int(1) DEFAULT NULL,

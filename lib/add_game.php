@@ -1,5 +1,9 @@
 <?php
 
+
+//Take the informations of a game as parameters
+//Insert this information in the database
+//Return an error or not
 function add_game(
   String $name,
   String $creator,

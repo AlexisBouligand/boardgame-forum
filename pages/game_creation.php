@@ -3,6 +3,9 @@ $PAGE_NAME = "Add Game";
 include_once("../lib/head.php");
 include_once("../lib/add_game.php");
 
+
+//We check if the game informations are valid and if the game can be add
+//Return an error or not
 function try_create_game() {
   // TODO: validate and sanitize
   $name = $_POST["name"];
@@ -14,15 +17,17 @@ function try_create_game() {
       return "Invalid image file!";
     }
   }
+
+  //Add the game
   $res = add_game(
     $name,
     $creator,
     $price,
     $publisher,
-    issert($_FILES["image"])
+    has_uploaded("image")
   );
   if ($res == NULL) {
-      header("Location: /");
+      header("Location:game_creation.php");
   } else {
     return "There was an error while trying to add your game: " . $res;
   }
@@ -64,3 +69,6 @@ if (isset($_POST["submit"])) {
 <?php
 include_once("../lib/tail.php");
 ?>
+
+
+<!--easter egg-->

@@ -9,6 +9,7 @@ class Player {
   public $followed = false;
   private $hashed_password = "";
 
+  //Initialize the class
   public function __construct(
     $id = 0,
     $username = null,
@@ -27,7 +28,8 @@ class Player {
     $this->followed = $followed;
   }
 
-  //C'est l'affichage d'un joueur, avec un bouton Follow
+  //Display a Player, with a follow button
+    //No return
   public function draw_card() {
     ?>
     <article class="player-profile">
@@ -71,7 +73,8 @@ class Player {
     <?php
   }
 
-
+//Check if the password is the good one
+//Return true or false
   public function password_verify($password) {
     return $this->hashed_password && password_verify($password, $this->hashed_password);
   }
@@ -80,7 +83,7 @@ class Player {
 
 
 
-
+//Check if the login user informations are correct
 function try_login($username, $password) {
   global $current_user;
 
@@ -93,6 +96,7 @@ function try_login($username, $password) {
   }
   return false;
 }
+
 
 function find_player_by($trait, $username) {
   global $bdd;

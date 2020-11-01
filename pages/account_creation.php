@@ -10,6 +10,8 @@ if ($current_user != NULL) {
     die();
 }
 
+//We check if the user informations are valid and if the game can be add
+//Return an error or not
 function try_create_account() {
     global $bdd;
     $pseudo = $_POST["pseudo"];
@@ -18,18 +20,22 @@ function try_create_account() {
     $birthdate = $_POST["birthdate"];
     $country = $_POST["country"];
 
+    //LThe differentes filed must fit the format
     if (!preg_match(PSEUDO_REGEX, $pseudo)) return "Invalid pseudo!";
     if (!preg_match(PASSWORD_REGEX, $password)) return "Invalid password!";
     if (!filter_var($_POST["email"], FILTER_VALIDATE_EMAIL)) return "Invalid email!";
     if (!strtotime($birthdate)) return "Invalid birth date!";
 
+    //We check the country
     $country_req = $bdd->prepare("SELECT * FROM country WHERE id = ?");
     if (!$country_req->execute([$country]) || !$country_req->fetch()) return "Invalid country!";
 
+    //We check if the username exists
     if ($user = find_player_by_name($pseudo)) {
         return "Couldn't create account: username already taken!";
     }
 
+    //We check the i size
     if (has_uploaded("profile_picture")) {
         if (!verify_image_upload("profile_picture", "png", 5000000)) {
             return "Invalid image!";
@@ -57,7 +63,7 @@ function try_create_account() {
         }
 
         // login the user
-        header("Location: /user_login.php");
+        header("Location: user_login.php");
         return "";
     } else {
         return "There was an error while creating your account: " . $res;
