@@ -2,6 +2,7 @@
 $PAGE_NAME = "Game Page";
 $PAGE_HEAD = "<link rel=\"stylesheet\" href=\"/css/game_page.css\" />";
 include_once("../lib/head.php");
+include_once("../lib/add_review.php");
 
 if (isset($_GET["name"])) {
   $game_res = find_game_by_name($_GET["name"]);
@@ -54,6 +55,34 @@ for($i = 0; $i < $count_res['counter']; $i++){
   }
 }
 
+function try_create_review($game_res, $current_user) {
+
+    if ($current_user == NULL){
+        return "You need to be connected to submit a review";
+    }
+
+    // TODO: validate and sanitize ?
+    $score = $_POST["score"];
+    $comment = $_POST["comment"];
+    $id_game = $game_res->id;
+    $id_user = $current_user->id;
+
+    $res = add_review(
+        $score,
+        $comment,
+        $id_game,
+        $id_user
+    );
+    if ($res == NULL) {
+        header("Refresh:0");
+    } else {
+        return "There was an error while trying to add your review: " . $res;
+    }
+}
+
+if (isset($_POST["submit"])) {
+    echo try_create_review($game_res, $current_user);
+}
 ?>
 
 <section class="game-page card-list">
@@ -68,7 +97,7 @@ for($i = 0; $i < $count_res['counter']; $i++){
     </div>
 
     <aside>
-      <div class="price">Price: <b><?php if ($game->price === NULL) echo "?"; else echo $game->price; ?>&nbsp;€</b></div>
+      <div class="price">Price: <b><?php if ($game_res->price === NULL) echo "?"; else echo $game_res->price; ?>&nbsp;€</b></div>
       <?php
       if ($game_res->publisher != null) {
          ?>
@@ -78,6 +107,9 @@ for($i = 0; $i < $count_res['counter']; $i++){
       ?>
     </aside>
   </article>
+
+
+    <button class="open-button" onclick="openForm()">Write Review</button>
 
 
   <?php
@@ -120,6 +152,37 @@ for($i = 0; $i < $count_res['counter']; $i++){
   ?>
 
 </section>
+
+
+<!-- Write Review Form -->
+
+<div class="form-popup" id="myForm">
+    <form method="post" action="game_page.php?id=<?php echo $game_res->id; ?>" class="form-container">
+        <h2>Write review</h2>
+
+        <label for="score"><b>Score : </b></label>
+        <input type="number" placeholder="Score" name="score" min="0" max="10" required>
+        <br>
+        <label for="comment"><b>Comment:</b></label>
+        <input type="text" placeholder="Enter your comment (not required)" name="comment">
+        <br><br>
+        <button type="submit" name="submit" class="btn">Send</button>
+        <button type="submit" class="btn cancel" onclick="closeForm()">Cancel</button>
+    </form>
+</div>
+
+
+<script>
+    function openForm() {
+        document.getElementById("myForm").style.display = "block";
+    }
+
+    function closeForm() {
+        document.getElementById("myForm").style.display = "none";
+    }
+</script>
+
+
 
 <?php
 include_once("../lib/tail.php");
