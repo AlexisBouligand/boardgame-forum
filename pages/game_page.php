@@ -31,7 +31,7 @@ if($review_req->execute([$game_res->id])){
 }
 
 // NOTE: can't this be done using a while loop?
-
+$search_res = NULL;
 //On met les critiques dans nos objets
 for($i = 0; $i < $count_res['counter']; $i++){
   if($access_to_critic){//Si tout s'est bien passé durant la requête
@@ -53,6 +53,16 @@ for($i = 0; $i < $count_res['counter']; $i++){
       $review_res = $review_req->fetch();
     }
   }
+}
+
+//If there is no comments published for this game, we display this comment
+if ($search_res == NULL){
+    $search_res = [new Critic(
+        new Player(0, "[phantom]", 0, "FR", "..."),
+        "There seems to be no comment here, be the first to give your opinion!",
+        "01/01/0001",
+        0,
+        0)];
 }
 
 function try_create_review($game_res, $current_user) {
