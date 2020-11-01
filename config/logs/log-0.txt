@@ -1,0 +1,127 @@
+[11-01-2020 10:03:16] [I] Server loaded. Type [1m[94m'help'[0m for help.
+[11-01-2020 10:04:29] [I] Commands:
+[11-01-2020 10:04:29] [I]   [34m[94m help[0m - [97mDisplays this command list.
+[11-01-2020 10:04:29] [I]   [34m[94m version[0m - [97mDisplays server version info.
+[11-01-2020 10:04:29] [I]   [34m[94m exit[0m - [97mExit the server application.
+[11-01-2020 10:04:29] [I]   [34m[94m stop[0m - [97mStop hosting the server.
+[11-01-2020 10:04:29] [I]   [34m[94m host [96m[3m[mapname] [mode][0m - [97mOpen the server. Will default to survival and a random map if not specified.
+[11-01-2020 10:04:29] [I]   [34m[94m maps[0m - [97mDisplay all available maps.
+[11-01-2020 10:04:29] [I]   [34m[94m reloadmaps[0m - [97mReload all maps from disk.
+[11-01-2020 10:04:29] [I]   [34m[94m status[0m - [97mDisplay server status.
+[11-01-2020 10:04:29] [I]   [34m[94m mods[0m - [97mDisplay all loaded mods.
+[11-01-2020 10:04:29] [I]   [34m[94m mod [96m[3m<name...>[0m - [97mDisplay information about a loaded plugin.
+[11-01-2020 10:04:29] [I]   [34m[94m js [96m[3m<script...>[0m - [97mRun arbitrary Javascript.
+[11-01-2020 10:04:29] [I]   [34m[94m say [96m[3m<message...>[0m - [97mSend a message to all players.
+[11-01-2020 10:04:29] [I]   [34m[94m pause [96m[3m<on/off>[0m - [97mPause or unpause the game.
+[11-01-2020 10:04:29] [I]   [34m[94m rules [96m[3m[remove/add] [name] [value...][0m - [97mList, remove or add global rules. These will apply regardless of map.
+[11-01-2020 10:04:29] [I]   [34m[94m fillitems [96m[3m[team][0m - [97mFill the core with items.
+[11-01-2020 10:04:29] [I]   [34m[94m playerlimit [96m[3m[off/somenumber][0m - [97mSet the server player limit.
+[11-01-2020 10:04:29] [I]   [34m[94m config [96m[3m[name] [value...][0m - [97mConfigure server settings.
+[11-01-2020 10:04:29] [I]   [34m[94m subnet-ban [96m[3m[add/remove] [address][0m - [97mBan a subnet. This simply rejects all connections with IPs starting with some string.
+[11-01-2020 10:04:29] [I]   [34m[94m whitelisted[0m - [97mList the entire whitelist.
+[11-01-2020 10:04:29] [I]   [34m[94m whitelist-add [96m[3m<ID>[0m - [97mAdd a player to the whitelist by ID.
+[11-01-2020 10:04:29] [I]   [34m[94m whitelist-remove [96m[3m<ID>[0m - [97mRemove a player to the whitelist by ID.
+[11-01-2020 10:04:29] [I]   [34m[94m shuffle [96m[3m[none/all/custom/builtin][0m - [97mSet map shuffling mode.
+[11-01-2020 10:04:29] [I]   [34m[94m nextmap [96m[3m<mapname...>[0m - [97mSet the next map to be played after a game-over. Overrides shuffling.
+[11-01-2020 10:04:29] [I]   [34m[94m kick [96m[3m<username...>[0m - [97mKick a person by name.
+[11-01-2020 10:04:29] [I]   [34m[94m ban [96m[3m<type-id/name/ip> <username/IP/ID...>[0m - [97mBan a person.
+[11-01-2020 10:04:29] [I]   [34m[94m bans[0m - [97mList all banned IPs and IDs.
+[11-01-2020 10:04:30] [I]   [34m[94m unban [96m[3m<ip/ID>[0m - [97mCompletely unban a person by IP or ID.
+[11-01-2020 10:04:30] [I]   [34m[94m pardon [96m[3m<ID>[0m - [97mPardons a votekicked player by ID and allows them to join again.
+[11-01-2020 10:04:30] [I]   [34m[94m admin [96m[3m<add/remove> <username/ID...>[0m - [97mMake an online user admin
+[11-01-2020 10:04:30] [I]   [34m[94m admins[0m - [97mList all admins.
+[11-01-2020 10:04:30] [I]   [34m[94m players[0m - [97mList all players currently in game.
+[11-01-2020 10:04:30] [I]   [34m[94m runwave[0m - [97mTrigger the next wave.
+[11-01-2020 10:04:30] [I]   [34m[94m load [96m[3m<slot>[0m - [97mLoad a save from a slot.
+[11-01-2020 10:04:30] [I]   [34m[94m save [96m[3m<slot>[0m - [97mSave game state to a slot.
+[11-01-2020 10:04:30] [I]   [34m[94m saves[0m - [97mList all saves in the save directory.
+[11-01-2020 10:04:30] [I]   [34m[94m gameover[0m - [97mForce a game over.
+[11-01-2020 10:04:30] [I]   [34m[94m info [96m[3m<IP/UUID/name...>[0m - [97mFind player info(s). Can optionally check for all names or IPs a player has had.
+[11-01-2020 10:04:30] [I]   [34m[94m search [96m[3m<name...>[0m - [97mSearch players who have used part of a name.
+[11-01-2020 10:04:30] [I]   [34m[94m gc[0m - [97mTrigger a garbage collection. Testing only.
+[11-01-2020 10:04:30] [I]   [34m[94m yes[0m - [97mRun the last suggested incorrect command.
+[11-01-2020 10:04:38] [I] All config values:
+[11-01-2020 10:04:38] [I] [90m| [1m[94mname[0m: [1m[94m[96m[3mServer[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mThe server name as displayed on clients.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94mdesc[0m: [1m[94m[96m[3moff[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mThe server description, displayed under the name. Max 100 characters.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94mport[0m: [1m[94m[96m[3m6567[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mThe port to host on.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94mautoUpdate[0m: [1m[94m[96m[3mfalse[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mWhether to auto-update and exit when a new bleeding-edge update arrives.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94mshowConnectMessages[0m: [1m[94m[96m[3mtrue[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mWhether to display connect/disconnect messages.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94menableVotekick[0m: [1m[94m[96m[3mtrue[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mWhether votekick is enabled.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94mstartCommands[0m: [1m[94m[96m[3m[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mCommands run at startup. This should be a comma-separated list.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94mcrashReport[0m: [1m[94m[96m[3mfalse[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mWhether to send crash reports.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94mlogging[0m: [1m[94m[96m[3mtrue[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mWhether to log everything to files.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94mstrict[0m: [1m[94m[96m[3mtrue[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mWhether strict mode is on - corrects positions and prevents duplicate UUIDs.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94mantiSpam[0m: [1m[94m[96m[3mtrue[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mWhether spammers are automatically kicked and rate-limited.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94minteractRateWindow[0m: [1m[94m[96m[3m6[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mBlock interaction rate limit window, in seconds.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94minteractRateLimit[0m: [1m[94m[96m[3m25[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mBlock interaction rate limit.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94minteractRateKick[0m: [1m[94m[96m[3m60[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mHow many times a player must interact inside the window to get kicked.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94mmessageRateLimit[0m: [1m[94m[96m[3m0[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mMessage rate limit in seconds. 0 to disable.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94mmessageSpamKick[0m: [1m[94m[96m[3m3[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mHow many times a player must send a message before the cooldown to get kicked. 0 to disable.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94msocketInput[0m: [1m[94m[96m[3mfalse[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mAllows a local application to control this server through a local TCP socket.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94msocketInputPort[0m: [1m[94m[96m[3m6859[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mThe port for socket input.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94msocketInputAddress[0m: [1m[94m[96m[3mlocalhost[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mThe bind address for socket input.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94mallowCustomClients[0m: [1m[94m[96m[3mfalse[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mWhether custom clients are allowed to connect.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94mwhitelist[0m: [1m[94m[96m[3mfalse[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mWhether the whitelist is used.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94mmotd[0m: [1m[94m[96m[3moff[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mThe message displayed to people on connection.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94mautosave[0m: [1m[94m[96m[3mfalse[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mWhether the periodically save the map when playing.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94mautosaveAmount[0m: [1m[94m[96m[3m10[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mThe maximum amount of autosaves. Older ones get replaced.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94mautosaveSpacing[0m: [1m[94m[96m[3m300[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mSpacing between autosaves in seconds.
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:04:38] [I] [90m| [1m[94mdebug[0m: [1m[94m[96m[3mfalse[0m
+[11-01-2020 10:04:38] [I] [90m| | [97mEnable debug logging
+[11-01-2020 10:04:38] [I] [90m|
+[11-01-2020 10:05:13] [I] Randomized next map to be [1m[94mTriad[0m.
+[11-01-2020 10:05:13] [I] Loading map...
+[11-01-2020 10:05:13] [I] Map loaded.
+[11-01-2020 10:05:13] [I] Opened a server on port [1m[94m6567[0m.
+[11-01-2020 10:05:17] [I] [94mShad Amethyst[3m[90m has connected. [3m[90m[[94m+rzRqWVJSIsAAAAAeXDuiQ==[3m[90m]
+[11-01-2020 10:07:00] [I] [94mShad Amethyst[3m[90m has disconnected. [3m[90m[[94m+rzRqWVJSIsAAAAAeXDuiQ==[3m[90m] (closed)

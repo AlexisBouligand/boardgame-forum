@@ -290,3 +290,7 @@ a.center {
   -webkit-appearance: none;
   appearance: none;
 }
+
+.vertical-spacer {
+  height: 2em;
+}

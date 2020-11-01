@@ -12,13 +12,16 @@ function try_create_game() {
   $creator = $_POST["creator"];
   $price = $_POST["price"];
   $publisher = $_POST["publisher"];
-  if (isset($_FILES["image"])) {
+  if (has_uploaded("image")) {
     if (!verify_image_upload("image", "png", 5000000)) {
       return "Invalid image file!";
     }
   }
 
-  //Add the game
+  if (find_game_by_name($name)) {
+    return "A game with the same name already exists!";
+  }
+
   $res = add_game(
     $name,
     $creator,
@@ -26,6 +29,15 @@ function try_create_game() {
     $publisher,
     has_uploaded("image")
   );
+
+  $game = find_game_by_name($name);
+  if (!$game) return "The game couldn't be crated for mysterious reasons...";
+
+  if (has_uploaded("image")) {
+    $target_image_file = "./images/game/" . $game->id . ".png";
+    move_uploaded_file($_FILES["image"]["tmp_name"], $target_image_file);
+  }
+
   if ($res == NULL) {
       header("Location:game_creation.php");
   } else {

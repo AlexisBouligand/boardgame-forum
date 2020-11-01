@@ -119,10 +119,15 @@ if (isset($_POST["submit"])) {
   </article>
 
 
-    <button class="open-button" onclick="openForm()">Write Review</button>
+  <button class="open-button" onclick="openForm()">Write Review</button>
 
 
   <?php
+  if ($current_user) {
+    echo "<div class=\"vertical-spacer\"></div>";
+    echo "<a href=\"/game_edition.php?id=" . $game_res->id . "\" class=\"center gray\">Edit game</a>";
+  }
+
   foreach ($search_res as $critic) {
     ?>
     <aside class="player-critic">
@@ -167,29 +172,29 @@ if (isset($_POST["submit"])) {
 <!-- Write Review Form -->
 
 <div class="form-popup" id="myForm">
-    <form method="post" action="game_page.php?id=<?php echo $game_res->id; ?>" class="form-container">
-        <h2>Write review</h2>
+  <form method="post" action="game_page.php?id=<?php echo $game_res->id; ?>" class="form-container">
+    <h2>Write review</h2>
 
-        <label for="score"><b>Score : </b></label>
-        <input type="number" placeholder="Score" name="score" min="0" max="10" required>
-        <br>
-        <label for="comment"><b>Comment:</b></label>
-        <input type="text" placeholder="Enter your comment (not required)" name="comment">
-        <br><br>
-        <button type="submit" name="submit" class="btn">Send</button>
-        <button type="submit" class="btn cancel" onclick="closeForm()">Cancel</button>
-    </form>
+    <label for="score"><b>Score : </b></label>
+    <input type="number" placeholder="Score" name="score" min="0" max="10" required>
+    <br>
+    <label for="comment"><b>Comment:</b></label>
+    <input type="text" placeholder="Enter your comment (not required)" name="comment">
+    <br><br>
+    <button type="submit" name="submit" class="btn">Send</button>
+    <button type="submit" class="btn cancel" onclick="closeForm()">Cancel</button>
+  </form>
 </div>
 
 
 <script>
-    function openForm() {
-        document.getElementById("myForm").style.display = "block";
-    }
+  function openForm() {
+    document.getElementById("myForm").style.display = "block";
+  }
 
-    function closeForm() {
-        document.getElementById("myForm").style.display = "none";
-    }
+  function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+  }
 </script>
 
 

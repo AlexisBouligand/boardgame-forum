@@ -5,7 +5,7 @@ include_once("../lib/head.php");
 
 $search_res = [];
 // Creates a SELECT query
-$req = $bdd->prepare("SELECT game.id, game.name, AVG(review.score), game.price, game.publisher, game.image FROM game LEFT JOIN review ON game.id = review.id_game GROUP BY game.id ORDER BY AVG(score) DESC;");
+$req = $bdd->prepare("SELECT game.id, AVG(review.score) AS mean_score FROM game LEFT JOIN review ON game.id = review.id_game GROUP BY game.id ORDER BY mean_score DESC;");
 
 // Execute the query
 if (!$req->execute()) {
@@ -15,7 +15,7 @@ if (!$req->execute()) {
 // While there is something to read and less than 10 games are read, we display a new game
 $nb_game_displayed = 0;
 while(($ligne = $req->fetch()) && $nb_game_displayed++ < 10) { // On est pas en lo21 donc on a le droit >.>
-  $search_res[] = new Game($ligne[0], $ligne[1], $ligne[2], $ligne[3], $ligne[4], $ligne[5]);
+  $search_res[] = find_game_by_id($ligne["id"]);
 }
 ?>
 <h2>Board games forum!</h2>

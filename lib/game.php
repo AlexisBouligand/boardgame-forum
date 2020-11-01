@@ -6,6 +6,7 @@ class Game {
   public $note = 0.5; // from 0 to 1
   public $price = 0;
   public $publisher = null;
+  public $creator = null;
   public $has_image = false;
 
   public function __construct(
@@ -14,6 +15,7 @@ class Game {
     $note = 0.5,
     $price = 0,
     $publisher = null,
+    $creator = null,
     $has_image = false
   ) {
     $this->id = $id;
@@ -21,6 +23,7 @@ class Game {
     $this->note = $note;
     $this->price = $price;
     $this->publisher = $publisher;
+    $this->creator = $creator;
     $this->has_image = $has_image;
   }
 }
@@ -40,7 +43,7 @@ function find_game_by($trait, $value) {
       $note = 0;
     }
 
-    return new Game($res["id"], $res["name"], $note, $res["price"], $res["publisher"], !!$res["image"]);
+    return new Game($res["id"], $res["name"], $note, (int)$res["price"], $res["publisher"], $res["creator"], !!$res["image"]);
   } else {
     return false;
   }
