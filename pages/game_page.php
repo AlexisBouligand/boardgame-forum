@@ -2,6 +2,7 @@
 $PAGE_NAME = "Game Page";
 $PAGE_HEAD = "<link rel=\"stylesheet\" href=\"/css/game_page.css\" />";
 include_once("../lib/head.php");
+include_once("../lib/add_review.php");
 
 if (isset($_GET["name"])) {
   $game_res = find_game_by_name($_GET["name"]);
@@ -30,7 +31,7 @@ if($review_req->execute([$game_res->id])){
 }
 
 // NOTE: can't this be done using a while loop?
-
+$search_res = NULL;
 //On met les critiques dans nos objets
 for($i = 0; $i < $count_res['counter']; $i++){
   if($access_to_critic){//Si tout s'est bien passé durant la requête
@@ -54,6 +55,44 @@ for($i = 0; $i < $count_res['counter']; $i++){
   }
 }
 
+//If there is no comments published for this game, we display this comment
+if ($search_res == NULL){
+    $search_res = [new Critic(
+        new Player(0, "[phantom]", 0, "FR", "..."),
+        "There seems to be no comment here, be the first to give your opinion!",
+        "01/01/0001",
+        0,
+        0)];
+}
+
+function try_create_review($game_res, $current_user) {
+
+    if ($current_user == NULL){
+        return "You need to be connected to submit a review";
+    }
+
+    // TODO: validate and sanitize ?
+    $score = $_POST["score"];
+    $comment = $_POST["comment"];
+    $id_game = $game_res->id;
+    $id_user = $current_user->id;
+
+    $res = add_review(
+        $score,
+        $comment,
+        $id_game,
+        $id_user
+    );
+    if ($res == NULL) {
+        header("Refresh:0");
+    } else {
+        return "There was an error while trying to add your review: " . $res;
+    }
+}
+
+if (isset($_POST["submit"])) {
+    echo try_create_review($game_res, $current_user);
+}
 ?>
 
 <section class="game-page card-list">
@@ -78,6 +117,10 @@ for($i = 0; $i < $count_res['counter']; $i++){
       ?>
     </aside>
   </article>
+
+
+  <button class="open-button" onclick="openForm()">Write Review</button>
+
 
   <?php
   if ($current_user) {
@@ -124,6 +167,37 @@ for($i = 0; $i < $count_res['counter']; $i++){
   ?>
 
 </section>
+
+
+<!-- Write Review Form -->
+
+<div class="form-popup" id="myForm">
+  <form method="post" action="game_page.php?id=<?php echo $game_res->id; ?>" class="form-container">
+    <h2>Write review</h2>
+
+    <label for="score"><b>Score : </b></label>
+    <input type="number" placeholder="Score" name="score" min="0" max="10" required>
+    <br>
+    <label for="comment"><b>Comment:</b></label>
+    <input type="text" placeholder="Enter your comment (not required)" name="comment">
+    <br><br>
+    <button type="submit" name="submit" class="btn">Send</button>
+    <button type="submit" class="btn cancel" onclick="closeForm()">Cancel</button>
+  </form>
+</div>
+
+
+<script>
+  function openForm() {
+    document.getElementById("myForm").style.display = "block";
+  }
+
+  function closeForm() {
+    document.getElementById("myForm").style.display = "none";
+  }
+</script>
+
+
 
 <?php
 include_once("../lib/tail.php");
