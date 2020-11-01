@@ -16,31 +16,31 @@ if (!$game_res) {
   $game_res = new Game(0, "[phantom]", 0.5, 0, false);
 }
 
-//On va faire une boucle avec toutes les critiques du jeu
-//On a d'abord besoin du nombre de critiques
+//We'll make a loop to get all the critics
+//We first need to het the number of critics
 $count_req = $bdd->prepare("SELECT COUNT(*) AS counter FROM review WHERE id_game = ?");
 if ($count_req->execute([$game_res->id])){
   $count_res = $count_req->fetch();
 }
 
-//On vas chercher les critiques
+//We get the critics
 $review_req = $bdd->prepare("SELECT * FROM review WHERE id_game = ?");
 if($review_req->execute([$game_res->id])){
   $access_to_critic=true;
   $review_res = $review_req->fetch();
 }
 
-// NOTE: can't this be done using a while loop?
-$search_res = NULL;
-//On met les critiques dans nos objets
-for($i = 0; $i < $count_res['counter']; $i++){
-  if($access_to_critic){//Si tout s'est bien passé durant la requête
 
-    //On cherche le nom de l'utilisateur qui a posté chaque critique
+$search_res = NULL;
+//We put the critics inside a Critic object
+for($i = 0; $i < $count_res['counter']; $i++){
+  if($access_to_critic){//If everything went went during the query
+
+    //We search for the username of the user who write the critic
     $user_req = $bdd->prepare("SELECT * FROM user WHERE id=?");
 
     if($user_req->execute([$review_res['id_user']])) {
-      $user_res = $user_req->fetch();//On enregistre m'utilisateur pour le réusitliser just après
+      $user_res = $user_req->fetch();//We save the user to use him/her then
 
 
       $search_res[$i] = new Critic(
@@ -65,6 +65,7 @@ if ($search_res == NULL){
         0)];
 }
 
+//Ask for a game and a user
 function try_create_review($game_res, $current_user) {
 
     if ($current_user == NULL){
@@ -95,6 +96,8 @@ if (isset($_POST["submit"])) {
 }
 ?>
 
+
+<!-- Display of the game-->
 <section class="game-page card-list">
   <h2><?php echo $game_res->title; ?></h2>
    <!---article is only dedicated to the game--->
@@ -102,7 +105,7 @@ if (isset($_POST["submit"])) {
 
     <div class="global-informations">
       <!---Size for the image : 64px--->
-      <img src="/Test_Image/7_wonders_board_game_cover.png" alt="Seven wonders board game" />
+      <img src="" alt="" />
       <h4 class="mark">Note: <?php echo round($game_res->note, 1); ?>/10</h4>
     </div>
 
@@ -118,16 +121,25 @@ if (isset($_POST["submit"])) {
     </aside>
   </article>
 
+    <?php
+    //If the user is connected, he can se the button "Write Review"
+    if($current_user){
+    ?>
 
   <button class="open-button" onclick="openForm()">Write Review</button>
-
+    <?php
+    }
+    ?>
 
   <?php
+  //If the user is connected, he can se the button "Edit game"
   if ($current_user) {
     echo "<div class=\"vertical-spacer\"></div>";
     echo "<a href=\"/game_edition.php?id=" . $game_res->id . "\" class=\"center gray\">Edit game</a>";
   }
 
+
+  //Display the critics while they aren't all displayed
   foreach ($search_res as $critic) {
     ?>
     <aside class="player-critic">
@@ -167,6 +179,7 @@ if (isset($_POST["submit"])) {
   ?>
 
 </section>
+
 
 
 <!-- Write Review Form -->

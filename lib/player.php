@@ -97,7 +97,9 @@ function try_login($username, $password) {
   return false;
 }
 
-
+//Ask for a unique specific value tag and a value
+//Used to find all the caracteristics of a player
+//Return a Player object
 function find_player_by($trait, $username) {
   global $bdd;
   global $current_user;
@@ -125,10 +127,17 @@ function find_player_by($trait, $username) {
   }
 }
 
+
+//Ask for the name of the player
+//Find a game by username
+//Return a Player object
 function find_player_by_name($name) {
   return find_player_by("pseudonym", $name);
 }
 
+//Ask for the id of the player
+//Find a player by id
+//Return a Player object
 function find_player_by_id($id) {
   return find_player_by("id", $id);
 }

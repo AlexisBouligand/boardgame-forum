@@ -8,11 +8,14 @@ if (isset($_POST["submit"])) {
   $password = $_POST["password"];
 
   if (preg_match(PSEUDO_REGEX, $pseudonym) && preg_match(PASSWORD_REGEX, $password)) {
+      //If the user has entered the right informations
     if (try_login($pseudonym, $password)) {
       $_SESSION["pseudonym"] = $pseudonym;
       $_SESSION["password"] = $password;
       header("Location: /user.php?username=$current_user->username");
-    } else {
+    }
+      //else the informations given are incorrect
+      else {
       echo "Login attempt failed: try again!";
     }
   } else {

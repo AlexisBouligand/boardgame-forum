@@ -51,6 +51,7 @@ $req = $bdd->prepare($sql);
 
 $search_res = [];
 
+//We search the player
 if ($req->execute($search_terms)) {
   while ($res = $req->fetch()) {
     $search_res[] = find_player_by_id($res["id"]);

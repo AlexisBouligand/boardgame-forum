@@ -27,7 +27,9 @@ class Game {
     $this->has_image = $has_image;
   }
 }
-
+//Ask for a unique specific value tag and a value
+//Used to find all the caracteristics of a game
+//Return a Game object
 function find_game_by($trait, $value) {
   global $bdd;
   // Fetch most of the information
@@ -49,10 +51,16 @@ function find_game_by($trait, $value) {
   }
 }
 
+//Ask for the name of the game
+//Find a game by game name
+//Return a Game object
 function find_game_by_name($name) {
   return find_game_by("name", $name);
 }
 
+//Ask for the id of the game
+//Find a game by id
+//Return a Game object
 function find_game_by_id($id) {
   return find_game_by("id", $id);
 }
