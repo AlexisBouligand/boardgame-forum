@@ -28,7 +28,7 @@ class Game {
   }
 }
 
-/// Finds a game based on one of its sql properties (`$trait`); this shouldn't be used outside of this file
+/// Finds a game based on one of its sql properties (`$trait`) and returns a full `Game` instance; this shouldn't be used outside of this file
 function find_game_by($trait, $value) {
   global $bdd;
   // Fetch most of the information
@@ -50,12 +50,18 @@ function find_game_by($trait, $value) {
   }
 }
 
-/// Finds a game based on its name
+/**
+ * Finds a game based on its name
+ * @return Game
+ */
 function find_game_by_name($name) {
   return find_game_by("name", $name);
 }
 
-/// Finds a game based on its ID
+/**
+ * Finds a game based on its ID
+ * @return Game
+ */
 function find_game_by_id($id) {
   return find_game_by("id", $id);
 }

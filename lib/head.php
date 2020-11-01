@@ -25,8 +25,8 @@
         <a href="/"><img src="../images/logo.png" alt="logo" id="logo" /></a>
       </div>
 
-      <form method="get" action="/list_users.php" id="recherche">
-        <label for="name">Recherche:</label>
+      <form method="get" action="/list_games.php" id="recherche">
+        <label for="name">Search for a game</label>
         <input type="text" name="name" placeholder="ex: solo" size="30" maxlength="10" />
       </form>
 
@@ -44,8 +44,8 @@
       <nav class="sidebar">
         <ul>
           <li><a href="/">Main page</a></li>
-          <li><a href="/list_games.php">All games</a></li>
-          <li><a href="/list_users.php">All users</a></li>
+          <li><a href="/list_games.php">Search game</a></li>
+          <li><a href="/list_users.php">Search user</a></li>
           <?php if ($current_user != NULL) { ?>
             <li><a href="/user.php?id=<?php echo $current_user->id; ?>">Profile page</a></li>
             <li><a href="/list_users.php?following=">Following</a></li>

@@ -12,6 +12,8 @@ const ORDER_GAMES_REVIEWS = 4;
 $reversed = false;
 $last_page = true;
 
+
+//====The sort part of the game search====
 if (isset($_GET["s"])) {
   switch (strtolower($_GET["s"])) {
     case "!published":
@@ -106,11 +108,14 @@ switch ($order_method) {
   default:
     $sort_sql = "";
 }
+//===========================
 
+
+//We make the search for the selected game names
 $sql = "SELECT game.*, AVG(review.score) AS mean_score, COUNT(review.id) AS review_count FROM game LEFT JOIN review ON review.id_game = game.id $search_sql GROUP BY game.id $sort_sql $offset_sql;";
 $req = $bdd->prepare($sql);
 
-if ($req->execute($search_terms)) {
+if ($req->execute($search_terms)) {//We display them
   ?>
   <h2>Search:</h2>
   <section class="game-search">
@@ -186,7 +191,7 @@ if ($req->execute($search_terms)) {
         }
         ?>
       </div>
-      <a class="name" href="/game_page.php?id=<?php echo $game->id; ?>">
+      <a class="name" href="game_page.php?id=<?php echo $game->id; ?>">
         <?php echo $game->title; ?>
       </a>
       <div class="info">
