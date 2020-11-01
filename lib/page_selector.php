@@ -1,4 +1,5 @@
 <?php
+/// Prints out a page selector "component"; the page is derived from a given GET parameter (`$field_name`) and is 1-indexed
 function echo_page_selector(String $field_name = "p", bool $last = false) {
   if (isset($_GET[$field_name]) && is_numeric($_GET[$field_name]) && $_GET[$field_name] > 0 && $_GET[$field_name] == round($_GET[$field_name], 0)) {
     $p = (int)$_GET[$field_name];
@@ -6,6 +7,7 @@ function echo_page_selector(String $field_name = "p", bool $last = false) {
     $p = 1;
   }
 
+  /// Generate the GET parameters, with as only difference the new page index
   function generate_link(String $field_name, $p) {
     $res = "?$field_name=$p";
     foreach ($_GET as $key => $value) {

@@ -28,8 +28,7 @@ class Player {
     $this->followed = $followed;
   }
 
-  //Display a Player, with a follow button
-    //No return
+  /** Prints out a player as a "card", with a "Follow/unfollow" button */
   public function draw_card() {
     ?>
     <article class="player-profile">
@@ -73,8 +72,9 @@ class Player {
     <?php
   }
 
-//Check if the password is the good one
-//Return true or false
+  /** Verifies the given `$password` against the stored, hashed password.
+   * @return true if the given password corresponds to the hashed one, false otherwise
+   */
   public function password_verify($password) {
     return $this->hashed_password && password_verify($password, $this->hashed_password);
   }
@@ -97,13 +97,13 @@ function try_login($username, $password) {
   return false;
 }
 
-
-function find_player_by($trait, $username) {
+/// Finds a player by a given sql property (`$trait`); this function shouldn't be used outside of this file
+function find_player_by($trait, $value) {
   global $bdd;
   global $current_user;
   $req = $bdd->prepare("SELECT pseudonym, id, birthdate, country, password, profile_picture FROM user WHERE $trait = ?;");
 
-  if ($req->execute([$username]) && ($res = $req->fetch())) {
+  if ($req->execute([$value]) && ($res = $req->fetch())) {
     $country_req = $bdd->prepare("SELECT country_name FROM country WHERE id = ?");
     $followed_req = $bdd->prepare("SELECT * FROM follows WHERE id_user = ? AND id_friend = ?;");
 
@@ -125,10 +125,12 @@ function find_player_by($trait, $username) {
   }
 }
 
+/// Finds a player by its pseudonym/username
 function find_player_by_name($name) {
   return find_player_by("pseudonym", $name);
 }
 
+/// Finds a player by its ID
 function find_player_by_id($id) {
   return find_player_by("id", $id);
 }

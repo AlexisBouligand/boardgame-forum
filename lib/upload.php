@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Verifies that the image sent as the form field `$field_name` is a valid image with as extension `$extension`.
+ * @return true on success, false otherwise.
+ */
 function verify_image_upload(
   String $field_name,
   String $extension,
@@ -23,6 +27,9 @@ function verify_image_upload(
   return true;
 }
 
+/**
+ * @return Whether or not the user uploaded a file as part of the form field `$field_name`.
+ */
 function has_uploaded(String $field_name) {
   return isset($_FILES[$field_name]) && file_exists($_FILES[$field_name]["tmp_name"]) && is_uploaded_file($_FILES[$field_name]["tmp_name"]);
 }
