@@ -42,12 +42,20 @@ for($i = 0; $i < $count_res['counter']; $i++){
     if($user_req->execute([$review_res['id_user']])) {
       $user_res = $user_req->fetch();//We save the user to use him/her then
 
+        //Get the karma of the current review
+        $karma_req = $bdd->prepare("SELECT SUM(positive) FROM vote WHERE id_review = ?;");
+        $karma_req->execute([$review_res['id']]);
+        $karma_res = $karma_req->fetch();
+        if ($karma_res[0] == NULL){
+            $karma_res[0] = 0;
+        }
+
 
       $search_res[$i] = new Critic(
         new Player($user_res['id'], $user_res['pseudonym'], time(), $user_res['country'], $user_res['password'], $user_res['profile_picture']),
         $review_res['comment'],
         $review_res['date_publication'],
-        -63,
+        $karma_res[0],
         $review_res['score']
       );
       $review_res = $review_req->fetch();
