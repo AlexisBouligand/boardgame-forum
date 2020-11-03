@@ -30,12 +30,12 @@ function try_create_account() {
     $country_req = $bdd->prepare("SELECT * FROM country WHERE id = ?");
     if (!$country_req->execute([$country]) || !$country_req->fetch()) return "Invalid country!";
 
-    //We check if the username exists
+    //We check if the username already exists
     if ($user = find_player_by_name($pseudo)) {
         return "Couldn't create account: username already taken!";
     }
 
-    //We check the i size
+    //We check the image size
     if (has_uploaded("profile_picture")) {
         if (!verify_image_upload("profile_picture", "png", 5000000)) {
             return "Invalid image!";
@@ -97,13 +97,13 @@ if (isset($_POST["submit"])) {
     <label>Country:</label>
     <select name="country">
         <?php
-        // Créer une requête SELECT pour récupérer les pays
+        //We get the countries with a SQL request
         $req = $bdd->prepare("SELECT id, country_name FROM country;");
-        // Exécute la requête
+        // We execute it
         $req->execute();
-        // Tant que il y a des données ->
+        // While there is data
         while($ligne = $req->fetch()) { // On est pas en lo21 donc on a le droit >.>
-            echo "<option value=\"$ligne[id]\">$ligne[country_name]</option>";
+            echo "<option value=\"$ligne[idfet]\">$ligne[country_name]</option>";
         }
         ?>
     </select>

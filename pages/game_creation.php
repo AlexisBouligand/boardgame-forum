@@ -3,7 +3,6 @@ $PAGE_NAME = "Add Game";
 include_once("../lib/head.php");
 include_once("../lib/add_game.php");
 
-
 //We check if the game informations are valid and if the game can be add
 //Return an error or not
 function try_create_game() {
@@ -12,6 +11,7 @@ function try_create_game() {
   $creator = $_POST["creator"];
   $price = $_POST["price"];
   $publisher = $_POST["publisher"];
+  $tag_id = $_POST["tag"];
   if (has_uploaded("image")) {
     if (!verify_image_upload("image", "png", 5000000)) {
       return "Invalid image file!";
@@ -27,7 +27,9 @@ function try_create_game() {
     $creator,
     $price,
     $publisher,
-    has_uploaded("image")
+    has_uploaded("image"),
+    $tag_id
+
   );
 
   $game = find_game_by_name($name);
@@ -69,6 +71,20 @@ if (isset($_POST["submit"])) {
   <label>Price:
     <input type="number" name="price" required />
   </label>
+
+    <label>Tag :
+    <select name="tag">
+        <?php
+        $req = $bdd->prepare("SELECT id, tag_name FROM tag;");
+        $req->execute();
+        // While there remains at least one tag, we display it
+        while($ligne = $req->fetch()) {
+            echo "<option value=\"$ligne[id]\">$ligne[tag_name]</option>";
+        }
+        ?>
+    </select>
+
+    </label>
 
   <!-- TODO: this -->
   <label>Image:
