@@ -19,19 +19,24 @@ function add_game(
 
     $req->execute([$name, $creator, $publisher,$price, $profile_picture]);
 
-    //We get the id of the game
-    $game_id_req = $bdd->prepare("SELECT id FROM game WHERE name = ?");
-    if($game_id_req->execute([$name]))
+
+    //If there is a tag associated to the game
+    if($tag_id!=-1)
     {
-      $game_id_res=$game_id_req->fetch();
+      //We get the id of the game
+      $game_id_req = $bdd->prepare("SELECT id FROM game WHERE name = ?");
+      if($game_id_req->execute([$name]))
+      {
+        $game_id_res=$game_id_req->fetch();
+      }
+
+
+
+      //We insert the game id and the tag id into the tag_relation table
+      $tag_req=$bdd->prepare("INSERT INTO relation_tag VALUES (?,?)");
+      $tag_req->execute([$game_id_res['id'],$tag_id]);
+
     }
-
-
-    header("Location:head.php");
-
-    //We insert the game id and the tag id into the tag_relation table
-    $tag_req=$bdd->prepare("INSERT INTO relation_tag VALUES (?,?)");
-    $tag_req->execute([$game_id_res['id'],$tag_id]);
 
     return NULL;
   } catch (Exception $err) {

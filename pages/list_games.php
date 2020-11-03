@@ -2,6 +2,7 @@
 $PAGE_NAME = "Games list";
 $PAGE_HEAD = "<link rel=\"stylesheet\" href=\"/css/list_games.css\" />";
 include_once("../lib/head.php");
+include_once("../lib/selection_tag_list.php");
 
 const ORDER_GAMES_NAME = 0;
 const ORDER_GAMES_PRICE = 1;
@@ -13,7 +14,7 @@ $reversed = false;
 $last_page = true;
 
 
-//====The sort part of the game search====
+//====The sort part(note, game name, tag, date, etc.) of the game search====
 if (isset($_GET["s"])) {
   switch (strtolower($_GET["s"])) {
     case "!published":
@@ -58,8 +59,12 @@ if (isset($_GET["p"]) && is_numeric($_GET["p"]) && $_GET["p"] > 0 && $_GET["p"] 
 }
 
 $search_sql = "";
+
 $search_terms = [];
 
+//Need the name of the parameter to check in a query and a query
+//Add an extension to the final request sent
+//No return
 function append_search_sql(String $query, String $value) {
   global $search_sql;
   global $search_terms;
@@ -71,12 +76,32 @@ function append_search_sql(String $query, String $value) {
   $search_terms[] = $value;
 }
 
-if (isset($_GET["name"])) {
-  append_search_sql(
-    "game.name LIKE CONCAT('%', ?, '%')",
-    $_GET["name"]
-  );
+
+
+
+//If the user launch a search
+if(isset($_GET["search"]))
+{
+
+    //If there is the name of a game in the search, we search it
+    if (isset($_GET["name"])) {
+        append_search_sql(
+            "game.name LIKE CONCAT('%', ?, '%')",
+            $_GET["name"]
+        );
+    }
+
+
+
+    //If there is a tag defined, we search it
+    if($_GET["tag"]!='none')
+    {
+        $tag_id=$_GET['tag'];
+
+        append_search_sql("relation_tag.id_tag = ?", $tag_id);
+    }
 }
+
 
 $offset_sql = "LIMIT " . ($page * $games_page_length) . ", " . $games_page_length;
 switch ($order_method) {
@@ -111,28 +136,36 @@ switch ($order_method) {
 //===========================
 
 
-//We make the search for the selected game names
-$sql = "SELECT game.*, AVG(review.score) AS mean_score, COUNT(review.id) AS review_count FROM game LEFT JOIN review ON review.id_game = game.id $search_sql GROUP BY game.id $sort_sql $offset_sql;";
+//This is the base request we will modify soon, according to the parameter the user choose
+$sql = "SELECT game.*, AVG(review.score) AS mean_score, COUNT(review.id) AS review_count FROM game INNER JOIN relation_tag on relation_tag.id_game=game.id LEFT JOIN review ON review.id_game = game.id $search_sql GROUP BY game.id $sort_sql $offset_sql;";
 $req = $bdd->prepare($sql);
 
 if ($req->execute($search_terms)) {//We display them
   ?>
   <h2>Search:</h2>
   <section class="game-search">
+
     <form class="main-form" action="list_games.php" method="get">
       <input type="string" hidden name="s" value="<?php
         echo filter_var($_GET["s"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
       ?>" />
-
       <label>
         Title (contains):
         <input type="string" name="name" placeholder="ex: Wonders" <?php
           if (isset($_GET["name"])) echo "value=\"" . filter_var($_GET["name"], FILTER_SANITIZE_FULL_SPECIAL_CHARS) . "\"";
         ?> />
       </label>
+        <label>Tag :
 
-      <input type="submit" name="" value="Search" />
+            <?php
+            display_selection_tag_list();
+            ?>
+
+        </label>
+
+      <input type="submit" name="search" value="Search" />
     </form>
+
   </section>
   <h2>Sort by:</h2>
   <section class="options-list">

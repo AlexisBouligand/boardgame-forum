@@ -6,7 +6,8 @@ include_once("../lib/add_user.php");
 
 if ($current_user != NULL) {
     // lolno
-    header("Location: /");
+    //WHAT ARE YOU DOING? GET OUT OF HERE
+    header("Location: index.php");
     die();
 }
 

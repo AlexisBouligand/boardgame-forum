@@ -2,6 +2,9 @@
 $PAGE_NAME = "Add Game";
 include_once("../lib/head.php");
 include_once("../lib/add_game.php");
+include_once("../lib/selection_tag_list.php");
+
+
 
 //We check if the game informations are valid and if the game can be add
 //Return an error or not
@@ -11,7 +14,17 @@ function try_create_game() {
   $creator = $_POST["creator"];
   $price = $_POST["price"];
   $publisher = $_POST["publisher"];
-  $tag_id = $_POST["tag"];
+  //If there is a tag associated
+  if($_POST['tag']!='none')
+  {
+      $tag_id = $_POST["tag"];
+
+  }
+  else
+  {
+      $tag_id=-1;
+
+  }
   if (has_uploaded("image")) {
     if (!verify_image_upload("image", "png", 5000000)) {
       return "Invalid image file!";
@@ -41,7 +54,7 @@ function try_create_game() {
   }
 
   if ($res == NULL) {
-      header("Location:game_creation.php");
+      header("Location:game_page.php?name=$name");
   } else {
     return "There was an error while trying to add your game: " . $res;
   }
@@ -52,7 +65,7 @@ if (isset($_POST["submit"])) {
 }
 ?>
 
-<h2>Add a Game</h2>
+<h2>Add at Game</h2>
 
 <form class="main-form" method="post" action="game_creation.php">
 
@@ -73,17 +86,9 @@ if (isset($_POST["submit"])) {
   </label>
 
     <label>Tag :
-    <select name="tag">
         <?php
-        $req = $bdd->prepare("SELECT id, tag_name FROM tag;");
-        $req->execute();
-        // While there remains at least one tag, we display it
-        while($ligne = $req->fetch()) {
-            echo "<option value=\"$ligne[id]\">$ligne[tag_name]</option>";
-        }
+       display_selection_tag_list();
         ?>
-    </select>
-
     </label>
 
   <!-- TODO: this -->
