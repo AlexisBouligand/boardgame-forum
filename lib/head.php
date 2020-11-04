@@ -50,6 +50,7 @@
             <li><a href="/user.php?id=<?php echo $current_user->id; ?>">Profile page</a></li>
             <li><a href="/list_users.php?following=">Following</a></li>
             <li><a href="/list_users.php?followers=">Followers</a></li>
+            <li><a href="/game_creation.php">Add a game</a></li>
           <?php } ?>
         </ul>
       </nav>
