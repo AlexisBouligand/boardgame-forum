@@ -25,6 +25,7 @@ function try_create_game() {
       $tag_id=-1;
 
   }
+
   if (has_uploaded("image")) {
     if (!verify_image_upload("image", "png", 5000000)) {
       return "Invalid image file!";

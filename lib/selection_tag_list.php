@@ -1,17 +1,18 @@
 <?php
 
-//Allow to select a tag
+//Ask for the name if the input
+//Allow to select a tag among a list
 //No return
-function display_selection_tag_list()
+function display_selection_tag_list($select_name ="tag")
 {
     global $bdd;
 
     $req = $bdd->prepare("SELECT id, tag_name FROM tag;");
     if($req->execute())
     {
-        echo "<select name=\"tag\">";
+        echo "<select name=$select_name>";
 
-        //We offer the possibility to don't chose a tag
+        //We offer the possibility not to chose a tag
         echo "<option value=\"none\">None</option>";
 
         // While there remains at least one tag, we display it

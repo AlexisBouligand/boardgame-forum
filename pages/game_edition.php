@@ -1,22 +1,47 @@
 <?php
 $PAGE_NAME = "Add Game";
 include_once("../lib/head.php");
+include_once("../lib/selection_tag_list.php");
 
+//Need the id of a game and to know if there is an image to update (bool)
+//Try to edit the game by updating its data
+//Return if the game was successfully updated
 function try_edit_game($id, bool $had_image) {
   global $bdd;
   $name = $_POST["name"];
   $creator = $_POST["creator"];
   $price = $_POST["price"];
   $publisher = $_POST["publisher"];
+    //If there is a tag to remove
+    if($_POST['tag_to_remove']!='none')
+    {
+        $tag_to_delete = $_POST["tag_to_remove"];
+    }
+    else
+    {
+        $tag_to_delete=-1;
+    }
+    if($_POST['tag_to_add']!='none')
+    {
+        $tag_to_add = $_POST["tag_to_add"];
+    }
+    else
+    {
+        $tag_to_add=-1;
+    }
 
-  if (has_uploaded("image")) {
+
+    if (has_uploaded("image")) {
     if (!verify_image_upload("image", "png", 5000000)) {
       return "Invalid image file!";
     }
   }
 
   $req = $bdd->prepare("UPDATE game SET name = :name, creator = :creator, publisher = :publisher, price = :price, image = :has_image WHERE id = :id");
+    $remove_tag_req=$bdd->prepare("DELETE FROM relation_tag WHERE id_tag= :id_tag");
+    $add_tag_req=$bdd->prepare("INSERT INTO relation_tag VALUES (:game_id,:tag_id)");
 
+    //We execute the requests
   if ($req->execute(array(
     "id" => $id,
     "name" => $name,
@@ -24,7 +49,9 @@ function try_edit_game($id, bool $had_image) {
     "price" => $price,
     "publisher" => $publisher,
     "has_image" => $had_image || has_uploaded("image") ? 1 : 0
-  ))) {
+     ))
+      && $remove_tag_req->execute(["id_tag"=> $tag_to_delete])
+      && $add_tag_req->execute(["game_id"=>$id,"tag_id"=>$tag_to_add])) {
     if (has_uploaded("image")) {
       $target_image_file = "./images/game/" . $game->id . ".png";
       move_uploaded_file($_FILES["image"]["tmp_name"], $target_image_file);
@@ -70,6 +97,18 @@ if (isset($_GET["id"]) && $game = find_game_by_id($_GET["id"])) {
     <label>Image:
       <input type="file" name="image" />
     </label>
+
+      <label>Add a tag:
+          <?php
+          display_selection_tag_list("tag_to_add");
+          ?>
+      </label>
+      <label>
+          Remove a tag:
+          <?php
+          display_selection_tag_list("tag_to_remove");
+          ?>
+      </label>
 
     <input type="submit" name="submit" value="Send">
   </form>
