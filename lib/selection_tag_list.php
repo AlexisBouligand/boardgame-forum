@@ -2,7 +2,7 @@
 
 //Allow to select a tag
 //No return
-function display_selection_tag_list($tag = "none")
+function display_selection_tag_list()
 {
     global $bdd;
 

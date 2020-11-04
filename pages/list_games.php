@@ -90,12 +90,13 @@ $tag_sql = "";
 $tag = "none";
 
 // If there is a tag defined, we search it
-if($_GET["tag"] && $_GET["tag"] != 'none' && is_numeric($_GET["tag"]) && $_GET["tag"] > 0 && $_GET["tag"] == round($_GET["tag"], 0)) {
-  $tag = (int)$_GET["tag"];
-  $tag_sql = "INNER JOIN relation_tag ON relation_tag.id_game = game.id && relation_tag.id_tag = :tag";
-  $search_terms["tag"] = $_GET['tag'];
+if(isset($_GET["tag"])) {
+    if ($_GET["tag"] && $_GET["tag"] != 'none' && is_numeric($_GET["tag"]) && $_GET["tag"] > 0 && $_GET["tag"] == round($_GET["tag"], 0)) {
+        $tag = (int)$_GET["tag"];
+        $tag_sql = "INNER JOIN relation_tag ON relation_tag.id_game = game.id && relation_tag.id_tag = :tag";
+        $search_terms["tag"] = $_GET['tag'];
+    }
 }
-
 
 $offset_sql = "LIMIT " . ($page * $games_page_length) . ", " . $games_page_length;
 switch ($order_method) {
@@ -152,7 +153,7 @@ if ($req->execute($search_terms)) {//We display them
       <label>Tag :
 
         <?php
-        display_selection_tag_list($tag);
+        display_selection_tag_list();
         ?>
 
       </label>

@@ -27,27 +27,37 @@ main {
 
 nav.sidebar {
   background-color: grey;
-  border-right: 2px solid black;
-  border-top: 2px solid black;
+  border: 2px solid black;
+
   width: 14em;
   flex-shrink: 0;
 }
 
 nav.sidebar > ul {
   list-style-type: none;
-  padding-left: 1em;
-  padding-right: 1em;
+  margin:auto;
+
 }
 
 nav.sidebar > ul > li {
-  padding: 0;
-  margin-top: 0.5em;
-  margin-bottom: 0.5em;
+
+    margin:auto;
+  padding-top: 1em;
+  padding-bottom: 1em;
   color: pink;
+  text-align: center;
 }
 
 nav.sidebar > ul > li > a {
   color: pink;
+  padding: auto;
+  margin: auto;
+}
+
+nav.sidebar > ul > li:hover{
+    border:1px solid orange;
+    background-color: black;
+    height: 2em;
 }
 
 .main-form {
