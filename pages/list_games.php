@@ -65,7 +65,7 @@ $search_terms = [];
 //Need the name of the parameter to check in a query and a query
 //Add an extension to the final request sent
 //No return
-function append_search_sql(String $query, String $value) {
+function append_search_sql(String $query, String $key, String $value) {
   global $search_sql;
   global $search_terms;
   if ($search_sql == "") {
@@ -73,33 +73,27 @@ function append_search_sql(String $query, String $value) {
   } else {
     $search_sql .= "AND $query";
   }
-  $search_terms[] = $value;
+  $search_terms[$key] = $value;
 }
 
 
+// If there is the name of a game in the search, we search it
+if (isset($_GET["name"])) {
+  append_search_sql(
+      "game.name LIKE CONCAT('%', :name, '%')",
+      "name",
+      $_GET["name"]
+  );
+}
 
+$tag_sql = "";
+$tag = "none";
 
-//If the user launch a search
-if(isset($_GET["search"]))
-{
-
-    //If there is the name of a game in the search, we search it
-    if (isset($_GET["name"])) {
-        append_search_sql(
-            "game.name LIKE CONCAT('%', ?, '%')",
-            $_GET["name"]
-        );
-    }
-
-
-
-    //If there is a tag defined, we search it
-    if($_GET["tag"]!='none')
-    {
-        $tag_id=$_GET['tag'];
-
-        append_search_sql("relation_tag.id_tag = ?", $tag_id);
-    }
+// If there is a tag defined, we search it
+if($_GET["tag"] && $_GET["tag"] != 'none' && is_numeric($_GET["tag"]) && $_GET["tag"] > 0 && $_GET["tag"] == round($_GET["tag"], 0)) {
+  $tag = (int)$_GET["tag"];
+  $tag_sql = "INNER JOIN relation_tag ON relation_tag.id_game = game.id && relation_tag.id_tag = :tag";
+  $search_terms["tag"] = $_GET['tag'];
 }
 
 
@@ -137,7 +131,7 @@ switch ($order_method) {
 
 
 //This is the base request we will modify soon, according to the parameter the user choose
-$sql = "SELECT game.*, AVG(review.score) AS mean_score, COUNT(review.id) AS review_count FROM game INNER JOIN relation_tag on relation_tag.id_game=game.id LEFT JOIN review ON review.id_game = game.id $search_sql GROUP BY game.id $sort_sql $offset_sql;";
+$sql = "SELECT game.*, AVG(review.score) AS mean_score, COUNT(review.id) AS review_count FROM game $tag_sql LEFT JOIN review ON review.id_game = game.id $search_sql GROUP BY game.id $sort_sql $offset_sql;";
 $req = $bdd->prepare($sql);
 
 if ($req->execute($search_terms)) {//We display them
@@ -155,14 +149,13 @@ if ($req->execute($search_terms)) {//We display them
           if (isset($_GET["name"])) echo "value=\"" . filter_var($_GET["name"], FILTER_SANITIZE_FULL_SPECIAL_CHARS) . "\"";
         ?> />
       </label>
-        <label>Tag :
+      <label>Tag :
 
-            <?php
-            display_selection_tag_list();
-            ?>
+        <?php
+        display_selection_tag_list($tag);
+        ?>
 
-        </label>
-
+      </label>
       <input type="submit" name="search" value="Search" />
     </form>
 
@@ -172,7 +165,7 @@ if ($req->execute($search_terms)) {//We display them
   <?php
     function search_terms() {
       $res = "";
-      if (isset($_GET["name"])) $res .= "&name=" . filter_var($_GET["name"], FILTER_SANITIZE_URL);
+      if (isset($_GET["name"])) $res .= "&name=" . urlencode($_GET["name"]);
       return $res;
     }
 

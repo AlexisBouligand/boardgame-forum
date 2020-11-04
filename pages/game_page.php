@@ -110,27 +110,27 @@ if (isset($_POST["submit"])) {
 
 <!-- Display of the game-->
 <section class="game-page card-list">
-    <h2><?php echo $game_res->title; ?></h2>
-    <!---article is only dedicated to the game--->
-    <article class="game">
+  <h2><?php echo $game_res->title; ?></h2>
+   <!---article is only dedicated to the game--->
+  <article class="game">
 
-        <div class="global-informations">
-            <!---Size for the image : 64px--->
-            <img src="" alt="" />
-            <h4 class="mark">Note: <?php echo round($game_res->note, 1); ?>/10</h4>
-        </div>
+    <div class="global-informations">
+      <!---Size for the image : 64px--->
+      <img src="<?php if ($game_res->has_image) echo "/images/game/" . $game_res->id . ".png"; else echo "/images/game-default.png"; ?>" alt="Game's picture" />
+      <h4 class="mark">Note: <?php echo round($game_res->note, 1); ?>/10</h4>
+    </div>
 
-        <aside>
-            <div class="price">Price: <b><?php if ($game_res->price === NULL) echo "?"; else echo $game_res->price; ?>&nbsp;€</b></div>
-            <?php
-            if ($game_res->publisher != null) {
-                ?>
-                <div class="publisher">Publisher: <b><?php echo $game_res->publisher; ?></b></div>
-                <?php
-            }
-            ?>
-        </aside>
-    </article>
+    <aside>
+      <div class="price">Price: <b><?php if ($game_res->price === NULL) echo "?"; else echo $game_res->price; ?>&nbsp;€</b></div>
+      <?php
+      if ($game_res->publisher != null) {
+         ?>
+         <div class="publisher">Publisher: <b><?php echo $game_res->publisher; ?></b></div>
+         <?php
+      }
+      ?>
+    </aside>
+  </article>
 
     <?php
     //If the user is connected, he can se the button "Write Review"
