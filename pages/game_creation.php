@@ -47,7 +47,7 @@ function try_create_game() {
   );
 
   $game = find_game_by_name($name);
-  if (!$game) return "The game couldn't be crated for mysterious reasons...";
+  if (!$game) return "The game couldn't be created for mysterious reasons...";
 
   if (has_uploaded("image")) {
     $target_image_file = "./images/game/" . $game->id . ".png";
