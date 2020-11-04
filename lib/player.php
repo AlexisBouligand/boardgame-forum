@@ -98,7 +98,7 @@ function try_login($username, $password) {
 }
 
 /// Finds a player by a given sql property (`$trait`) and returns its corresponding, full `Player` instance; this function shouldn't be used outside of this file
-function find_player_by($trait, $username) {
+function find_player_by($trait, $value) {
   global $bdd;
   global $current_user;
   $req = $bdd->prepare("SELECT pseudonym, id, birthdate, country, password, profile_picture FROM user WHERE $trait = ?;");
