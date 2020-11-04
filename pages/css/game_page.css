@@ -186,3 +186,15 @@ img {
   background-color: gray;
   text-decoration: underline;
 }
+
+
+#user-comments-separation{
+  background-color: #606060;
+  color: pink;
+  padding: 16px 20px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 95%;
+  transition: 0.2s background-color;
+}

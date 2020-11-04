@@ -24,7 +24,7 @@ if ($count_req->execute([$game_res->id])) {
 }
 
 //We get the critics
-$review_req = $bdd->prepare("SELECT * FROM review WHERE id_game = ?");
+$review_req = $bdd->prepare("SELECT review.id,review.score,review.comment,review.id_user,review.id_game,review.date_publication FROM review LEFT JOIN vote ON review.id=vote.id_review WHERE review.id_game=? GROUP BY review.id ORDER BY AVG(vote.positive) DESC;");
 if($review_req->execute([$game_res->id])) {
     $access_to_critic=true;
     $review_res = $review_req->fetch();
@@ -224,7 +224,7 @@ if (isset($_POST["submit"])) {
                 <div class="publication-date">Published the <?php echo date("Y-m-d", strtotime($critic->date)); ?></div>
             </div>
 
-            <p><?php echo $critic->contents; ?></p>
+            <h3><?php echo $critic->contents; ?></h3>
 
             <div><?php
 

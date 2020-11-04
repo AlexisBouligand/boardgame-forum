@@ -28,7 +28,7 @@ while(($ligne = $req->fetch()) && $nb_game_displayed++ < 10) { // On est pas en 
       <?php if ($game->has_image) { ?>
         <img class="game-picture" src="/images/game/<?php echo $game->id; ?>.png" />
       <?php } else { ?>
-        <div class="game-picture"></div>
+        <img class="game-picture" src="/images/game-default.png" />
       <?php } ?>
       <h3 class="game-title"><?php echo $game->title;?></h3>
       <div class="game-note">Note: <?php if ($game->note == NULL) echo "N/A"; else echo number_format($game->note, 1); ?></div>
