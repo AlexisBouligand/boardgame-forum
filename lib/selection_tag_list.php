@@ -2,7 +2,7 @@
 
 //Allow to select a tag
 //No return
-function display_selection_tag_list()
+function display_selection_tag_list($tag = "none")
 {
     global $bdd;
 
@@ -16,7 +16,11 @@ function display_selection_tag_list()
 
         // While there remains at least one tag, we display it
         while($ligne = $req->fetch()) {
-            echo "<option value=\"$ligne[id]\">$ligne[tag_name]</option>";
+            if ($ligne["id"] == $tag) {
+                echo "<option value=\"$ligne[id]\" selected>$ligne[tag_name]</option>";
+            } else {
+                echo "<option value=\"$ligne[id]\">$ligne[tag_name]</option>";
+            }
         }
         echo  "</select>";
     }

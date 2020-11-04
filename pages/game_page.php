@@ -105,7 +105,7 @@ if (isset($_POST["submit"])) {
 
     <div class="global-informations">
       <!---Size for the image : 64px--->
-      <img src="" alt="" />
+      <img src="<?php if ($game_res->has_image) echo "/images/game/" . $game_res->id . ".png"; else echo "/images/game-default.png"; ?>" alt="Game's picture" />
       <h4 class="mark">Note: <?php echo round($game_res->note, 1); ?>/10</h4>
     </div>
 
