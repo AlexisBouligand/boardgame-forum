@@ -11,6 +11,7 @@ h2 {
   text-align: center;
 }
 
+
 #main-horizontal {
   display: flex;
   flex-direction: row;
@@ -49,15 +50,16 @@ nav.sidebar > ul > li {
 }
 
 nav.sidebar > ul > li > a {
-  color: pink;
+  color: orange;
   padding: auto;
   margin: auto;
 }
 
 nav.sidebar > ul > li:hover{
     border:1px solid orange;
-    background-color: black;
+    background-color: darkgray;
     height: 2em;
+  transition:height 0.2s, background-color 0.5s;
 }
 
 .main-form {
@@ -303,4 +305,26 @@ a.center {
 
 .vertical-spacer {
   height: 2em;
+}
+
+
+table{
+  border:2px solid grey;
+  border-collapse: collapse;
+
+}
+tr, th, td{
+  border: 1px solid grey;
+
+}
+
+td:hover{
+  background-color:grey;
+
+  transition:background-color 0.5s ;
+}
+
+th, td{
+  padding:10px;
+  text-align: center;
 }

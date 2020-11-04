@@ -328,12 +328,12 @@ if (isset($_POST["submit"])) {
 
         </aside>
         <?php
-}}
+}}//===============================
  ?>
 
 </section>
 
-//===============================
+
 <?php
 
 include_once("../lib/tail.php");

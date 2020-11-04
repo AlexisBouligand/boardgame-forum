@@ -26,7 +26,9 @@ if (!$user) $user = new Player(0, "[phantom]", 0, "FR", "...");
 //Separation
 ?>
 <div id="user-comments-separation">
-    <?php echo $user->username; ?>'s comments :
+    <?php
+    //If it is the page of the current user, we use a pronoun
+    if(strcmp($current_user->id,$user->id)){ echo "$user->username's";}else{echo "Your";} ?> comments :
 </div>
 <?php
 

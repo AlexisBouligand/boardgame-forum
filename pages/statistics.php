@@ -1,6 +1,6 @@
 <?php
 $PAGE_NAME = "Statistics Page";
-$PAGE_HEAD = "<link rel=\"stylesheet\" href=\"/css/game_page.css\" />";
+$PAGE_HEAD = "<link rel=\"stylesheet\" href=\"/css/style.css\" />";
 include_once("../lib/head.php");
 
 
@@ -10,18 +10,26 @@ include_once("../lib/head.php");
 
 <!-- Users section -->
 <section id="section_user">
+    <h3>A few statistics</h3>
 
-    Number of registered users :
-    <?php
+
+    <table>
+    <tr>
+        <th>Number of registered users </th>
+        <th>Average number of followed user by a user </th>
+        <th>Average number of review written by a user </th>
+    </tr>
+        <tr>
+    <td><?php
     //Prepare a MySQL request
     $req = $bdd->prepare("SELECT COUNT(*) FROM user;");
     // We execute it
     $req->execute();
-    echo $req->fetch()[0];
-    ?>
-    <br/>
-    Average number of followed user by a user :
-    <?php
+    echo round($req->fetch()[0],3);
+    ?></td>
+
+
+    <td><?php
     $nb_follow_req = $bdd->prepare("SELECT COUNT(*) fROM follows");
     $nb_follow_req->execute();
     $nb_follow_res = $nb_follow_req->fetch();
@@ -31,11 +39,12 @@ include_once("../lib/head.php");
     $nb_user_res = $nb_user_req->fetch();
 
     $avg = $nb_follow_res[0]/$nb_user_res[0];
-    echo $avg;
-    ?>
-    <br/>
-    Average number of review written by a user :
-    <?php
+    echo round($avg,3);
+        ?></td>
+
+
+
+    <td><?php
     $nb_review_req = $bdd->prepare("SELECT COUNT(*) fROM review");
     $nb_review_req->execute();
     $nb_review_res = $nb_review_req->fetch();
@@ -45,28 +54,33 @@ include_once("../lib/head.php");
     $nb_user_res = $nb_user_req->fetch();
 
     $avg = $nb_review_res[0]/$nb_user_res[0];
-    echo $avg;
-    ?>
+    echo round($avg,3);
+        ?></td>
 
-
+    </tr>
+    </table>
 </section>
 
 <br/>
 
 <!-- Games section -->
 <section id="section_game">
-
-    Number of registered games :
-    <?php
+    <table>
+       <tr><th> Number of registered games </th>
+        <th>Average number of review on a game </th>
+        <th>Average game score </th>
+       </tr>
+        <tr>
+    <td><?php
     //Prepare a MySQL request
     $req = $bdd->prepare("SELECT COUNT(*) FROM game;");
     // We execute it
     $req->execute();
-    echo $req->fetch()[0];
-    ?>
-    <br/>
-    Average number of review on a game :
-    <?php
+    echo round($req->fetch()[0],3);
+        ?></td>
+
+
+    <td><?php
     $nb_review_req = $bdd->prepare("SELECT COUNT(*) fROM review");
     $nb_review_req->execute();
     $nb_review_res = $nb_review_req->fetch();
@@ -76,16 +90,16 @@ include_once("../lib/head.php");
     $nb_game_res = $nb_game_req->fetch();
 
     $avg = $nb_review_res[0]/$nb_game_res[0];
-    echo $avg;
-    ?>
-    <br/>
-    Average game score :
-    <?php
+    echo round($avg,3);
+        ?></td>
+
+    <td><?php
     $req = $bdd->prepare("SELECT AVG(a.rcount) FROM (select AVG(score) as rcount FROM review r GROUP BY r.id_game) a");
     $req->execute();
-    echo $req->fetch()[0];
-    ?>
-
+    echo round($req->fetch()[0],3);
+        ?></td>
+        </tr>
+    </table>
 </section>
 
 
