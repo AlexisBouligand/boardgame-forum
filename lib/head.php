@@ -49,13 +49,14 @@
 
           <li><a href="/list_games.php">Search game</a></li>
           <li><a href="/list_users.php">Search user</a></li>
-            <li><a href="/game_creation.php">Add a game</a></li>
+
 
             <!--If the user is connected, he/she can see his followers and profile page-->
           <?php if ($current_user != NULL) { ?>
             <li><a href="/user.php?id=<?php echo $current_user->id; ?>">Profile page</a></li>
             <li><a href="/list_users.php?following=">Following</a></li>
             <li><a href="/list_users.php?followers=">Followers</a></li>
+            <li><a href="/game_creation.php">Add a game</a></li>
           <?php }else{?><!-- the user can only create an account if he/she is not already connected-->
             <li><a href="/account_creation.php"</li>Create account</a></li>
             <?php }?>

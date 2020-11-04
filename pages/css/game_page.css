@@ -79,43 +79,59 @@ img {
   align-items: center;
   justify-content: center;
   text-decoration: none;
+  cursor: pointer;
+  transition: 0.1s color;
+}
+
+.player-critic .like.active, .player-critic .dislike.active {
+  color: white;
+  transition: 0.15s color;
 }
 
 .player-critic .like:hover, .player-critic .dislike:hover {
   color: black;
 }
 
+.game-edition-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
 /* Button used to open the contact form - fixed at the bottom of the page */
-.open-button {
-  background-color: grey;
+.game-edition-buttons > * {
+  background-color: #606060;
   color: pink;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
-  opacity: 0.8;
-  position: relative;
-  bottom: -10px;
-  right: 0px;
-  width: 280px;
+  margin-top: 10px;
+  margin-left: 5px;
+  margin-right: 5px;
+  width: 50%;
+  transition: 0.2s background-color;
 }
 
 /* The popup form - hidden by default */
-.form-popup {
+#form-popup {
   display: none;
-  position: fixed;
-  left: 33%;
-  top: 40%;
-  width: 40%;
-  border: 3px solid #f1f1f1;
+  margin-top: 15px;
+  margin-left: 5px;
+  margin-right: 5px;
   z-index: 9;
+  box-shadow: 0px 4px 16px -4px rgba(0, 0, 0, 0.75);
+}
+
+#form-popup.visible {
+  display: block;
 }
 
 /* Add styles to the form container */
 .form-container {
-  /*max-width: 300px;*/
   padding: 10px;
   background-color: grey;
   color: pink;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Full-width input fields */
@@ -135,22 +151,38 @@ img {
 
 /* Set a style for the submit/login button */
 .form-container .btn {
-  background-color: orange;
+  display: block;
+  background-color: rgba(255, 128, 0, 0.8);
   color: black;
   padding: 16px 20px;
   border: none;
   cursor: pointer;
   width: 100%;
-  margin-bottom:10px;
-  opacity: 0.8;
+  margin-bottom: 10px;
+  box-sizing: border-box;
+  text-align: center;
+  transition: 0.2s background-color;
+}
+
+.form-container .btn:hover {
+  text-decoration: none;
 }
 
 /* Add a red background color to the cancel button */
 .form-container .cancel {
-  background-color: red;
+  background-color: rgba(255, 0, 0, 0.8);
 }
 
 /* Add some hover effects to buttons */
-.form-container .btn:hover, .open-button:hover {
-  opacity: 1;
+.form-container .btn:hover {
+  background-color: orange;
+}
+
+.form-container .btn.cancel:hover {
+  background-color: red;
+}
+
+.game-edition-buttons > *:hover {
+  background-color: gray;
+  text-decoration: underline;
 }
