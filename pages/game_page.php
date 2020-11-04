@@ -193,7 +193,7 @@ if (isset($_POST["submit"])) {
                 <div class="publication-date">Published the <?php echo date("Y-m-d", strtotime($critic->date)); ?></div>
             </div>
 
-            <p><?php echo $critic->contents; ?></p>
+            <h3><?php echo $critic->contents; ?></h3>
 
             <div><?php echo $critic->score; ?>/10</div>
 
