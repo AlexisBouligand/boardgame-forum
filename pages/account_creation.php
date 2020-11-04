@@ -104,7 +104,7 @@ if (isset($_POST["submit"])) {
         $req->execute();
         // While there is data
         while($ligne = $req->fetch()) { // On est pas en lo21 donc on a le droit >.>
-            echo "<option value=\"$ligne[idfet]\">$ligne[country_name]</option>";
+            echo "<option value=\"$ligne[id]\">$ligne[country_name]</option>";
         }
         ?>
     </select>
