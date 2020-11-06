@@ -172,40 +172,9 @@ if (isset($_POST["submit"])) {
       </form>
   </div>
 
-
-
   <?php
-
-
-
-
-
-    //===Display the critics while they aren't all displayed===
-
-    foreach ($search_res as  $critic) {
-
-
-        //If the user only wants his friends critics
-
-        $sort_by_friend=false;
-
-        if($sort_by_friend){
-         //We want the number of friend of the user
-        $number_of_friend_req=$bdd->prepare("SELECT count(*) FROM follows WHERE :id_current_user=id_user");
-        $number_of_friend_req->execute(["id_current_user"=>$current_user->id]);
-        $number_of_friend_res=$number_of_friend_req->fetch();
-
-        $friend_req=$bdd->prepare("SELECT id_friend FROM follows WHERE :id_current_user=id_user");
-        $friend_req->execute(["id_current_user"=>$current_user->id]);
-
-        for ($i = 0; $i < $number_of_friend_res[0]; $i++) {
-            $friend_res=$friend_req->fetch();
-            $author_id = $critic->author->id;
-
-
-        if(!strcmp($friend_res[0],$author_id)) {
-
-
+    //Display the critics while they aren't all displayed
+    foreach ($search_res as $critic) {
         ?>
         <aside class="player-critic">
             <div class="post-infos">
@@ -224,13 +193,9 @@ if (isset($_POST["submit"])) {
                 <div class="publication-date">Published the <?php echo date("Y-m-d", strtotime($critic->date)); ?></div>
             </div>
 
-            <h3><?php echo $critic->contents; ?></h3>
+            <div class="contents"><?php echo $critic->contents; ?></div>
 
-            <div><?php
-
-                    echo "$critic->score/10";
-
-                 ?></div>
+            <div class="score"><?php echo $critic->score; ?>/10</div>
 
             <div class="karma-box">
                 <a
@@ -263,78 +228,12 @@ if (isset($_POST["submit"])) {
             </div >
 
         </aside>
-
-
-
-
         <?php
-    }}}else{
+    }
     ?>
-
-    <aside class="player-critic">
-            <div class="post-infos">
-                <?php if ($critic->author->has_profile_picture) { ?>
-                    <a href="/images/user/<?php echo $critic->author->id; ?>.png">
-                        <img src="/images/user/<?php echo $critic->author->id; ?>.png" alt="PP" />
-                    </a>
-                <?php } else { ?>
-                    <a href="/images/user-default.png">
-                        <img src="/images/user-default.png" alt="PP" />
-                    </a>
-                <?php } ?>
-                <a class="username" href="/user.php?id=<?php echo $critic->author->id; ?>">
-                    <?php echo $critic->author->username; ?>
-                </a>
-                <div class="publication-date">Published the <?php echo date("Y-m-d", strtotime($critic->date)); ?></div>
-            </div>
-
-            <p><?php echo $critic->contents; ?></p>
-
-            <div><?php
-
-                    echo "$critic->score/10";
-
-                 ?></div>
-
-            <div class="karma-box">
-                <a
-                  name="like"
-                  <?php if ($critic->current_vote == 1) {
-                    echo "class=\"like active\"";
-                  } else {
-                    echo "class=\"like\"";
-                  } ?>
-                  <?php if ($current_user) { ?>
-                    onclick="vote(<?php echo $critic->id; ?>, 1, this);"
-                  <?php } ?>
-                >
-                    <span>&#x25b2;</span>
-                </a>
-                <span class="karma"><?php echo $critic->karma; ?></span>
-                <a
-                  name="dislike"
-                  <?php if ($critic->current_vote == -1) {
-                    echo "class=\"dislike active\"";
-                  } else {
-                    echo "class=\"dislike\"";
-                  } ?>
-                  <?php if ($current_user) { ?>
-                    onclick="vote(<?php echo $critic->id; ?>, -1, this);"
-                  <?php } ?>
-                >
-                    <span>&#x25bc;</span>
-                </a>
-            </div >
-
-        </aside>
-        <?php
-}}//===============================
- ?>
 
 </section>
 
-
 <?php
-
 include_once("../lib/tail.php");
 ?>
