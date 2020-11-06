@@ -35,6 +35,10 @@ img {
   padding: 10px;
 }
 
+.player-critic:first-of-type {
+  margin-top: 5px;
+}
+
 /*Size for the profile picture: 64px*/
 .player-critic img {
   width: 64px;
@@ -53,9 +57,15 @@ img {
   color: black;
 }
 
-.publication-date {
+.date-and-score {
   padding: 10px;
   margin-left: auto;
+  text-align: right;
+}
+
+.date-and-score .score {
+  font-weight: bold;
+  font-size: 14pt;
 }
 
 .player-critic .karma-box {
@@ -197,4 +207,9 @@ img {
   margin-top: 10px;
   width: 95%;
   transition: 0.2s background-color;
+}
+
+.comment {
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
 }

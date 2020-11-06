@@ -80,12 +80,13 @@ while($review = $review_req->fetch())
             <a class="username" href="/game_page.php?id=<?php echo $game['id']; ?>">
                 <?php echo $game['name']; ?>
             </a>
-            <div class="publication-date">Published the <?php echo date("Y-m-d", strtotime($review['date_publication'])); ?></div>
+            <div class="date-and-score">
+                <div class="publication-date">Published the <?php echo date("Y-m-d", strtotime($review['date_publication'])); ?></div>
+                <div class="score"><?php echo $review['score']; ?>/10</div>
+            </div>
         </div>
 
-        <h3><?php echo $review['comment']; ?></h3>
-
-        <div><?php echo $review['score']; ?>/10</div>
+        <div class="comment"><?php echo $review['comment']; ?></div>
 
         <div class="karma-box">
             <a

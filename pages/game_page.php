@@ -16,33 +16,30 @@ if (!$game_res) {
     $game_res = new Game(0, "[phantom]", 0.5, 0, false);
 }
 
-//We'll make a loop to get all the critics
-//We first need to het the number of critics
-$count_req = $bdd->prepare("SELECT COUNT(*) AS counter FROM review WHERE id_game = ?");
-if ($count_req->execute([$game_res->id])) {
-    $count_res = $count_req->fetch();
-}
-
-//We get the critics
-$review_req = $bdd->prepare("SELECT review.id,review.score,review.comment,review.id_user,review.id_game,review.date_publication FROM review LEFT JOIN vote ON review.id=vote.id_review WHERE review.id_game=? GROUP BY review.id ORDER BY AVG(vote.positive) DESC;");
+// We get the critics
+$review_req = $bdd->prepare("SELECT review.id, review.score, review.comment, review.id_user, review.id_game, review.date_publication FROM review LEFT JOIN vote ON review.id=vote.id_review WHERE review.id_game = ? GROUP BY review.id ORDER BY AVG(vote.positive) DESC, review.id;");
 if($review_req->execute([$game_res->id])) {
     $access_to_critic=true;
     $review_res = $review_req->fetch();
 }
 
+if (isset($_GET["following-only"])) {
+    $following_only = true;
+} else {
+    $following_only = false;
+}
 
 $search_res = NULL;
-//We put the critics inside a Critic object
-for($i = 0; $i < $count_res["counter"]; $i++) {
-    if($access_to_critic) { //If everything went went during the query
-
-        //We search for the username of the user who write the critic
+// We put the critics inside a Critic object
+if ($review_req->execute([$game_res->id])) {
+    while ($review_res = $review_req->fetch()) {
+        // We search for the username of the user who write the critic
         $user_req = $bdd->prepare("SELECT * FROM user WHERE id=?");
 
-        if($user_req->execute([$review_res["id_user"]])) {
-            $user_res = $user_req->fetch(); //We save the user to use him/her then
+        if ($user_req->execute([$review_res["id_user"]])) {
+            $user_res = $user_req->fetch(); // We save the user to use him/her then
 
-            //Get the karma of the current review
+            // Get the karma of the current review
             $karma_req = $bdd->prepare("SELECT SUM(positive) FROM vote WHERE id_review = ?;");
             if ($karma_req->execute([$review_res["id"]])) {
                 $karma_res = $karma_req->fetch();
@@ -52,6 +49,7 @@ for($i = 0; $i < $count_res["counter"]; $i++) {
             }
 
             $current_vote = 0;
+            $is_from_friend = true; // the following_only option is disabled by default for non-logged-in users
             if ($current_user) {
                 $current_vote_req = $bdd->prepare("SELECT * FROM vote WHERE id_user = ? AND id_review = ?;");
                 if (
@@ -60,32 +58,39 @@ for($i = 0; $i < $count_res["counter"]; $i++) {
                 ) {
                     $current_vote = $current_vote_res["positive"];
                 }
+                if ($following_only) {
+                    $following_req = $bdd->prepare("SELECT * FROM follows WHERE id_user = ? AND id_friend = ?");
+                    $is_from_friend = ($following_req->execute([$current_user->id, $review_res["id_user"]]) && $following_req->fetch());
+                }
             }
 
-
-            $search_res[$i] = new Critic(
-                $review_res["id"],
-                new Player($user_res["id"], $user_res["pseudonym"], time(), $user_res["country"], $user_res["password"], $user_res["profile_picture"]),
-                $review_res["comment"],
-                $review_res["date_publication"],
-                $karma_res[0],
-                $review_res["score"],
-                $current_vote
-            );
-            $review_res = $review_req->fetch();
+            if ($is_from_friend) {
+                $search_res[] = new Critic(
+                    $review_res["id"],
+                    new Player($user_res["id"], $user_res["pseudonym"], time(), $user_res["country"], $user_res["password"], $user_res["profile_picture"]),
+                    $review_res["comment"],
+                    $review_res["date_publication"],
+                    $karma_res[0],
+                    $review_res["score"],
+                    $current_vote
+                );
+            }
         }
     }
 }
 
 //If there is no comments published for this game, we display this comment
 if ($search_res == NULL) {
-    $search_res = [new Critic(
-        0,
-        new Player(0, "[phantom]", 0, "FR", "..."),
-        "There seems to be no comment here, be the first to give your opinion!",
-        "01/01/0001",
-        0,
-        0)];
+    $search_res = [
+        new Critic(
+            0,
+            new Player(0, "[phantom]", 0, "FR", "..."),
+            "There seems to be no comment here, be the first to give your opinion!",
+            "01/01/0001",
+            0,
+            0
+        )
+    ];
 }
 
 //Ask for a game and a user
@@ -153,27 +158,41 @@ if (isset($_POST["submit"])) {
         echo "<button class=\"open-button\" onclick=\"toggle_form()\">Write Review</button>";
         echo "<a href=\"/game_edition.php?id=" . $game_res->id . "\" class=\"center gray\">Edit game</a>";
         echo "</div>";
+        ?>
+
+        <!-- Write Review Form -->
+
+        <div class="form-popup" id="form-popup">
+            <form method="post" action="game_page.php?id=<?php echo $game_res->id; ?>" class="form-container">
+                <h2>Write review</h2>
+
+                <label>
+                    <b>Score : </b>
+                    <input type="number" placeholder="Score" name="score" min="0" max="10" required>
+                </label>
+                <label for="comment"><b>Comment:</b></label>
+                <input type="text" placeholder="Enter your comment (not required)" name="comment">
+                <button type="submit" name="submit" class="btn">Send</button>
+                <a class="btn cancel" onclick="close_form()">Cancel</a>
+            </form>
+        </div>
+
+        <div class="vertical-spacer small"></div>
+
+        <section class="options-list no-margin">
+            <?php
+            if ($following_only) {
+                echo "<a href=\"?name=" . urlencode($game_res->title) . "\">All comments</a>";
+                echo "<a href=\"?name=" . urlencode($game_res->title) . "&following-only\" class=\"active\">Friends only</a>";
+            } else {
+                echo "<a href=\"?name=" . urlencode($game_res->title) . "\" class=\"active\">All comments</a>";
+                echo "<a href=\"?name=" . urlencode($game_res->title) . "&following-only\">Friends only</a>";
+            }
+            ?>
+        </section>
+
+        <?php
     }
-    ?>
-
-    <!-- Write Review Form -->
-
-    <div class="form-popup" id="form-popup">
-        <form method="post" action="game_page.php?id=<?php echo $game_res->id; ?>" class="form-container">
-            <h2>Write review</h2>
-
-            <label>
-                <b>Score : </b>
-                <input type="number" placeholder="Score" name="score" min="0" max="10" required>
-            </label>
-            <label for="comment"><b>Comment:</b></label>
-            <input type="text" placeholder="Enter your comment (not required)" name="comment">
-            <button type="submit" name="submit" class="btn">Send</button>
-            <a class="btn cancel" onclick="close_form()">Cancel</a>
-        </form>
-    </div>
-
-    <?php
     //Display the critics while they aren't all displayed
     foreach ($search_res as $critic) {
         ?>
@@ -191,12 +210,13 @@ if (isset($_POST["submit"])) {
                 <a class="username" href="/user.php?id=<?php echo $critic->author->id; ?>">
                     <?php echo $critic->author->username; ?>
                 </a>
-                <div class="publication-date">Published the <?php echo date("Y-m-d", strtotime($critic->date)); ?></div>
+                <div class="date-and-score">
+                    <div class="publication-date">Published the <?php echo date("Y-m-d", strtotime($critic->date)); ?></div>
+                    <div class="score"><?php echo $critic->score; ?>/10</div>
+                </div>
             </div>
 
-            <div class="contents"><?php echo $critic->contents; ?></div>
-
-            <div class="score"><?php echo $critic->score; ?>/10</div>
+            <div class="comment"><?php echo $critic->contents; ?></div>
 
             <div class="karma-box">
                 <a
