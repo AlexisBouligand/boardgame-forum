@@ -39,7 +39,10 @@ header {
   background: darkorange;
 }
 
-
+#div_logo {
+  width: var(--header-height);
+  border-right: 2px solid black;
+}
 
 #logo {
   height: var(--header-height);
