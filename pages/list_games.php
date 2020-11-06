@@ -199,7 +199,7 @@ if ($req->execute($search_terms)) {//We display them
   <?php
   while ($res = $req->fetch()) {
     $last_page = false;
-    $game = new Game($res["id"], $res["name"], $res["mean_score"], $res["price"], $res["publisher"], !!$res["image"]);
+    $game = new Game($res["id"], $res["name"], $res["mean_score"], $res["price"], $res["publisher"], $res['creator'], !!$res["image"]);
     ?>
     <div class="game card">
       <div class="picture">
