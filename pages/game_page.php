@@ -124,55 +124,56 @@ if (isset($_POST["submit"])) {
 
 <!-- Display of the game-->
 <section class="game-page card-list">
-  <h2><?php echo $game_res->title; ?></h2>
-   <!---article is only dedicated to the game--->
-  <article class="game">
+    <h2><?php echo $game_res->title; ?></h2>
+    <!---article is only dedicated to the game--->
+    <article class="game">
 
-    <div class="global-informations">
-      <!---Size for the image : 64px--->
-      <img src="<?php if ($game_res->has_image) echo "/images/game/" . $game_res->id . ".png"; else echo "/images/game-default.png"; ?>" alt="Game's picture" />
-      <h4 class="mark">Note: <?php echo round($game_res->note, 1); ?>/10</h4>
+        <div class="global-informations">
+            <!---Size for the image : 64px--->
+            <img src="<?php if ($game_res->has_image) echo "/images/game/" . $game_res->id . ".png"; else echo "/images/game-default.png"; ?>" alt="Game's picture" />
+            <h4 class="mark">Note: <?php echo round($game_res->note, 1); ?>/10</h4>
+        </div>
+
+        <aside>
+            <div class="price">Price: <b><?php if ($game_res->price === NULL) echo "?"; else echo $game_res->price; ?>&nbsp;€</b></div>
+            <?php
+            if ($game_res->publisher != null) {
+                ?>
+                <div class="publisher">Publisher: <b><?php echo $game_res->publisher; ?></b></div>
+                <?php
+            }
+            ?>
+        </aside>
+    </article>
+
+    <?php
+    //If the user is connected, he can see the button "Edit game" and the button "Write Review"
+    if ($current_user) {
+        echo "<div class=\"game-edition-buttons\">";
+        echo "<button class=\"open-button\" onclick=\"toggle_form()\">Write Review</button>";
+        echo "<a href=\"/game_edition.php?id=" . $game_res->id . "\" class=\"center gray\">Edit game</a>";
+        echo "</div>";
+    }
+    ?>
+
+    <!-- Write Review Form -->
+
+    <div class="form-popup" id="form-popup">
+        <form method="post" action="game_page.php?id=<?php echo $game_res->id; ?>" class="form-container">
+            <h2>Write review</h2>
+
+            <label>
+                <b>Score : </b>
+                <input type="number" placeholder="Score" name="score" min="0" max="10" required>
+            </label>
+            <label for="comment"><b>Comment:</b></label>
+            <input type="text" placeholder="Enter your comment (not required)" name="comment">
+            <button type="submit" name="submit" class="btn">Send</button>
+            <a class="btn cancel" onclick="close_form()">Cancel</a>
+        </form>
     </div>
 
-    <aside>
-      <div class="price">Price: <b><?php if ($game_res->price === NULL) echo "?"; else echo $game_res->price; ?>&nbsp;€</b></div>
-      <?php
-      if ($game_res->publisher != null) {
-         ?>
-         <div class="publisher">Publisher: <b><?php echo $game_res->publisher; ?></b></div>
-         <?php
-      }
-      ?>
-    </aside>
-  </article>
-
-  <?php
-  //If the user is connected, he can see the button "Edit game" and the button "Write Review"
-  if ($current_user) {
-      echo "<div class=\"game-edition-buttons\">";
-      echo "<button class=\"open-button\" onclick=\"toggle_form()\">Write Review</button>";
-      echo "<a href=\"/game_edition.php?id=" . $game_res->id . "\" class=\"center gray\">Edit game</a>";
-      echo "</div>";
-  } ?>
-
-  <!-- Write Review Form -->
-
-  <div class="form-popup" id="form-popup">
-      <form method="post" action="game_page.php?id=<?php echo $game_res->id; ?>" class="form-container">
-          <h2>Write review</h2>
-
-          <label>
-              <b>Score : </b>
-              <input type="number" placeholder="Score" name="score" min="0" max="10" required>
-          </label>
-          <label for="comment"><b>Comment:</b></label>
-          <input type="text" placeholder="Enter your comment (not required)" name="comment">
-          <button type="submit" name="submit" class="btn">Send</button>
-          <a class="btn cancel" onclick="close_form()">Cancel</a>
-      </form>
-  </div>
-
-  <?php
+    <?php
     //Display the critics while they aren't all displayed
     foreach ($search_res as $critic) {
         ?>
