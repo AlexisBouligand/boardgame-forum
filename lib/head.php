@@ -58,8 +58,8 @@
             <li><a href="/list_users.php?following=">Following</a></li>
             <li><a href="/list_users.php?followers=">Followers</a></li>
             <li><a href="/game_creation.php">Add a game</a></li>
-              <li><a href="/statistics.php">Statistilogcs</a></li>
-              <li><a href="/user_logout.php">Log out</li>
+              <li><a href="/statistics.php">Statistics</a></li>
+              <li><a href="/user_logout.php">Log out</a></li>
           <?php }else{?><!-- the user can only create an account if he/she is not already connected-->
             <li><a href="/account_creation.php"</li>Create account</a></li>
               <li><a href="/user_login.php">Sign in</a></li>

@@ -1,6 +1,6 @@
 <?php
 $PAGE_NAME = "Statistics Page";
-$PAGE_HEAD = "<link rel=\"stylesheet\" href=\"/css/style.css\" />";
+$PAGE_HEAD = "<link rel=\"stylesheet\" href=\"/css/statistics.css\" />";
 include_once("../lib/head.php");
 
 
@@ -100,6 +100,57 @@ include_once("../lib/head.php");
         ?></td>
         </tr>
     </table>
+</section>
+
+<!-- Charts section -->
+
+<section>
+
+    <h3>A few charts</h3>
+
+    <?php
+    $req = $bdd->prepare("SELECT tag.tag_name,COUNT(*) FROM relation_tag INNER JOIN tag ON relation_tag.id_tag=tag.id GROUP BY id_tag;");
+    $req->execute();
+    ?>
+
+
+
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {packages: ['corechart']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            // Define the chart to be drawn.
+            var data = new google.visualization.DataTable()
+            data.addColumn('string', 'tag_name');
+            data.addColumn('number', 'occurence');
+            <?php
+            while($res = $req->fetch())
+            {
+                echo "data.addRows([['$res[0]',$res[1]]]);\n";
+            }
+            ?>
+
+            // Set chart options
+            var options = {'title':'Tag occurrence',
+                'width':450,
+                'height':450};
+
+
+            // Instantiate and draw the chart.
+            var chart = new google.visualization.PieChart(document.getElementById('tag_piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+
+    <table>
+        <tr><th>
+        <p id="tag_piechart"/>
+        </th></tr>
+    </table>
+
+
 </section>
 
 

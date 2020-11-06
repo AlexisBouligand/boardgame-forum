@@ -120,6 +120,7 @@
   margin-right: 5px;
   width: 50%;
   transition: 0.2s background-color;
+  font-size: 100%;
 }
 
 /* The popup form - hidden by default */
