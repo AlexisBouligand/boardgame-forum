@@ -155,7 +155,7 @@ if (isset($_POST["submit"])) {
     //If the user is connected, he can see the button "Edit game" and the button "Write Review"
     if ($current_user) {
         echo "<div class=\"game-edition-buttons\">";
-        echo "<button class=\"open-button\" onclick=\"toggle_form()\">Write Review</button>";
+        echo "<button class=\"open-button\" onclick=\"toggle_form()\" >Write Review</button>";
         echo "<a href=\"/game_edition.php?id=" . $game_res->id . "\" class=\"center gray\">Edit game</a>";
         echo "</div>";
         ?>
