@@ -12,48 +12,44 @@ function try_edit_game($id, bool $had_image) {
   $creator = $_POST["creator"];
   $price = $_POST["price"];
   $publisher = $_POST["publisher"];
-    //If there is a tag to remove
-    if($_POST['tag_to_remove']!='none')
-    {
-        $tag_to_delete = $_POST["tag_to_remove"];
-    }
-    else
-    {
-        $tag_to_delete=-1;
-    }
-    if($_POST['tag_to_add']!='none')
-    {
-        $tag_to_add = $_POST["tag_to_add"];
-    }
-    else
-    {
-        $tag_to_add=-1;
-    }
+  //If there is a tag to remove
+  if($_POST["tag_to_remove"] != "none") {
+    $tag_to_delete = $_POST["tag_to_remove"];
+  } else {
+    $tag_to_delete = -1;
+  }
+  if ($_POST["tag_to_add"] != "none") {
+    $tag_to_add = $_POST["tag_to_add"];
+  } else {
+    $tag_to_add = -1;
+  }
 
 
-    if (has_uploaded("image")) {
+  if (has_uploaded("image")) {
     if (!verify_image_upload("image", "png", 5000000)) {
       return "Invalid image file!";
     }
   }
 
   $req = $bdd->prepare("UPDATE game SET name = :name, creator = :creator, publisher = :publisher, price = :price, image = :has_image WHERE id = :id");
-    $remove_tag_req=$bdd->prepare("DELETE FROM relation_tag WHERE id_tag= :id_tag");
-    $add_tag_req=$bdd->prepare("INSERT INTO relation_tag VALUES (:game_id,:tag_id)");
+  $remove_tag_req = $bdd->prepare("DELETE FROM relation_tag WHERE id_tag = :id_tag");
+  $add_tag_req = $bdd->prepare("INSERT INTO relation_tag VALUES (:game_id, :tag_id)");
 
     //We execute the requests
-  if ($req->execute(array(
-    "id" => $id,
-    "name" => $name,
-    "creator" => $creator,
-    "price" => $price,
-    "publisher" => $publisher,
-    "has_image" => $had_image || has_uploaded("image") ? 1 : 0
-     ))
-      && $remove_tag_req->execute(["id_tag"=> $tag_to_delete])
-      && $add_tag_req->execute(["game_id"=>$id,"tag_id"=>$tag_to_add])) {
+  if (
+    $req->execute(array(
+      "id" => $id,
+      "name" => $name,
+      "creator" => $creator,
+      "price" => $price,
+      "publisher" => $publisher,
+      "has_image" => $had_image || has_uploaded("image") ? 1 : 0
+    ))
+    && ($tag_to_delete == -1 || $remove_tag_req->execute(["id_tag" => $tag_to_delete]))
+    && ($tag_to_add == -1 || $add_tag_req->execute(["game_id" => $id,"tag_id" => $tag_to_add]))
+  ) {
     if (has_uploaded("image")) {
-      $target_image_file = "./images/game/" . $game->id . ".png";
+      $target_image_file = "./images/game/" . ((int)$id) . ".png";
       move_uploaded_file($_FILES["image"]["tmp_name"], $target_image_file);
     }
 
@@ -66,7 +62,7 @@ function try_edit_game($id, bool $had_image) {
 if (isset($_GET["id"]) && $game = find_game_by_id($_GET["id"])) {
   if (isset($_POST["submit"])) {
     echo "<div class=\"result\">";
-    echo try_edit_game($_GET["id"], $game->has_image);
+    echo try_edit_game(filter_var($_GET["id"], FILTER_SANITIZE_NUMBER_INT), $game->has_image);
     echo "</div>";
     $game = find_game_by_id($_GET["id"]);
   }
@@ -75,7 +71,7 @@ if (isset($_GET["id"]) && $game = find_game_by_id($_GET["id"])) {
 
   <h2>Edit a Game: <?php echo filter_var($game->title, FILTER_SANITIZE_FULL_SPECIAL_CHARS); ?></h2>
 
-  <form class="main-form" method="post" action="game_edition.php?id=<?php echo $game->id; ?>">
+  <form class="main-form" method="post" enctype="multipart/form-data" action="game_edition.php?id=<?php echo $game->id; ?>">
     <label>Game's name:
       <input type="text" name="name" value="<?php echo filter_var($game->title, FILTER_SANITIZE_FULL_SPECIAL_CHARS); ?>" required />
     </label>

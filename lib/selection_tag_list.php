@@ -3,7 +3,7 @@
 //Ask for the name if the input
 //Allow to select a tag among a list
 //No return
-function display_selection_tag_list($select_name ="tag")
+function display_selection_tag_list($select_name = "tag")
 {
     global $bdd;
 
@@ -17,7 +17,7 @@ function display_selection_tag_list($select_name ="tag")
 
         // While there remains at least one tag, we display it
         while($ligne = $req->fetch()) {
-            if ($ligne["id"] == $tag) {
+            if (isset($_GET[$select_name]) && $ligne["id"] == $_GET[$select_name]) {
                 echo "<option value=\"$ligne[id]\" selected>$ligne[tag_name]</option>";
             } else {
                 echo "<option value=\"$ligne[id]\">$ligne[tag_name]</option>";

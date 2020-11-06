@@ -1,7 +1,3 @@
-img {
-  white-space: pre-wrap;
-}
-
 .game-title {
   padding: 5px 15px;
   display: inline-block;
@@ -21,6 +17,11 @@ img {
 
 .global-informations {
   display: flex;
+}
+
+.global-informations > img {
+  height: 64px;
+  width: 64px;
 }
 
 .mark {
