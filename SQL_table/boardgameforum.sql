@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : ven. 16 oct. 2020 à 16:58
+-- Généré le : sam. 07 nov. 2020 à 13:07
 -- Version du serveur :  10.4.14-MariaDB
 -- Version de PHP : 7.4.10
 
@@ -91,7 +91,7 @@ INSERT INTO `country` (`id`, `country_name`) VALUES
 (52, 'Congo, the Democratic Republic of the'),
 (53, 'Cook Islands'),
 (54, 'Costa Rica'),
-(55, "Cote D'Ivoire"),
+(55, 'Cote D\'Ivoire'),
 (56, 'Croatia'),
 (57, 'Cuba'),
 (58, 'Curacao'),
@@ -159,7 +159,7 @@ INSERT INTO `country` (`id`, `country_name`) VALUES
 (120, 'Kosovo'),
 (121, 'Kuwait'),
 (122, 'Kyrgyzstan'),
-(123, "Lao People's Democratic Republic"),
+(123, 'Lao People\'s Democratic Republic'),
 (124, 'Latvia'),
 (125, 'Lebanon'),
 (126, 'Lesotho'),
@@ -308,7 +308,15 @@ CREATE TABLE `follows` (
 INSERT INTO `follows` (`id_user`, `id_friend`) VALUES
 (2, 3),
 (3, 2),
-(3, 4);
+(3, 4),
+(5, 2),
+(5, 6),
+(6, 2),
+(6, 3),
+(6, 5),
+(7, 4),
+(7, 6),
+(7, 7);
 
 -- --------------------------------------------------------
 
@@ -330,8 +338,18 @@ CREATE TABLE `game` (
 --
 
 INSERT INTO `game` (`id`, `name`, `creator`, `publisher`, `price`, `image`) VALUES
-(1, 'Nessos', 'Takaaki Sayama et Toshiki Arao', 'IELLO', NULL, 0),
-(2, '7 wonders', ' Antoine Bauza', 'Repos production', 25, 1);
+(1, 'Nessos', 'Takaaki Sayama et Toshiki Arao', 'IELLO', 0, 1),
+(2, '7 wonders', ' Antoine Bauza', 'Repos production', 25, 1),
+(3, 'Catan', 'Klaus Teuber', 'Kosmos', 35, 1),
+(4, 'Shadow Hunter', 'Yasutaka Ikeda', 'Matagot', 22, 1),
+(5, 'King of Tokyo', 'Richard Garfield', 'IELLO', 32, 1),
+(6, 'Munchkin', 'Steve Jackson', 'Edge', 22, 1),
+(7, 'Concepte', 'Alain Rivollet, Gaëtan Beaujannot', 'Repos Production', 27, 1),
+(8, 'The Crew', 'Thomas Sing', 'IELLO', 14, 1),
+(9, 'Troyes Dice', 'Sébastien Dujardin, Alain Orban, Xavier Georges', 'Pearl Games', 23, 1),
+(10, 'Dixit', 'Jean-Louis Roubira', 'Libellud', 27, 1),
+(11, 'Roll to the Top ! Laminate', 'Peter Joustra, Corné van Moorsel', 'Cwali', 17, 1),
+(12, 'Pictures', 'Christian Stöhr, Daniela Stöhr', 'Matagot', 43, 1);
 
 -- --------------------------------------------------------
 
@@ -351,7 +369,20 @@ CREATE TABLE `relation_tag` (
 INSERT INTO `relation_tag` (`id_game`, `id_tag`) VALUES
 (1, 3),
 (1, 6),
-(1, 7);
+(1, 7),
+(3, 8),
+(4, 5),
+(4, 10),
+(5, 9),
+(6, 11),
+(6, 12),
+(7, 13),
+(8, 12),
+(8, 14),
+(9, 9),
+(10, 13),
+(11, 9),
+(12, 13);
 
 -- --------------------------------------------------------
 
@@ -375,7 +406,19 @@ CREATE TABLE `review` (
 INSERT INTO `review` (`id`, `score`, `comment`, `id_user`, `id_game`, `date_publication`) VALUES
 (1, 9, 'Excellent jeu de bluff, très rapide à jouer', 2, 1, '2020-10-16 16:52:13'),
 (2, 4, 'J\'ai pas arrêté de perdre c\'était nul!', 4, 1, '2020-10-16 16:52:54'),
-(3, 10, "Meilleur jeu au monde, on a pu apprendre les règles en 2 minutes et s'amuser pendant des heures!", 3, 1, '2020-10-16 16:53:44');
+(3, 10, 'Meilleur jeu au monde, on a pu apprendre les règles en 2 minutes et s\'amuser pendant des heures!', 3, 1, '2020-10-16 16:53:44'),
+(4, 10, 'C\'est mon jeu de dés préféré!', 5, 5, '2020-11-07 12:39:35'),
+(5, 4, 'J\'aime beaucoup les jeux de dés, mais celui là c\'est pas le meilleur.', 5, 9, '2020-11-07 12:40:21'),
+(6, 8, 'C\'est mon deuxième jeu de dés préféré!', 5, 11, '2020-11-07 12:42:48'),
+(7, 10, 'Mon jeu de devinettes préféré, surtout que ce que l\'on doit faire deviner est trop drôle!', 6, 7, '2020-11-07 12:50:31'),
+(8, 7, 'Un très bon jeu de devinettes, mais il est un peu lent :/', 6, 10, '2020-11-07 12:51:10'),
+(9, 3, 'J\'y ai pas joué plus de 15 minutes parce que ce jeu est ennuyant.', 6, 12, '2020-11-07 12:51:56'),
+(10, 2, 'c\'est un jeu où il n\'y a pas besoin de réfléchir, c\'est nul!', 6, 11, '2020-11-07 12:53:19'),
+(11, 8, 'J\'aime jeu de bluff, mais celui la, moins bien que poker.', 7, 1, '2020-11-07 12:59:02'),
+(12, 10, 'On peut utiliser triche! c\'est mieux que poker!', 7, 6, '2020-11-07 13:00:13'),
+(13, 1, 'On doit tuer amis pour victoire! c\'est hérésie!', 7, 4, '2020-11-07 13:01:20'),
+(14, 7, 'Beaucoup compter dans ce jeu, comme dans poker, je suis fort à compter.', 7, 2, '2020-11-07 13:02:41'),
+(15, 5, '', 7, 12, '2020-11-07 13:03:40');
 
 -- --------------------------------------------------------
 
@@ -399,7 +442,14 @@ INSERT INTO `tag` (`id`, `tag_name`) VALUES
 (4, 'mensonge'),
 (5, 'trahison'),
 (6, 'rapide à apprendre'),
-(7, 'rapide à jouer');
+(7, 'rapide à jouer'),
+(8, 'commerce'),
+(9, 'dés'),
+(10, 'rôles cachés'),
+(11, 'triche'),
+(12, 'cartes'),
+(13, 'devinette'),
+(14, 'coopératif');
 
 -- --------------------------------------------------------
 
@@ -409,7 +459,7 @@ INSERT INTO `tag` (`id`, `tag_name`) VALUES
 
 CREATE TABLE `user` (
   `id` int(11) NOT NULL,
-  `pseudonym` varchar(255) NOT NULL UNIQUE,
+  `pseudonym` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `profile_picture` int(1) DEFAULT NULL,
@@ -425,7 +475,10 @@ CREATE TABLE `user` (
 INSERT INTO `user` (`id`, `pseudonym`, `email`, `password`, `profile_picture`, `country`, `birthdate`, `date_account_creation`) VALUES
 (2, 'kalharko', 'oscar.dewasmes@utbm.fr', '*A28D6A233B76FC581A8E711B8966883C91C97612', 1, 76, '2001-08-21', '2020-10-16 16:14:57'),
 (3, 'racsomc', 'oscar.dewasmes@gmail.com', '*4AD47E08DAE2BD4F0977EED5D23DC901359DF617', 0, 76, '2001-08-21', '2020-10-16 16:16:25'),
-(4, 'ppoussin', 'p.poussin@yahoo.fr', '*F207EE4F2A07EC1ED5ECE65E0BC10E957A7DADBD', 0, 76, '2001-08-21', '2020-10-16 16:17:05');
+(4, 'ppoussin', 'p.poussin@yahoo.fr', '*F207EE4F2A07EC1ED5ECE65E0BC10E957A7DADBD', 1, 76, '2001-08-21', '2020-10-16 16:17:05'),
+(5, 'oka', 'oka@oka.oka', '$2y$10$TXxDNnNK.dply.E6ma7gee9VEbEq/TBJNFuzdmhDIgeUv6geeColu', 1, 9, '2020-10-26', '2020-11-07 11:54:20'),
+(6, 'Devinette_Master', 'master@devinettes.fr', '$2y$10$aizdVFtDdF8ovMhrpw1ff.b24K6RgsIv.fK2WPzf5RsJSS6x54PeK', 1, 76, '1999-11-10', '2020-11-07 12:49:19'),
+(7, 'poker_god', 'poker@god.fr', '$2y$10$1/PGVl0KKV83KriucCBt.O6ykloCwDOLAqOHKmd.YuSIgfHotv5u6', 1, 185, '1984-11-15', '2020-11-07 12:57:49');
 
 -- --------------------------------------------------------
 
@@ -445,7 +498,17 @@ CREATE TABLE `vote` (
 
 INSERT INTO `vote` (`id_user`, `id_review`, `positive`) VALUES
 (2, 2, 0),
-(3, 1, 1);
+(3, 1, 1),
+(6, 1, 1),
+(6, 2, -1),
+(6, 3, 1),
+(6, 4, -1),
+(6, 5, 1),
+(6, 6, 1),
+(6, 7, 1),
+(7, 1, 1),
+(7, 9, 1),
+(7, 12, 1);
 
 --
 -- Index pour les tables déchargées
@@ -496,6 +559,7 @@ ALTER TABLE `tag`
 --
 ALTER TABLE `user`
   ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `pseudonym` (`pseudonym`),
   ADD KEY `country` (`country`);
 
 --
@@ -519,25 +583,25 @@ ALTER TABLE `country`
 -- AUTO_INCREMENT pour la table `game`
 --
 ALTER TABLE `game`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT pour la table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT pour la table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Contraintes pour les tables déchargées
