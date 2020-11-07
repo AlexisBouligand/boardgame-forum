@@ -28,11 +28,12 @@ if (!$user) $user = new Player(0, "[phantom]", 0, "FR", "...");
 <h2>
     <?php
     //If it is the page of the current user, we use a pronoun
+    if($current_user!=NULL){
     if (strcmp($current_user->id,$user->id)) {
         echo "$user->username's";
     } else {
         echo "Your";
-    }
+    }}
     ?> comments :
 </h2>
 <?php
