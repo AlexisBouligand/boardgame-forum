@@ -10,6 +10,9 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap">
     <script src="/js/main.js"></script>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
     <?php
       if (isset($PAGE_HEAD)) {
         echo $PAGE_HEAD;
