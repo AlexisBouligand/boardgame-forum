@@ -160,9 +160,12 @@ if (isset($_POST["submit"])) {
                 <div class="publisher">Publisher: <b><?php echo $game_res->publisher; ?></b></div>
                 <div class="tags">Tags: <b>
                 <?php
-                foreach ($tags as $tag){
-                    echo $tag;
-                    echo " ";
+                for ($i=0; $i<count($tags); $i++)
+                {
+                    echo $tags[$i];
+                    if ($i != count($tags)-1){
+                        echo ", ";
+                    }
                 }
                 ?></b></div>
                 <?php
