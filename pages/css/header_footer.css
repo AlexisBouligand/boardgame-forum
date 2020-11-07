@@ -39,8 +39,6 @@ header {
   background: darkorange;
 }
 
-
-
 #logo {
   height: var(--header-height);
 }
@@ -63,10 +61,72 @@ header {
 }
 
 
+nav.sidebar {
+  background-color: grey;
+  border: 2px solid black;
+
+  width: 9em;
+  flex-shrink: 0;
+}
+
+nav.sidebar > ul {
+  list-style-type: none;
+  margin: auto;
+  padding-left: 0;
+}
+
+nav.sidebar > ul > li {
+  margin: auto;
+  height: 1.25em;
+  padding-top: 1em;
+  padding-bottom: 1em;
+  color: #ffc77d;
+  text-align: center;
+  transition: 0.2s height, 0.5s background-color, 0.5s border, 0.4s color;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparent;
+}
+
+nav.sidebar > ul > li > a {
+  color: inherit;
+  width: 100%;
+  display: block;
+}
+
+nav.sidebar > ul > li:hover{
+  border: 1px solid orange;
+  background-color: darkgray;
+  height: 2em;
+  color: white;
+}
 
 footer {
   padding-top: 1em;
   padding-bottom: 1em;
   text-align: center;
   background-color: orange;
+}
+
+@media only screen and (max-width: 750px) {
+  #recherche {
+    display: none;
+  }
+
+  .sidebar {
+    padding-right: 2em;
+    left: -9em;
+    position: absolute;
+    transition: 0.5s left;
+    z-index: 10;
+  }
+
+  .sidebar:hover, .sidebar:active {
+    left: 0;
+  }
+
+  #main-horizontal {
+    padding-left: 2em;
+  }
 }
