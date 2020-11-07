@@ -16,16 +16,12 @@ if (!$game_res) {
     $game_res = new Game(0, "[phantom]", 0.5, 0, false);
 }
 
-//We get the game's tags
-$tag_req = $bdd->prepare("SELECT tag_name FROM game INNER JOIN relation_tag ON game.id=relation_tag.id_game INNER JOIN tag ON relation_tag.id_tag=tag.id WHERE game.id=?;");
-$tags = NULL;
-if($tag_req->execute([$game_res->id])) {
-    $i = 0;
-    $tags = [];
-    while ($tag_res = $tag_req->fetch())
-    {
-        $tags[$i] = $tag_res[0];
-        $i = $i +1;
+// We get the game's tags
+$tags_req = $bdd->prepare("SELECT tag_name FROM game INNER JOIN relation_tag ON game.id=relation_tag.id_game INNER JOIN tag ON relation_tag.id_tag=tag.id WHERE game.id=?;");
+$tags = [];
+if($tags_req->execute([$game_res->id])) {
+    while ($tag_res = $tags_req->fetch()) {
+        $tags[] = $tag_res[0];
     }
 }
 
@@ -160,12 +156,14 @@ if (isset($_POST["submit"])) {
                 <div class="publisher">Publisher: <b><?php echo $game_res->publisher; ?></b></div>
                 <div class="tags">Tags: <b>
                 <?php
-                for ($i=0; $i<count($tags); $i++)
-                {
+                for ($i = 0; $i < count($tags); $i++) {
                     echo $tags[$i];
                     if ($i != count($tags)-1){
                         echo ", ";
                     }
+                }
+                if (count($tags) == 0) {
+                    echo "None";
                 }
                 ?></b></div>
                 <?php
