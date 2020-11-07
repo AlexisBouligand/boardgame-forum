@@ -6,13 +6,12 @@ include_once("../lib/head.php");
 
 
 if (isset($_GET["username"])) {
-
     //We get the user informations
-  $user = find_player_by_name($_GET["username"]);
+    $user = find_player_by_name($_GET["username"]);
 } else if (isset($_GET["id"])) {
-  $user = find_player_by_id($_GET["id"]);
+    $user = find_player_by_id($_GET["id"]);
 } else {
-  $user = false;
+    $user = false;
 }
 
 if (!$user) $user = new Player(0, "[phantom]", 0, "FR", "...");
@@ -30,7 +29,7 @@ if (!$user) $user = new Player(0, "[phantom]", 0, "FR", "...");
     //If it is the page of the current user, we use a pronoun
     if($current_user!=NULL){
     if (strcmp($current_user->id,$user->id)) {
-        echo "$user->username's";
+        echo htmlspecialchars($user->username) . "'s";
     } else {
         echo "Your";
     }}
@@ -74,50 +73,50 @@ while($review = $review_req->fetch())
     ?>
     <aside class="player-critic">
         <div class="post-infos">
-            <?php if ($game['image']==1) { ?>
-                <a href="/images/game/<?php echo $game['id']; ?>.png">
-                    <img src="/images/game/<?php echo $game['id']; ?>.png" alt="game picture" />
+            <?php if ($game["image"]==1) { ?>
+                <a href="/images/game/<?php echo $game["id"]; ?>.png">
+                    <img src="/images/game/<?php echo $game["id"]; ?>.png" alt="game picture" />
                 </a>
             <?php } else { ?>
                 <a href="/images/game-default.png">
                     <img src="/images/game-default.png" alt="game picture" />
                 </a>
             <?php } ?>
-            <a class="username" href="/game_page.php?id=<?php echo $game['id']; ?>">
-                <?php echo $game['name']; ?>
+            <a class="username" href="/game_page.php?id=<?php echo $game["id"]; ?>">
+                <?php echo htmlspecialchars($game["name"]); ?>
             </a>
             <div class="date-and-score">
-                <div class="publication-date">Published the <?php echo date("Y-m-d", strtotime($review['date_publication'])); ?></div>
-                <div class="score"><?php echo $review['score']; ?>/10</div>
+                <div class="publication-date">Published the <?php echo date("Y-m-d", strtotime($review["date_publication"])); ?></div>
+                <div class="score"><?php echo $review["score"]; ?>/10</div>
             </div>
         </div>
 
-        <div class="comment"><?php echo $review['comment']; ?></div>
+        <div class="comment"><?php echo htmlspecialchars($review["comment"]); ?></div>
 
         <div class="karma-box">
             <a
-                    name="like"
+                name="like"
                 <?php if ($current_vote == 1) {
                     echo "class=\"like active\"";
                 } else {
                     echo "class=\"like\"";
                 } ?>
                 <?php if ($current_user) { ?>
-                    onclick="vote(<?php echo $review['id']; ?>, 1, this);"
+                    onclick="vote(<?php echo $review["id"]; ?>, 1, this);"
                 <?php } ?>
             >
                 <span>&#x25b2;</span>
             </a>
             <span class="karma"><?php echo $karma; ?></span>
             <a
-                    name="dislike"
+                name="dislike"
                 <?php if ($current_vote == -1) {
                     echo "class=\"dislike active\"";
                 } else {
                     echo "class=\"dislike\"";
                 } ?>
                 <?php if ($current_user) { ?>
-                    onclick="vote(<?php echo $review['id']; ?>, -1, this);"
+                    onclick="vote(<?php echo $review["id"]; ?>, -1, this);"
                 <?php } ?>
             >
                 <span>&#x25bc;</span>

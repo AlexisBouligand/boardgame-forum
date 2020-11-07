@@ -44,3 +44,16 @@ This whole section is nonsense, why do people think they ever need an IDE for th
 10. The website will now be accessible by navigating to `http://localhost:8000/` in your browser
 
 Note that the preview buttons that PHPStorm offer you do not work, as they entirely mess up the directory structure of the website.
+
+## Notes
+
+### Safety and XSS
+
+The following pieces of data within the database are deemed safe, ie. they cannot be manipulated by users and they cannot contain any special characters or invalid values once stored anywhere:
+
+- Any numerical ID
+- `tag.tag_name`
+- `country.country_name`
+- `game.price`
+- `review.score`
+- `vote.positive`

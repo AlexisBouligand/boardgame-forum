@@ -11,12 +11,14 @@ include_once("../lib/selection_tag_list.php");
 function try_create_game() {
   // TODO: validate and sanitize
   $name = $_POST["name"];
+  if (!$name) return "Invalid name!";
   $creator = $_POST["creator"];
   $price = $_POST["price"];
+  if (!is_numerical($price) || $price < 0) return "Invalid price!";
   $publisher = $_POST["publisher"];
 
   // If there is a tag associated
-  if($_POST['tag']!='none') {
+  if($_POST["tag"] != "none") {
       $tag_id = $_POST["tag"];
   } else {
       $tag_id=-1;

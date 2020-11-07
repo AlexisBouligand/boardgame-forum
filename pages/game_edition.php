@@ -9,8 +9,10 @@ include_once("../lib/selection_tag_list.php");
 function try_edit_game($id, bool $had_image) {
   global $bdd;
   $name = $_POST["name"];
+  if (!$name) return "Invalid name!";
   $creator = $_POST["creator"];
   $price = $_POST["price"];
+  if (!is_numerical($price) || $price < 0) return "Invalid price!";
   $publisher = $_POST["publisher"];
   //If there is a tag to remove
   if($_POST["tag_to_remove"] != "none") {

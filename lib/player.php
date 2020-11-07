@@ -42,7 +42,7 @@ class Player {
             <img src="/images/user-default.png" alt="PP" />
           </a>
         <?php } ?>
-        <a href="/user.php?id=<?php echo $this->id; ?>" class="nickname"><?php echo $this->username; ?></a>
+        <a href="/user.php?id=<?php echo $this->id; ?>" class="nickname"><?php echo htmlspecialchars($this->username); ?></a>
       </div>
 
       <div class="profile-info">
@@ -90,7 +90,6 @@ function try_login($username, $password) {
   if ($user = find_player_by_name($username)) {
     if($user->password_verify($password)) {
       $current_user = $user;
-      // echo $current_user->country;
       return true;
     }
   }

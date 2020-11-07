@@ -94,7 +94,7 @@ include_once("../lib/head.php");
         ?></td>
 
     <td><?php
-    $req = $bdd->prepare("SELECT AVG(a.rcount) FROM (select AVG(score) as rcount FROM review r GROUP BY r.id_game) a");
+    $req = $bdd->prepare("SELECT AVG(a.rcount) FROM (SELECT AVG(score) AS rcount FROM review r GROUP BY r.id_game) a");
     $req->execute();
     echo round($req->fetch()[0],3);
         ?></td>
@@ -109,7 +109,7 @@ include_once("../lib/head.php");
     <h3>A few charts</h3>
 
     <?php
-    $req = $bdd->prepare("SELECT tag.tag_name,COUNT(*) FROM relation_tag INNER JOIN tag ON relation_tag.id_tag=tag.id GROUP BY id_tag;");
+    $req = $bdd->prepare("SELECT tag.tag_name, COUNT(*) FROM relation_tag INNER JOIN tag ON relation_tag.id_tag=tag.id GROUP BY id_tag;");
     $req->execute();
     ?>
 

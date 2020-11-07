@@ -38,7 +38,7 @@
         <?php if ($current_user == NULL) { ?>
           <a href="/user_login.php" class="login">Sign In</a>
         <?php } else { ?>
-          <a href="/user_logout.php" class="logout">Hello, <?php echo $current_user->username; ?>.<br />Log out?</a>
+          <a href="/user_logout.php" class="logout">Hello, <?php echo htmlspecialchars($current_user->username); ?>.<br />Log out?</a>
         <?php } ?>
       </div>
 

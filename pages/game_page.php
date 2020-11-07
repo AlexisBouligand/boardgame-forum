@@ -138,7 +138,7 @@ if (isset($_POST["submit"])) {
 
 <!-- Display of the game-->
 <section class="game-page card-list">
-    <h2><?php echo $game_res->title; ?></h2>
+    <h2><?php echo htmlspecialchars($game_res->title); ?></h2>
     <!---article is only dedicated to the game--->
     <article class="game">
 
@@ -153,7 +153,8 @@ if (isset($_POST["submit"])) {
             <?php
             if ($game_res->publisher != null) {
                 ?>
-                <div class="publisher">Publisher: <b><?php echo $game_res->publisher; ?></b></div>
+                <div class="publisher">Publisher: <b><?php echo htmlspecialchars($game_res->publisher); ?></b></div>
+                <div class="creator">Author: <b><?php echo htmlspecialchars($game_res->creator); ?></b></div>
                 <div class="tags">Tags: <b>
                 <?php
                 for ($i = 0; $i < count($tags); $i++) {
@@ -229,7 +230,7 @@ if (isset($_POST["submit"])) {
                     </a>
                 <?php } ?>
                 <a class="username" href="/user.php?id=<?php echo $critic->author->id; ?>">
-                    <?php echo $critic->author->username; ?>
+                    <?php echo htmlspecialchars($critic->author->username); ?>
                 </a>
                 <div class="date-and-score">
                     <div class="publication-date">Published the <?php echo date("Y-m-d", strtotime($critic->date)); ?></div>
@@ -237,7 +238,7 @@ if (isset($_POST["submit"])) {
                 </div>
             </div>
 
-            <div class="comment"><?php echo $critic->contents; ?></div>
+            <div class="comment"><?php echo htmlspecialchars($critic->contents); ?></div>
 
             <?php
             if ($critic->contents && $critic->author->id != 0) {

@@ -6,7 +6,7 @@
   max-width: 50%;
 }
 
-.price, .publisher, .tags {
+.price, .publisher, .tags, .creator {
   margin: 10px;
 }
 

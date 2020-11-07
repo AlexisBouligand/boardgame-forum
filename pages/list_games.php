@@ -206,7 +206,7 @@ if ($req->execute($search_terms)) {//We display them
         <?php if ($game->has_image) {
           ?>
           <a href="/images/game/<?php echo $game->id ?>.png">
-            <img src="/images/game/<?php echo $game->id ?>.png" alt="<?php echo $game->title;?>'s image" />
+            <img src="/images/game/<?php echo $game->id ?>.png" alt="<?php echo filter_var($game->title, FILTER_SANITIZE_FULL_SPECIAL_CHARS);?>'s image" />
           </a>
           <?php
         } else {
@@ -219,7 +219,7 @@ if ($req->execute($search_terms)) {//We display them
         ?>
       </div>
       <a class="name" href="game_page.php?id=<?php echo $game->id; ?>">
-        <?php echo $game->title; ?>
+        <?php echo htmlspecialchars($game->title); ?>
       </a>
       <div class="info">
         <div class="price">Price: <b><?php if ($game->price === NULL) echo "?"; else echo $game->price; ?>&nbsp;€</b></div>

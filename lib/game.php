@@ -3,7 +3,7 @@
 class Game {
   public $id = 0;
   public $title = null;
-  public $note = 0.5; // from 0 to 1
+  public $note = 0; // from 0 to 10
   public $price = 0;
   public $publisher = null;
   public $creator = null;
@@ -12,7 +12,7 @@ class Game {
   public function __construct(
     $id = 0,
     $title = null,
-    $note = 0.5,
+    $note = 0,
     $price = 0,
     $publisher = null,
     $creator = null,
