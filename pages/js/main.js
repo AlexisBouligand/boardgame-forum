@@ -1,7 +1,7 @@
 /// Called by the follow button
 function follow(id, self) {
   let xhr = new XMLHttpRequest();
-  xhr.open("get", "/add_friend.php?id=" + id);
+  xhr.open("get", "/api/add_friend.php?id=" + id);
 
   self.className = "thinking";
 

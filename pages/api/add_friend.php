@@ -1,5 +1,5 @@
 <?php
-include_once("../lib/prelude.php");
+include_once("../../lib/prelude.php");
 
 $id_friend = NULL;
 // On vas ajouter le poto dans la bdd

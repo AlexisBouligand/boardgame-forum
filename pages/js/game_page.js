@@ -1,7 +1,7 @@
 /// Called by the vote buttons
 function vote(id_review, positive, vote_button) {
     let xhr = new XMLHttpRequest();
-    xhr.open("get", `/add_vote.php?id_review=${id_review}&positive=${positive}`);
+    xhr.open("get", `/api/add_vote.php?id_review=${id_review}&positive=${positive}`);
 
     xhr.onerror = console.error;
     xhr.onload = () => {

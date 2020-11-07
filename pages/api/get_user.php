@@ -1,5 +1,5 @@
 <?php
-include_once("../lib/prelude.php");
+include_once("../../lib/prelude.php");
 
 if (isset($_GET["id"])) {
   $user = find_player_by_id($_GET["id"]);

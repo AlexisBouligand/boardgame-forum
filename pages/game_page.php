@@ -239,35 +239,41 @@ if (isset($_POST["submit"])) {
 
             <div class="comment"><?php echo $critic->contents; ?></div>
 
-            <div class="karma-box">
-                <a
-                  name="like"
-                  <?php if ($critic->current_vote == 1) {
-                    echo "class=\"like active\"";
-                  } else {
-                    echo "class=\"like\"";
-                  } ?>
-                  <?php if ($current_user) { ?>
-                    onclick="vote(<?php echo $critic->id; ?>, 1, this);"
-                  <?php } ?>
-                >
-                    <span>&#x25b2;</span>
-                </a>
-                <span class="karma"><?php echo $critic->karma; ?></span>
-                <a
-                  name="dislike"
-                  <?php if ($critic->current_vote == -1) {
-                    echo "class=\"dislike active\"";
-                  } else {
-                    echo "class=\"dislike\"";
-                  } ?>
-                  <?php if ($current_user) { ?>
-                    onclick="vote(<?php echo $critic->id; ?>, -1, this);"
-                  <?php } ?>
-                >
-                    <span>&#x25bc;</span>
-                </a>
-            </div >
+            <?php
+            if ($critic->contents && $critic->author->id != 0) {
+                ?>
+                <div class="karma-box">
+                    <a
+                    name="like"
+                    <?php if ($critic->current_vote == 1) {
+                        echo "class=\"like active\"";
+                    } else {
+                        echo "class=\"like\"";
+                    } ?>
+                    <?php if ($current_user) { ?>
+                        onclick="vote(<?php echo $critic->id; ?>, 1, this);"
+                    <?php } ?>
+                    >
+                        <span>&#x25b2;</span>
+                    </a>
+                    <span class="karma"><?php echo $critic->karma; ?></span>
+                    <a
+                    name="dislike"
+                    <?php if ($critic->current_vote == -1) {
+                        echo "class=\"dislike active\"";
+                    } else {
+                        echo "class=\"dislike\"";
+                    } ?>
+                    <?php if ($current_user) { ?>
+                        onclick="vote(<?php echo $critic->id; ?>, -1, this);"
+                    <?php } ?>
+                    >
+                        <span>&#x25bc;</span>
+                    </a>
+                </div>
+                <?php
+            }
+            ?>
 
         </aside>
         <?php

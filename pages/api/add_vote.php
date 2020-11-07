@@ -1,6 +1,6 @@
 <?php
 
-include_once("../lib/prelude.php");
+include_once("../../lib/prelude.php");
 
 //Get the parameters from the url
 $id_review = $_GET["id_review"];

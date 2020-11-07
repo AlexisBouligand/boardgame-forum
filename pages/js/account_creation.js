@@ -13,7 +13,7 @@ let pseudo_requested = "";
 /// Sends a request to see if the given pseudo exists
 function pseudo_lookup(value) {
   pseudo_xhr = new XMLHttpRequest();
-  pseudo_xhr.open("get", "/get_user.php?name=" + encodeURIComponent(value));
+  pseudo_xhr.open("get", "/api/get_user.php?name=" + encodeURIComponent(value));
   pseudo_xhr.onload = () => {
     if (pseudo_xhr.status === 200) {
       let response = JSON.parse(pseudo_xhr.response);
