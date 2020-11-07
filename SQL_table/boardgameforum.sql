@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 07 nov. 2020 à 13:07
+-- Généré le : sam. 07 nov. 2020 à 15:55
 -- Version du serveur :  10.4.14-MariaDB
 -- Version de PHP : 7.4.10
 
@@ -316,7 +316,21 @@ INSERT INTO `follows` (`id_user`, `id_friend`) VALUES
 (6, 5),
 (7, 4),
 (7, 6),
-(7, 7);
+(7, 7),
+(8, 13),
+(8, 16),
+(8, 17),
+(8, 20),
+(9, 8),
+(9, 15),
+(9, 18),
+(9, 19),
+(13, 2),
+(13, 4),
+(13, 5),
+(13, 6),
+(19, 7),
+(19, 9);
 
 -- --------------------------------------------------------
 
@@ -418,7 +432,25 @@ INSERT INTO `review` (`id`, `score`, `comment`, `id_user`, `id_game`, `date_publ
 (12, 10, 'On peut utiliser triche! c\'est mieux que poker!', 7, 6, '2020-11-07 13:00:13'),
 (13, 1, 'On doit tuer amis pour victoire! c\'est hérésie!', 7, 4, '2020-11-07 13:01:20'),
 (14, 7, 'Beaucoup compter dans ce jeu, comme dans poker, je suis fort à compter.', 7, 2, '2020-11-07 13:02:41'),
-(15, 5, '', 7, 12, '2020-11-07 13:03:40');
+(15, 5, '', 7, 12, '2020-11-07 13:03:40'),
+(16, 7, 'I\'m a lucky man', 9, 11, '2020-11-07 15:37:49'),
+(17, 9, 'I really enjoyed this game when I was young, soo cool', 9, 3, '2020-11-07 15:38:21'),
+(18, 6, 'It\'s...peculiar sometimes', 11, 4, '2020-11-07 15:39:12'),
+(19, 7, 'The ooy whay to win is not to loose, yep.', 11, 1, '2020-11-07 15:39:58'),
+(20, 1, 'C\'est mieux que rien disons...', 13, 7, '2020-11-07 15:41:34'),
+(21, 8, '1 vré je de taktic', 13, 2, '2020-11-07 15:42:15'),
+(22, 9, 'Incerdible', 17, 1, '2020-11-07 15:44:28'),
+(23, 10, '', 8, 5, '2020-11-07 15:45:05'),
+(24, 6, '', 8, 12, '2020-11-07 15:45:21'),
+(25, 1, 'No', 8, 9, '2020-11-07 15:45:34'),
+(26, 3, 'I don\'t like to think', 18, 12, '2020-11-07 15:47:03'),
+(27, 2, 'I don\'t like to think', 18, 10, '2020-11-07 15:47:20'),
+(28, 7, 'Yeah. Good. Game.', 18, 4, '2020-11-07 15:47:57'),
+(29, 8, 'Good game to drink (water)', 19, 11, '2020-11-07 15:49:42'),
+(30, 8, 'Excellent with friends.', 19, 7, '2020-11-07 15:50:01'),
+(31, 10, '', 19, 12, '2020-11-07 15:50:48'),
+(32, 9, 'Trooop bien. J\'y ai joué ave toute ma famille on s\'est eclaté.', 15, 7, '2020-11-07 15:51:58'),
+(33, 8, 'j\'ai hâte que l\'extension sorte !', 15, 1, '2020-11-07 15:52:27');
 
 -- --------------------------------------------------------
 
@@ -478,7 +510,20 @@ INSERT INTO `user` (`id`, `pseudonym`, `email`, `password`, `profile_picture`, `
 (4, 'ppoussin', 'p.poussin@yahoo.fr', '*F207EE4F2A07EC1ED5ECE65E0BC10E957A7DADBD', 1, 76, '2001-08-21', '2020-10-16 16:17:05'),
 (5, 'oka', 'oka@oka.oka', '$2y$10$TXxDNnNK.dply.E6ma7gee9VEbEq/TBJNFuzdmhDIgeUv6geeColu', 1, 9, '2020-10-26', '2020-11-07 11:54:20'),
 (6, 'Devinette_Master', 'master@devinettes.fr', '$2y$10$aizdVFtDdF8ovMhrpw1ff.b24K6RgsIv.fK2WPzf5RsJSS6x54PeK', 1, 76, '1999-11-10', '2020-11-07 12:49:19'),
-(7, 'poker_god', 'poker@god.fr', '$2y$10$1/PGVl0KKV83KriucCBt.O6ykloCwDOLAqOHKmd.YuSIgfHotv5u6', 1, 185, '1984-11-15', '2020-11-07 12:57:49');
+(7, 'poker_god', 'poker@god.fr', '$2y$10$1/PGVl0KKV83KriucCBt.O6ykloCwDOLAqOHKmd.YuSIgfHotv5u6', 1, 185, '1984-11-15', '2020-11-07 12:57:49'),
+(8, 'B_gel', 'bogel@gmail.com', '$2y$10$FWkocxR0H3KEBoaPCIwX1ePYz7rfA5QD/Yk3nlK6w.U4l.6chE0xe', 1, 185, '1980-01-10', '2020-11-07 15:05:56'),
+(9, 'emil', 'em@i.l', '$2y$10$9FCGFTHUj3su9ZtTzCtnUeLNJtvAj0kS670o48tNGKTyZzG.TlzZ6', 1, 239, '2002-05-10', '2020-11-07 15:17:52'),
+(10, 'Xxx_Ciller_xxX', 'koller@gmail.com', '$2y$10$Pp41FxLpQlEkcoTL242MBOTai9tDsThY8mvimbevVQA/mAHcHrsRm', 1, 205, '1970-10-25', '2020-11-07 15:20:25'),
+(11, 'Your_modo', 'bbitsme@yeah.com', '$2y$10$o9Bb81UYVQpYustrzr9oyuvIwqfEXakhPjsak1oQn2Gu7SfKzSPvW', 1, 180, '1998-09-19', '2020-11-07 15:22:26'),
+(12, 'The_dark_side', 'cookie@join.com', '$2y$10$YuQeiuuF23mAyERJoOp6MuzlT9.bsEWjZ5JdsqYyUX3/fIwwt9C1S', 1, 184, '2000-01-01', '2020-11-07 15:23:39'),
+(13, 'my_PP_is_broken', 'yoan.dupond@orange.fr', '$2y$10$b0AfwzqaCWx3xOsD0J6Qq.T2aLjBw9QMhJS4jguPk13WtSF31WkAO', 1, 76, '2010-08-05', '2020-11-07 15:25:43'),
+(14, 'UTBMTHEBEST', 'xDDD@utc.fr', '$2y$10$OyIV2eaRQ.SNxlejlsHTyejxvj/AaQkfmt0UJPA3ckK3SEGFEmL.W', 1, 212, '1982-09-16', '2020-11-07 15:30:20'),
+(15, 'DopeIsNope', 'thereflexionnist@gg.wp', '$2y$10$kbLL.LhHzrxd4GJvdIqjw.igRpdA.I.GoVEsEQN4u3iXKjufAYizO', 0, 46, '1950-06-04', '2020-11-07 15:30:57'),
+(16, 'itsmeMaaarioooooooo', 'luigi@bross.togo', '$2y$10$2jfXzKQvoFmv3GKnj997VeyPvZWSuR7SRjUYesXB2Mtdhc349SoBG', 0, 161, '1995-02-15', '2020-11-07 15:31:58'),
+(17, 'BossHugo', 'yep@best.com', '$2y$10$UngRIN4e46wuprCMPy5Ssez.OnGwiPzd904uAWWSIuiucvgcnccyG', 1, 218, '1984-05-04', '2020-11-07 15:32:53'),
+(18, 'TheWesh', 'j@l.ok', '$2y$10$1WVWBHsdsF26gv6XSb.71.U/pHQtz6ztCcDPR.W4aP4Ck0UjtzOPK', 1, 239, '2005-02-10', '2020-11-07 15:33:54'),
+(19, 'Che_ers', 'okgoogle@gmail.com', '$2y$10$vmroBjk/KVGdPrLFxCoO5.lVZF9v9SqzJbkSBZuzuJazGvBCxJSVy', 1, 218, '2003-05-02', '2020-11-07 15:34:32'),
+(20, 'I_have_a_default_PP', 'ptitpoussin@nice.fr', '$2y$10$FhbF/GBN17Ldn9.pEWtjlehH6UFStLqvELy77uj2aVPGgA1VHWw/e', 0, 244, '2000-04-15', '2020-11-07 15:35:52');
 
 -- --------------------------------------------------------
 
@@ -508,7 +553,21 @@ INSERT INTO `vote` (`id_user`, `id_review`, `positive`) VALUES
 (6, 7, 1),
 (7, 1, 1),
 (7, 9, 1),
-(7, 12, 1);
+(7, 12, 1),
+(8, 1, 1),
+(8, 10, 1),
+(8, 14, 1),
+(8, 18, 1),
+(13, 7, 1),
+(13, 14, 1),
+(15, 2, -1),
+(15, 17, -1),
+(15, 21, -1),
+(15, 30, 1),
+(15, 33, 1),
+(17, 4, -1),
+(18, 27, 1),
+(19, 7, 1);
 
 --
 -- Index pour les tables déchargées
@@ -589,7 +648,7 @@ ALTER TABLE `game`
 -- AUTO_INCREMENT pour la table `review`
 --
 ALTER TABLE `review`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
 
 --
 -- AUTO_INCREMENT pour la table `tag`
@@ -601,7 +660,7 @@ ALTER TABLE `tag`
 -- AUTO_INCREMENT pour la table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- Contraintes pour les tables déchargées
