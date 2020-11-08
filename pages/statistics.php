@@ -106,7 +106,7 @@ include_once("../lib/head.php");
 
 <section>
 
-    <h3>A few charts</h3>
+    <h3>Chart</h3>
 
     <?php
     $req = $bdd->prepare("SELECT tag.tag_name, COUNT(*) FROM relation_tag INNER JOIN tag ON relation_tag.id_tag=tag.id GROUP BY id_tag;");

@@ -4,6 +4,6 @@ $db_name = "boardgameforum";
 $db_username = "root";
 $db_password = "";
 
-$games_page_length = 10;
-$users_page_length = 20;
+$games_page_length = 7;
+$users_page_length = 7;
 ?>

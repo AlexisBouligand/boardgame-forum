@@ -352,7 +352,7 @@ CREATE TABLE `game` (
 --
 
 INSERT INTO `game` (`id`, `name`, `creator`, `publisher`, `price`, `image`) VALUES
-(1, 'Nessos', 'Takaaki Sayama et Toshiki Arao', 'IELLO', 0, 1),
+(1, 'Nessos', 'Takaaki Sayama et Toshiki Arao', 'IELLO', 5, 1),
 (2, '7 wonders', ' Antoine Bauza', 'Repos production', 25, 1),
 (3, 'Catan', 'Klaus Teuber', 'Kosmos', 35, 1),
 (4, 'Shadow Hunter', 'Yasutaka Ikeda', 'Matagot', 22, 1),
