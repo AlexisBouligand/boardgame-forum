@@ -20,11 +20,14 @@ function append_search_sql(String $query, String $key, String $value) {
 }
 
 if (isset($_GET["name"])) {
+  $name = $_GET["name"];
   append_search_sql(
     "pseudonym LIKE CONCAT('%', :name, '%')",
     "name",
     $_GET["name"]
   );
+} else {
+  $name = "";
 }
 
 
@@ -89,12 +92,13 @@ Filter by:
   <?php
     function echo_link(String $url_appendix, String $contents, bool $active = false) {
       global $page;
+      global $name;
       if ($active) {
         echo "<a class=\"active\" href=\"";
       } else {
         echo "<a href=\"";
       }
-      echo "?name=" . filter_var($_GET["name"], FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+      echo "?name=" . urlencode($name);
       echo "&p=" . ($page + 1);
       echo "&$url_appendix";
       echo "\">$contents</a>";
