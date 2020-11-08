@@ -352,18 +352,18 @@ CREATE TABLE `game` (
 --
 
 INSERT INTO `game` (`id`, `name`, `creator`, `publisher`, `price`, `image`) VALUES
-(1, 'Nessos', 'Takaaki Sayama et Toshiki Arao', 'IELLO', 5, 1),
+(1, 'Nessos', 'Takaaki Sayama', 'IELLO', 5, 1),
 (2, '7 wonders', ' Antoine Bauza', 'Repos production', 25, 1),
 (3, 'Catan', 'Klaus Teuber', 'Kosmos', 35, 1),
 (4, 'Shadow Hunter', 'Yasutaka Ikeda', 'Matagot', 22, 1),
 (5, 'King of Tokyo', 'Richard Garfield', 'IELLO', 32, 1),
 (6, 'Munchkin', 'Steve Jackson', 'Edge', 22, 1),
-(7, 'Concepte', 'Alain Rivollet, Gaëtan Beaujannot', 'Repos Production', 27, 1),
+(7, 'Concepte', 'Alain Rivollet', 'Repos Production', 27, 1),
 (8, 'The Crew', 'Thomas Sing', 'IELLO', 14, 1),
-(9, 'Troyes Dice', 'Sébastien Dujardin, Alain Orban, Xavier Georges', 'Pearl Games', 23, 1),
+(9, 'Troyes Dice', 'Sébastien Dujardin', 'Pearl Games', 23, 1),
 (10, 'Dixit', 'Jean-Louis Roubira', 'Libellud', 27, 1),
-(11, 'Roll to the Top ! Laminate', 'Peter Joustra, Corné van Moorsel', 'Cwali', 17, 1),
-(12, 'Pictures', 'Christian Stöhr, Daniela Stöhr', 'Matagot', 43, 1);
+(11, 'Roll to the Top ! Laminate', 'Peter Joustra', 'Cwali', 17, 1),
+(12, 'Pictures', 'Christian Stöhr', 'Matagot', 43, 1);
 
 -- --------------------------------------------------------
 
