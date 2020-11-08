@@ -88,6 +88,7 @@ Filter by:
 <section class="options-list">
   <?php
     function echo_link(String $url_appendix, String $contents, bool $active = false) {
+      global $page;
       if ($active) {
         echo "<a class=\"active\" href=\"";
       } else {
